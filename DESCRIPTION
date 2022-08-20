@@ -11,3 +11,4 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/FlavioLeccese92/Rduinoiot
 BugReports: https://github.com/FlavioLeccese92/Rduinoiot/issues
+RoxygenNote: 7.1.2
