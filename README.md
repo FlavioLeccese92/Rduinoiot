@@ -9,7 +9,10 @@
 status](https://www.r-pkg.org/badges/version/Rduinoiot)](https://CRAN.R-project.org/package=Rduinoiot)
 <!-- badges: end -->
 
-The goal of Rduinoiot is to …
+Rduinoiot provides an easy way to connect to Arduino Iot Cloud API with
+R. Functions allows to exploit API methods for many purposes, manage
+your Arduino devices and dashboards and access to the data produced by
+sensors and sketches.
 
 ## Installation
 
@@ -23,11 +26,36 @@ devtools::install_github("FlavioLeccese92/Rduinoiot")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Reading real-time humidity sensor of one of your devices can be done
+like this:
 
 ``` r
 library(Rduinoiot)
-## basic example code
+# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT HERE CLIENT_ID')
+# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT HERE CLIENT_SECRET')
+create_auth_token()
+#> Authorization succeeded
+
+thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
+property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778"
+
+things_properties_timeseries(thing_id = thing_id, property_id = property_id, desc = FALSE, interval = 60)
+#> Method succeeded
+#> # A tibble: 1,000 x 2
+#>    time                value
+#>    <dttm>              <dbl>
+#>  1 2022-08-12 21:58:00  27.8
+#>  2 2022-08-12 21:59:00  28.0
+#>  3 2022-08-12 22:00:00  28.3
+#>  4 2022-08-12 22:01:00  28.6
+#>  5 2022-08-12 22:02:00  28.9
+#>  6 2022-08-12 22:03:00  29.2
+#>  7 2022-08-12 22:04:00  29.5
+#>  8 2022-08-12 22:05:00  29.7
+#>  9 2022-08-12 22:06:00  29.9
+#> 10 2022-08-12 22:07:00  30.1
+#> # ... with 990 more rows
+#> # i Use `print(n = ...)` to see more rows
 ```
 
 What is special about using `README.Rmd` instead of just `README.md`?
