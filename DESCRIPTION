@@ -4,14 +4,21 @@ Title: Arduino iot-api R client
 Version: 0.1.0
 Author: Flavio Leccese
 Maintainer: Flavio Leccese <flavioleccese92@gmail.com>
-Description: This package provides an R client for the Arduino Iot Cloud API and some helpful functions that utilize the client
-License: MIT
+Description: This package provides an R client for the Arduino Iot Cloud API and some helpful functions that utilize the client.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/FlavioLeccese92/Rduinoiot
 BugReports: https://github.com/FlavioLeccese92/Rduinoiot/issues
 RoxygenNote: 7.1.2
-Suggests: 
+Imports: 
+    httr,
+    jsonlite,
+    tibble,
+    dplyr,
+    methods,
+    magrittr
+Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr

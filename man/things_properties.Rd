@@ -94,25 +94,31 @@ Official documentation:
 }
 }
 \examples{
-Sys.setenv(ARDUINO_API_CLIENT_ID = 'V8CpJ82mOtpsBgnGqeVGvRpSw9SOXcNo')
-Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'OSo32AvUyJCe15UO90kXxrDQtsf1DpsFJ5CYI3xT9TaHe1SvIu8BwBteGl0pAdL5')
+library(dplyr)
+
+# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
 
 ### create property ###
-things_properties_create(thing_id = thing_id, name = "test",
-permission = "READ_ONLY", type = "FLOAT", update_strategy = "ON_CHANGE", update_parameter = 10)
+things_properties_create(thing_id = thing_id,
+name = "test",  permission = "READ_ONLY", type = "FLOAT",
+update_strategy = "ON_CHANGE", update_parameter = 10)
 
 ### check properties list ###
-things_properties_list(thing_id = thing_id)
-things_properties_show(thing_id = thing_id, property_id = "562c6b29-6dc0-4cc9-aaf4-3ca86e587ff3")
+properties_list = things_properties_list(thing_id = thing_id)
+property_id = properties_list \%>\% filter(name == "test") \%>\% pull(id)
+
+things_properties_show(thing_id = thing_id, property_id = property_id)
 
 ### update property ###
-things_properties_update(thing_id = thing_id, property_id = "9f62ede5-4dab-443d-97c1-9fdf56276d6f",
-name = "testupdated2", permission = "READ_ONLY", type = "FLOAT", update_strategy = "ON_CHANGE", update_parameter = 10)
+things_properties_update(thing_id = thing_id, property_id = property_id,
+name = "testupdated2", permission = "READ_ONLY", type = "FLOAT",
+update_strategy = "ON_CHANGE", update_parameter = 10)
 
 ### delete property ###
-things_properties_delete(thing_id = thing_id, property_id = "9f62ede5-4dab-443d-97c1-9fdf56276d6f")
+things_properties_delete(thing_id = thing_id, property_id = property_id)
 
 }

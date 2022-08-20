@@ -39,6 +39,7 @@ Reading real-time humidity sensor of one of your devices can be done like this:
 
 ```{r example}
 library(Rduinoiot)
+
 # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
 # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()

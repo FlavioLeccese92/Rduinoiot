@@ -17,8 +17,8 @@
 #'
 #' @examples
 #'
-#' Sys.setenv(ARDUINO_API_CLIENT_ID = 'V8CpJ82mOtpsBgnGqeVGvRpSw9SOXcNo')
-#' Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'OSo32AvUyJCe15UO90kXxrDQtsf1DpsFJ5CYI3xT9TaHe1SvIu8BwBteGl0pAdL5')
+#' # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+#' # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 #'
 #' create_auth_token()
 #'

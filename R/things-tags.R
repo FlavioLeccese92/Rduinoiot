@@ -15,8 +15,8 @@
 #' (either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
 #' @return A tibble showing the keys and values for given device
 #' @examples
-#' Sys.setenv(ARDUINO_API_CLIENT_ID = 'V8CpJ82mOtpsBgnGqeVGvRpSw9SOXcNo')
-#' Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'OSo32AvUyJCe15UO90kXxrDQtsf1DpsFJ5CYI3xT9TaHe1SvIu8BwBteGl0pAdL5')
+#' # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+#' # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 #' create_auth_token()
 #'
 #' thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
