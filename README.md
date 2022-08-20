@@ -7,6 +7,8 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/Rduinoiot)](https://CRAN.R-project.org/package=Rduinoiot)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 Rduinoiot provides an easy way to connect to Arduino Iot Cloud API with
@@ -31,15 +33,16 @@ like this:
 
 ``` r
 library(Rduinoiot)
-# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT HERE CLIENT_ID')
-# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT HERE CLIENT_SECRET')
+# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 #> Authorization succeeded
 
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
 property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778"
 
-things_properties_timeseries(thing_id = thing_id, property_id = property_id, desc = FALSE, interval = 60)
+things_properties_timeseries(thing_id = thing_id, property_id = property_id,
+                             desc = FALSE, interval = 60)
 #> Method succeeded
 #> # A tibble: 1,000 x 2
 #>    time                value
