@@ -4,16 +4,21 @@
 # Rduinoiot
 
 <!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/Rduinoiot)](https://CRAN.R-project.org/package=Rduinoiot)
 <!-- badges: end -->
 
 The goal of Rduinoiot is to …
 
 ## Installation
 
-You can install the development version of Rduinoiot like so:
+You can install the development version of Rduinoiot from
+[GitHub](https://github.com/) with:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+# install.packages("devtools")
+devtools::install_github("FlavioLeccese92/Rduinoiot")
 ```
 
 ## Example
