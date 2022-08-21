@@ -21,8 +21,13 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/FlavioLeccese92/Rduinoiot/workflows/R-CMD-check/badge.svg)](https://github.com/FlavioLeccese92/Rduinoiot/actions)
 <!-- badges: end -->
 
+<<<<<<< HEAD
 **Rduinoiot** provides an easy way to connect to [Arduino Iot Cloud API](https://create.arduino.cc/iot/) with R.
 Functions allows to exploit [API methods](https://www.arduino.cc/reference/en/iot/api) for many purposes, manage your Arduino devices and dashboards and access to the data produced by sensors and sketches.
+=======
+{Rduinoiot} provides an easy way to connect to (Arduino Iot Cloud API)[https://create.arduino.cc/iot/] with R.
+Functions allows to exploit (API methods)[https://www.arduino.cc/reference/en/iot/api] for many purposes, manage your Arduino devices and dashboards and access to the data produced by sensors and sketches.
+>>>>>>> d73c5479c2362f38b8852163bb6b42911991b7c2
 
 ## Installation
 
@@ -34,8 +39,13 @@ devtools::install_github("FlavioLeccese92/Rduinoiot")
 ```
 ## List things associated to the user
 
+<<<<<<< HEAD
 Things associated to the user account can be easily accessed using  `things_list()`.
 This function will return detailed information, in particular `things_id` which are needed to access to properties.
+=======
+Things associated to the user account can be easily accessed using \code{things_list()}. 
+This function will return detailed information, in particular \code{things_id}s which are needed to access to properties.
+>>>>>>> d73c5479c2362f38b8852163bb6b42911991b7c2
 
 ```{r example 1}
 library(Rduinoiot)
@@ -43,7 +53,11 @@ library(Rduinoiot)
 # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 
+<<<<<<< HEAD
 things_list()
+=======
+dt = things_list()
+>>>>>>> d73c5479c2362f38b8852163bb6b42911991b7c2
 ```
 
 ## Real-time sensor data

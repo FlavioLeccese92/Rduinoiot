@@ -46,6 +46,10 @@ Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 
 create_auth_token()
 
+<<<<<<< HEAD
 things_list()
+=======
+t_list = things_list()
+>>>>>>> d73c5479c2362f38b8852163bb6b42911991b7c2
 }
 }
