@@ -26,7 +26,7 @@ things_tags_delete(thing_id, key, token = getOption("ARDUINO_API_TOKEN"))
 \item{value}{The value of the tag (no spaces allowed)}
 
 \item{token}{A valid token created with \code{create_auth_token}
-(either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))}
+(either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
 }
 \value{
 A tibble showing the keys and values for given device
@@ -49,6 +49,7 @@ Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
+
 ### create/modify tag ###
 things_tags_upsert(thing_id = thing_id, key = "1", value = "test")
 

@@ -16,4 +16,8 @@ Useful links:
 }
 
 }
+\author{
+\strong{Maintainer}: Flavio Leccese \email{flavioleccese92@gmail.com}
+
+}
 \keyword{internal}

@@ -2,9 +2,12 @@
 
 export("%>%")
 export(create_auth_token)
+export(devices_list)
+export(devices_properties_list)
 export(devices_tags_delete)
 export(devices_tags_list)
 export(devices_tags_upsert)
+export(things_list)
 export(things_properties_create)
 export(things_properties_delete)
 export(things_properties_list)

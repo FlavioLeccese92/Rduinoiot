@@ -12,7 +12,7 @@
 #'
 #' @param thing_id The id of the thing
 #' @param property_id The id of the thing
-#' @param show_deleted If TRUE, shows the soft deleted properties (default FALSE)
+#' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`
 #' @param name The friendly name of the property
 #' @param permission The permission of the property (READ_ONLY or READ_WRITE allowed)
 #' @param type The type of the property (see details for exhaustive list of values)
@@ -20,13 +20,13 @@
 #' @param ... Optional parameters for `things_properties_create`:
 #'  * `max_value` (numeric) Maximum value of this property
 #'  * `min_value` (numeric) Minimum value of this property
-#'  * `persist` (logic) If TRUE, data will persist into a timeseries database
+#'  * `persist` (logic) If `TRUE`, data will persist into a timeseries database
 #'  * `tag` (numeric) The integer id of the property
 #'  * `update_parameter` (numeric) The update frequency in seconds, or the amount of the property
 #'  has to change in order to trigger an update
 #'  * `variable_name` (character) The sketch variable name of the property
 #' @param token A valid token created with `create_auth_token`
-#' (either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
+#' (either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})
 #' @return A tibble showing the information about properties for given device
 #' @examples
 #' \dontrun{
@@ -44,8 +44,8 @@
 #' update_strategy = "ON_CHANGE", update_parameter = 10)
 #'
 #' ### check properties list ###
-#' properties_list = things_properties_list(thing_id = thing_id)
-#' property_id = properties_list %>% filter(name == "test") %>% pull(id)
+#' p_list = things_properties_list(thing_id = thing_id)
+#' property_id = p_list %>% filter(name == "test") %>% pull(id)
 #'
 #' things_properties_show(thing_id = thing_id, property_id = property_id)
 #'
@@ -164,9 +164,9 @@ things_properties_list <- function(thing_id,
       still_valid_token = TRUE
       res = tibble::as_tibble(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8")))
       if(nrow(res)>0){
-        res$created_at = as.POSIXct(res$created_at, format = "%Y-%m-%dT%H:%M:%OSZ")
-        res$updated_at = as.POSIXct(res$updated_at, format = "%Y-%m-%dT%H:%M:%OSZ")
-        res$value_updated_at = as.POSIXct(res$value_updated_at, format = "%Y-%m-%dT%H:%M:%OSZ")
+        res$created_at = as.POSIXct(res$created_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
+        res$updated_at = as.POSIXct(res$updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
+        res$value_updated_at = as.POSIXct(res$value_updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
       }
       message("Method succeeded")}
     else if(res$status_code == 401){
@@ -202,10 +202,10 @@ things_properties_show <- function(thing_id,
       still_valid_token = TRUE
       res = tibble::as_tibble(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8")))
       if(nrow(res)>0){
-        res$created_at = as.POSIXct(res$created_at, format = "%Y-%m-%dT%H:%M:%OSZ")
-        res$updated_at = as.POSIXct(res$updated_at, format = "%Y-%m-%dT%H:%M:%OSZ")
+        res$created_at = as.POSIXct(res$created_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
+        res$updated_at = as.POSIXct(res$updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
         if("value_updated_at" %in% names(res)){
-          res$value_updated_at = as.POSIXct(res$value_updated_at, format = "%Y-%m-%dT%H:%M:%OSZ")}
+          res$value_updated_at = as.POSIXct(res$value_updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")}
       }
       message("Method succeeded")}
     else if(res$status_code == 401){

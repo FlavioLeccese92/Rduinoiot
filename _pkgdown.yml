@@ -1,4 +1,22 @@
 url: ~
 template:
-  bootstrap: 5
-
+  params:
+    bootswatch: readable
+reference:
+- title: "Authentication"
+  contents:
+  - create_auth_token
+- title: "Devices"
+  contents:
+  - devices_list
+  - starts_with("devices_tags")
+- title: "Properties (of devices)"
+  contents:
+  - starts_with("devices_properties")
+- title: "Things"
+  contents:
+  - things_list
+  - starts_with("things_tags")
+- title: "Properties (of things)"
+  contents:
+  - starts_with("things_properties")

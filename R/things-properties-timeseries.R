@@ -8,13 +8,13 @@
 #'
 #' @param thing_id The id of the thing
 #' @param property_id The id of the property
-#' @param from A Posixct or Date object.
+#' @param from A `Posixct` or `Date` object.
 #' Get data with a timestamp >= to this value (default: 2 weeks ago, min: 1842-01-01, max: 2242-01-01)
-#' @param to A Posixct or Date object.
+#' @param to A `Posixct` or `Date` object.
 #' Get data with a timestamp < to this value (default: now, min: 1842-01-01, max: 2242-01-01)
 #' @param interval (numeric) Binning interval in seconds
 #' (defaut: the smallest possible value compatibly with the limit of 1000 data points in the response)
-#' @param desc (logic) Whether data's ordering (by time) should be descending
+#' @param desc (logic) Whether data's ordering (by time) should be descending. Default TO `FALSE`
 #' @param token A valid token created with `create_auth_token`
 #' (either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
 #' @return A tibble showing of time and value for property of given device
@@ -70,7 +70,7 @@ things_properties_timeseries <- function(thing_id, property_id,
       still_valid_token = TRUE
       res = tibble::as_tibble(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$data)
       if(nrow(res)>0){
-        res$time = as.POSIXct(res$time, format = "%Y-%m-%dT%H:%M:%OSZ")
+        res$time = as.POSIXct(res$time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
       }
       message("Method succeeded")}
     else if(res$status_code == 401){

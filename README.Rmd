@@ -21,8 +21,8 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/FlavioLeccese92/Rduinoiot/workflows/R-CMD-check/badge.svg)](https://github.com/FlavioLeccese92/Rduinoiot/actions)
 <!-- badges: end -->
 
-Rduinoiot provides an easy way to connect to Arduino Iot Cloud API with R.
-Functions allows to exploit API methods for many purposes, manage your Arduino devices and dashboards and access to the data produced by sensors and sketches.
+**Rduinoiot** provides an easy way to connect to [Arduino Iot Cloud API](https://create.arduino.cc/iot/) with R.
+Functions allows to exploit [API methods](https://www.arduino.cc/reference/en/iot/api) for many purposes, manage your Arduino devices and dashboards and access to the data produced by sensors and sketches.
 
 ## Installation
 
@@ -32,27 +32,29 @@ You can install the development version of Rduinoiot from [GitHub](https://githu
 # install.packages("devtools")
 devtools::install_github("FlavioLeccese92/Rduinoiot")
 ```
+## List things associated to the user
 
-## Real-time sensor data
+Things associated to the user account can be easily accessed using  `things_list()`.
+This function will return detailed information, in particular `things_id` which are needed to access to properties.
 
-Reading real-time humidity sensor of one of your devices can be done like this:
-
-```{r example}
+```{r example 1}
 library(Rduinoiot)
 # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
 # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 
+things_list()
+```
+
+## Real-time sensor data
+
+Reading real-time humidity sensor of one of your devices can be done like this:
+
+```{r example 2}
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
 property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778"
 
 things_properties_timeseries(thing_id = thing_id, property_id = property_id,
                              desc = FALSE, interval = 60)
-```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
 ```
 
