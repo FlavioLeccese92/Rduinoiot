@@ -30,15 +30,9 @@ devtools::install_github("FlavioLeccese92/Rduinoiot")
 
 ## List things associated to the user
 
-<<<<<<< HEAD
 Things associated to the user account can be easily accessed using
 `things_list()`. This function will return detailed information, in
 particular `things_id` which are needed to access to properties.
-=======
-Things associated to the user account can be easily accessed using .
-This function will return detailed information, in particular s which
-are needed to access to properties.
->>>>>>> d73c5479c2362f38b8852163bb6b42911991b7c2
 
 ``` r
 library(Rduinoiot)
@@ -47,7 +41,6 @@ library(Rduinoiot)
 create_auth_token()
 #> Authorization succeeded
 
-<<<<<<< HEAD
 things_list()
 #> Method succeeded
 #> # A tibble: 4 x 13
@@ -61,10 +54,6 @@ things_list()
 #> #   device_fqbn <chr>, device_id <chr>, device_name <chr>, device_type <chr>,
 #> #   and abbreviated variable names 1: properties_count, 2: sketch_id,
 #> #   3: timezone
-=======
-dt = things_list()
-#> Method succeeded
->>>>>>> d73c5479c2362f38b8852163bb6b42911991b7c2
 ```
 
 ## Real-time sensor data

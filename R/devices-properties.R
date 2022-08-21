@@ -2,9 +2,7 @@
 #'
 #' List properties associated to a given device
 #'
-#' Official documentation:
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetProperties}{devicesV2GetProperties}
-#' @md
+#' Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetProperties}{devicesV2GetProperties}
 #'
 #' @param device_id The id of the device
 #' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`

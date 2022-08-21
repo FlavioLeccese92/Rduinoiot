@@ -2,9 +2,7 @@
 #'
 #' List devices associated to the user
 #'
-#' Official documentation:
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List}{devicesV2List}
-#' @md
+#' Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List}{devicesV2List}
 #'
 #' @param serial serial number of the device you  may want to filter from the list (not device_id)
 #' @param tags tags you  may want to filter from the list

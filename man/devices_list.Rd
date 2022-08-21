@@ -15,7 +15,7 @@ devices_list(
 
 \item{tags}{tags you  may want to filter from the list}
 
-\item{token}{A valid token created with \code{create_auth_token}
+\item{token}{A valid token created with `create_auth_token`
 (either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
 }
 \value{
@@ -25,10 +25,7 @@ A tibble showing extensive information about devices (and related things) associ
 List devices associated to the user
 }
 \details{
-Official documentation:
-\itemize{
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List}{devicesV2List}
-}
+Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List}{devicesV2List}
 }
 \examples{
 \dontrun{

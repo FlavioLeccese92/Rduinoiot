@@ -6,7 +6,6 @@ reference:
 - title: "Authentication"
   contents:
   - create_auth_token
-<<<<<<< HEAD
 - title: "Devices"
   contents:
   - devices_list
@@ -21,15 +20,3 @@ reference:
 - title: "Properties (of things)"
   contents:
   - starts_with("things_properties")
-=======
-- title: "Things API method"
-  contents:
-  - things_list
-  - starts_with("things_tags")
-- title: "Properties (of things) API methods"
-  contents:
-  - starts_with("things_properties")
-- title: "Devices API method"
-  contents:
-  - starts_with("devices")
->>>>>>> d73c5479c2362f38b8852163bb6b42911991b7c2

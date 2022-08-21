@@ -14,9 +14,9 @@ devices_properties_list(
 \arguments{
 \item{device_id}{The id of the device}
 
-\item{show_deleted}{If \code{TRUE}, shows the soft deleted properties. Default to \code{FALSE}}
+\item{show_deleted}{If `TRUE`, shows the soft deleted properties. Default to `FALSE`}
 
-\item{token}{A valid token created with \code{create_auth_token}
+\item{token}{A valid token created with `create_auth_token`
 (either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
 }
 \value{
@@ -26,10 +26,7 @@ A tibble showing the information about properties for given device.
 List properties associated to a given device
 }
 \details{
-Official documentation:
-\itemize{
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetProperties}{devicesV2GetProperties}
-}
+Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetProperties}{devicesV2GetProperties}
 }
 \examples{
 \dontrun{
