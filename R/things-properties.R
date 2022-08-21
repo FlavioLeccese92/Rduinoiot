@@ -29,10 +29,11 @@
 #' (either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
 #' @return A tibble showing the information about properties for given device
 #' @examples
+#' \dontrun{
 #' library(dplyr)
 #'
-#' # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-#' # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+#' Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+#' Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 #' create_auth_token()
 #'
 #' thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
@@ -55,7 +56,7 @@
 #'
 #' ### delete property ###
 #' things_properties_delete(thing_id = thing_id, property_id = property_id)
-#'
+#' }
 #' @name things_properties
 #' @rdname things_properties
 #' @export

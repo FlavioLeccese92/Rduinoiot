@@ -34,10 +34,10 @@ from Arduino site page https://cloud.arduino.cc/home/api-keys
 Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api-_}{API Summary}
 }
 \examples{
-
+\dontrun{
 # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
 # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 
 create_auth_token()
-
+}
 }

@@ -19,8 +19,9 @@
 #' (either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
 #' @return A tibble showing of time and value for property of given device
 #' @examples
-#' # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-#' # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+#' \dontrun{
+#' Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+#' Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 #' create_auth_token()
 #'
 #' thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
@@ -28,7 +29,7 @@
 #'
 #' things_properties_timeseries(thing_id = thing_id, property_id = property_id,
 #' desc = FALSE, interval = 60, from = "2022-08-20")
-#'
+#' }
 #' @name things_properties_timeseries
 #' @rdname things_properties_timeseries
 #' @export

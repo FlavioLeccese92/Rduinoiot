@@ -43,8 +43,9 @@ Official documentation:
 }
 }
 \examples{
-# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+\dontrun{
+Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 
 device_id = "fa7ee291-8dc8-4713-92c7-9027969e4aa1"
@@ -56,5 +57,5 @@ devices_tags_list(device_id = device_id)
 
 ### delete tag ###
 devices_tags_delete(device_id = device_id, key = "1")
-
+}
 }

@@ -43,8 +43,9 @@ Official documentation:
 }
 }
 \examples{
-# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+\dontrun{
+Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
@@ -56,5 +57,5 @@ things_tags_list(thing_id = thing_id)
 
 ### delete tag ###
 things_tags_delete(thing_id = thing_id, key = "1")
-
+}
 }

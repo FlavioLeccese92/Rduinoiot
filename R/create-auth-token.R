@@ -16,12 +16,12 @@
 #' @return A token valid for Arduino IoT Cloud API (stored on .Rprofile)
 #'
 #' @examples
-#'
+#' \dontrun{
 #' # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
 #' # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 #'
 #' create_auth_token()
-#'
+#' }
 #' @export
 create_auth_token <- function(client_id = Sys.getenv("ARDUINO_API_CLIENT_ID"),
                               client_secret = Sys.getenv("ARDUINO_API_CLIENT_SECRET"),

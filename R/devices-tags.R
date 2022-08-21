@@ -15,8 +15,9 @@
 #' (either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
 #' @return A tibble showing the keys and values for given device
 #' @examples
-#' # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-#' # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+#' \dontrun{
+#' Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+#' Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 #' create_auth_token()
 #'
 #' device_id = "fa7ee291-8dc8-4713-92c7-9027969e4aa1"
@@ -28,7 +29,7 @@
 #'
 #' ### delete tag ###
 #' devices_tags_delete(device_id = device_id, key = "1")
-#'
+#' }
 #' @name devices_tags
 #' @rdname devices_tags
 #' @export

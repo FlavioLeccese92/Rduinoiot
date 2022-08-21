@@ -45,8 +45,9 @@ Official documentation:
  \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Timeseries}{propertiesV2Timeseries}
 }
 \examples{
-# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+\dontrun{
+Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
@@ -54,5 +55,5 @@ property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778"
 
 things_properties_timeseries(thing_id = thing_id, property_id = property_id,
 desc = FALSE, interval = 60, from = "2022-08-20")
-
+}
 }
