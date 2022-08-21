@@ -1,4 +1,18 @@
 url: ~
 template:
-  bootstrap: 5
-
+  params:
+    bootswatch: readable
+reference:
+- title: "Authentication"
+  contents:
+  - create_auth_token
+- title: "Things API method"
+  contents:
+  - things_list
+  - starts_with("things_tags")
+- title: "Properties (of things) API methods"
+  contents:
+  - starts_with("things_properties")
+- title: "Devices API method"
+  contents:
+  - starts_with("devices")

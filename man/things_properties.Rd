@@ -63,7 +63,7 @@ things_properties_delete(
 \itemize{
 \item \code{max_value} (numeric) Maximum value of this property
 \item \code{min_value} (numeric) Minimum value of this property
-\item \code{persist} (logic) If TRUE, data will persist into a timeseries database
+\item \code{persist} (logic) If \code{TRUE}, data will persist into a timeseries database
 \item \code{tag} (numeric) The integer id of the property
 \item \code{update_parameter} (numeric) The update frequency in seconds, or the amount of the property
 has to change in order to trigger an update
@@ -71,11 +71,11 @@ has to change in order to trigger an update
 }}
 
 \item{token}{A valid token created with \code{create_auth_token}
-(either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))}
+(either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
 
 \item{property_id}{The id of the thing}
 
-\item{show_deleted}{If TRUE, shows the soft deleted properties (default FALSE)}
+\item{show_deleted}{If \code{TRUE}, shows the soft deleted properties. Default to \code{FALSE}}
 }
 \value{
 A tibble showing the information about properties for given device
@@ -109,8 +109,8 @@ name = "test",  permission = "READ_ONLY", type = "FLOAT",
 update_strategy = "ON_CHANGE", update_parameter = 10)
 
 ### check properties list ###
-properties_list = things_properties_list(thing_id = thing_id)
-property_id = properties_list \%>\% filter(name == "test") \%>\% pull(id)
+p_list = things_properties_list(thing_id = thing_id)
+property_id = p_list \%>\% filter(name == "test") \%>\% pull(id)
 
 things_properties_show(thing_id = thing_id, property_id = property_id)
 

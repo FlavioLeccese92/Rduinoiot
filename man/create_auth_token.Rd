@@ -11,11 +11,11 @@ create_auth_token(
 )
 }
 \arguments{
-\item{client_id}{Your client id (default is the environmental variable ARDUINO_API_CLIENT_ID)}
+\item{client_id}{Your client id (default is the environmental variable \code{ARDUINO_API_CLIENT_ID})}
 
-\item{client_secret}{Your client secret (default is the environmental variable ARDUINO_API_CLIENT_SECRET)}
+\item{client_secret}{Your client secret (default is the environmental variable \code{ARDUINO_API_CLIENT_SECRET})}
 
-\item{...}{Additional parameters needed for the body of the POST request:
+\item{...}{Additional parameters needed for the body of the \code{POST} request:
 \itemize{
 \item \code{token_url} (default: 'https://api2.arduino.cc/iot/v1/clients/token')
 \item \code{grant_type} (default: 'client_credentials')
@@ -24,7 +24,7 @@ create_auth_token(
 }}
 }
 \value{
-A token valid for Arduino IoT Cloud API (stored on .Rprofile)
+A token valid for Arduino IoT Cloud API (stored on .Rprofile) and retrievable by \code{getOption('ARDUINO_API_TOKEN')}
 }
 \description{
 Obtain an authorization token using your personal client_id and client_secret

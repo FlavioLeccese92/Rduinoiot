@@ -2,7 +2,8 @@ Package: Rduinoiot
 Type: Package
 Title: Arduino iot-api R client
 Version: 0.1.0
-Author: Flavio Leccese
+Authors@R: 
+    c(person(given = "Flavio", family = "Leccese", email = "flavioleccese92@gmail.com", role = c("aut", "cre")))
 Maintainer: Flavio Leccese <flavioleccese92@gmail.com>
 Description: This package provides an R client for the Arduino Iot Cloud API and some helpful functions that utilize the client.
 License: MIT + file LICENSE

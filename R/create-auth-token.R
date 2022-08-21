@@ -5,15 +5,15 @@
 #'
 #' Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api-_}{API Summary}
 #'
-#' @param client_id Your client id (default is the environmental variable ARDUINO_API_CLIENT_ID)
-#' @param client_secret Your client secret (default is the environmental variable ARDUINO_API_CLIENT_SECRET)
-#' @param ... Additional parameters needed for the body of the POST request:
+#' @param client_id Your client id (default is the environmental variable `ARDUINO_API_CLIENT_ID`)
+#' @param client_secret Your client secret (default is the environmental variable `ARDUINO_API_CLIENT_SECRET`)
+#' @param ... Additional parameters needed for the body of the `POST` request:
 #'  * `token_url` (default: 'https://api2.arduino.cc/iot/v1/clients/token')
 #'  * `grant_type` (default: 'client_credentials')
 #'  * `audience` (default: 'https://api2.arduino.cc/iot')
 #'  * `content_type` (default: 'application/x-www-form-urlencoded')
 #' @md
-#' @return A token valid for Arduino IoT Cloud API (stored on .Rprofile)
+#' @return A token valid for Arduino IoT Cloud API (stored on .Rprofile) and retrievable by \code{getOption('ARDUINO_API_TOKEN')}
 #'
 #' @examples
 #' \dontrun{
