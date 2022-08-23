@@ -15,7 +15,7 @@ reference:
   - starts_with("devices_properties")
 - title: "Things"
   contents:
-  - things_list
+  - things
   - starts_with("things_tags")
 - title: "Properties (of things)"
   contents:

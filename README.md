@@ -13,7 +13,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 **Rduinoiot** provides an easy way to connect to [Arduino Iot Cloud
-API](https://create.arduino.cc/iot/) with R. Functions allows to exploit
+API](https://create.arduino.cc/iot/) with R. Functions allow to exploit
 [API methods](https://www.arduino.cc/reference/en/iot/api) for many
 purposes, manage your Arduino devices and dashboards and access to the
 data produced by sensors and sketches.

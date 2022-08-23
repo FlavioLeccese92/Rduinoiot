@@ -37,23 +37,25 @@ things_properties_timeseries <- function(thing_id, property_id,
                                          from = NULL, to = NULL, interval = NULL, desc = NULL,
                                          token = getOption('ARDUINO_API_TOKEN')){
 
-  if(missing(thing_id)){stop("missing thing_id", call. = FALSE)}
-  if(missing(thing_id)){stop("missing property_id", call. = FALSE)}
+  if(missing(thing_id)){cli::cli_alert_danger("missing device_id"); stop()}
+  if(missing(property_id)){cli::cli_alert_danger("missing property_id"); stop()}
 
-  if(is.null(token)){stop("Token is null: use function create_auth_token to create a valid one", call. = FALSE)}
+  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
   url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s/timeseries", thing_id, property_id)
   still_valid_token = FALSE
 
   if(!missing(from)){
     if(!is(from, "POSIXct") && !is(from, "Date")){
-      from = tryCatch({as.Date(from)}, error = function(e){stop("from not in a valid POSIXct or Date format")})
+      from = tryCatch({as.Date(from)}, error = function(e){
+        cli::cli_alert_danger("{.field to} not in a valid POSIXct or Date format")})
       from = strftime(format(from, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
     else{from = strftime(format(from, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
   }
 
   if(!missing(to)){
     if(!is(to, "POSIXct") && !is(to, "Date")){
-      to = tryCatch({as.Date(to)}, error = function(e){stop("to not in a valid POSIXct or Date format")})
+      to = tryCatch({as.Date(to)}, error = function(e){
+        cli::cli_alert_danger("{.field from} not in a valid POSIXct or Date format")})
       to = strftime(format(to, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
     else{to = strftime(format(to, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
   }
@@ -67,19 +69,19 @@ things_properties_timeseries <- function(thing_id, property_id,
                 'to' = to)
     res = httr::GET(url = url, query = query, httr::add_headers(header), encode = "json")
     if(res$status_code == 200){
-      still_valid_token = TRUE
       res = tibble::as_tibble(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$data)
       if(nrow(res)>0){
         res$time = as.POSIXct(res$time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
       }
-      message("Method succeeded")}
+      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
-      message("Request not authorized: regenerate token")
+      cli::cli_alert_warning("Request not authorized: regenerate token")
       create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
-    else if(res$status_code == 404){ still_valid_token = TRUE; stop("API error: Not found\n")}
+    else if(res$status_code == 404){
+      still_valid_token = TRUE; cli::cli_alert_danger("API error: Not found");}
     else{
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail, "\n")))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
   return(res)
 }

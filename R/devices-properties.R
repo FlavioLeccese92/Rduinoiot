@@ -29,29 +29,29 @@ devices_properties_list <- function(device_id,
                                     show_deleted = FALSE,
                                     token = getOption('ARDUINO_API_TOKEN')){
 
-  if(missing(device_id)){stop("missing device_id", call. = FALSE)}
-  if(!is.logical(show_deleted)){stop("show_deleted must be TRUE or FALSE", call. = FALSE)}
+  if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
+  if(!is.logical(show_deleted)){cli::cli_alert_danger("show_deleted must be TRUE or FALSE"); stop()}
 
-  if(is.null(token)){stop("Token is null: use function create_auth_token to create a valid one", call. = FALSE)}
+  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/properties?show_deleted=%s", device_id, show_deleted)
+  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/properties", device_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){
     header = c('Authorization' = paste0("Bearer ", token),
                'Content-Type' = "text/plain")
-    res = httr::GET(url = url, httr::add_headers(header))
+    query = list('show_deleted' = show_deleted)
+    res = httr::GET(url = url, query = query, httr::add_headers(header))
     if(res$status_code == 200){
-      still_valid_token = TRUE
       res = tibble::as_tibble(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8")))
-      message("Method succeeded")}
+      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
-      message("Request not authorized: regenerate token")
+      cli::cli_alert_warning("Request not authorized: regenerate token")
       create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail)))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
   return(res)
 }

@@ -18,7 +18,9 @@ Imports:
     tibble,
     dplyr,
     methods,
-    magrittr
+    magrittr,
+    cli,
+    purrr
 Suggests:
     knitr,
     rmarkdown

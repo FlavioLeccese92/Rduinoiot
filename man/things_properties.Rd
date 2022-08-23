@@ -73,7 +73,7 @@ has to change in order to trigger an update
 \item{token}{A valid token created with \code{create_auth_token}
 (either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
 
-\item{property_id}{The id of the thing}
+\item{property_id}{The id of the property}
 
 \item{show_deleted}{If \code{TRUE}, shows the soft deleted properties. Default to \code{FALSE}}
 }
@@ -109,14 +109,14 @@ name = "test",  permission = "READ_ONLY", type = "FLOAT",
 update_strategy = "ON_CHANGE", update_parameter = 10)
 
 ### check properties list ###
-p_list = things_properties_list(thing_id = thing_id)
+p_list = things_properties_list(thing_id = thing_id, show_deleted = FALSE)
 property_id = p_list \%>\% filter(name == "test") \%>\% pull(id)
 
 things_properties_show(thing_id = thing_id, property_id = property_id)
 
 ### update property ###
 things_properties_update(thing_id = thing_id, property_id = property_id,
-name = "testupdated2", permission = "READ_ONLY", type = "FLOAT",
+name = "test_update", permission = "READ_ONLY", type = "FLOAT",
 update_strategy = "ON_CHANGE", update_parameter = 10)
 
 ### delete property ###

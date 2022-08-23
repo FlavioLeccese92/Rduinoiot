@@ -11,7 +11,7 @@
 #' @md
 #'
 #' @param thing_id The id of the thing
-#' @param property_id The id of the thing
+#' @param property_id The id of the property
 #' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`
 #' @param name The friendly name of the property
 #' @param permission The permission of the property (READ_ONLY or READ_WRITE allowed)
@@ -44,14 +44,14 @@
 #' update_strategy = "ON_CHANGE", update_parameter = 10)
 #'
 #' ### check properties list ###
-#' p_list = things_properties_list(thing_id = thing_id)
+#' p_list = things_properties_list(thing_id = thing_id, show_deleted = FALSE)
 #' property_id = p_list %>% filter(name == "test") %>% pull(id)
 #'
 #' things_properties_show(thing_id = thing_id, property_id = property_id)
 #'
 #' ### update property ###
 #' things_properties_update(thing_id = thing_id, property_id = property_id,
-#' name = "testupdated2", permission = "READ_ONLY", type = "FLOAT",
+#' name = "test_update", permission = "READ_ONLY", type = "FLOAT",
 #' update_strategy = "ON_CHANGE", update_parameter = 10)
 #'
 #' ### delete property ###
@@ -68,13 +68,13 @@ things_properties_create <- function(thing_id,
   missing_args = setdiff(c("thing_id", "name", "permission", "type", "update_strategy"),
                          names(unlist(match.call())))
   if(length(missing_args)>0){
-    stop(paste0("missing argument ", paste0(missing_args, collapse = ", ")), call. = FALSE)
+    cli::cli_alert_danger(paste0("Missing argument ", paste0(missing_args, collapse = ", "))); stop()
   }
   add_args = list(...)
   add_args_name = c("max_value", "min_value", "persist", "tag", "update_parameter", "variable_name")
   add_body = add_args[which(names(add_args) %in% add_args_name)]
 
-  if(is.null(token)){stop("Token is null: use function create_auth_token to create a valid one", call. = FALSE)}
+  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
   url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties", thing_id)
   still_valid_token = FALSE
 
@@ -88,20 +88,22 @@ things_properties_create <- function(thing_id,
     if(length(add_body)>0){body = append(body, add_body)}
     res = httr::PUT(url = url, body = body, httr::add_headers(header), encode = "json")
     if(res$status_code == 201){
-      still_valid_token = TRUE
-      message("Method succeeded")}
+      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
+      res = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))
+      cli::cli_text(paste0("Created property with
+      {.field name} = {.val ", res$variable_name,"} and {.field property_id} = {.val ", res$id,"}"))
+    }
     else if(res$status_code == 401){
-      message("Request not authorized: regenerate token")
+      cli::cli_alert_warning("Request not authorized: regenerate token")
       create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail)))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
 }
 #' @name things_properties
 #' @export
-#'
 things_properties_update <- function(thing_id, property_id,
                                      name, permission, type, update_strategy,
                                      ...,
@@ -110,13 +112,13 @@ things_properties_update <- function(thing_id, property_id,
   missing_args = setdiff(c("thing_id", "property_id", "name", "permission", "type", "update_strategy"),
                          names(unlist(match.call())))
   if(length(missing_args)>0){
-    stop(paste0("missing argument ", paste0(missing_args, collapse = ", ")), call. = FALSE)
+    cli::cli_alert_danger(paste0("Missing argument ", paste0(missing_args, collapse = ", "))); stop()
   }
   add_args = list(...)
   add_args_name = c("max_value", "min_value", "persist", "tag", "update_parameter", "variable_name")
   add_body = add_args[which(names(add_args) %in% add_args_name)]
 
-  if(is.null(token)){stop("Token is null: use function create_auth_token to create a valid one", call. = FALSE)}
+  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
   url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s", thing_id, property_id)
   still_valid_token = FALSE
 
@@ -130,28 +132,27 @@ things_properties_update <- function(thing_id, property_id,
     if(length(add_body)>0){body = append(body, add_body)}
     res = httr::POST(url = url, body = body, httr::add_headers(header), encode = "json")
     if(res$status_code == 200){
-      still_valid_token = TRUE
-      message("Method succeeded")}
+      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
+      cli::cli_text(paste0("Updated property with {.field property_id} = {.val ", property_id,"}"))}
     else if(res$status_code == 401){
-      message("Request not authorized: regenerate token")
+      cli::cli_alert_warning("Request not authorized: regenerate token")
       create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail)))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
 }
 #' @name things_properties
 #' @export
-#'
 things_properties_list <- function(thing_id,
                                    show_deleted = FALSE,
                                    token = getOption('ARDUINO_API_TOKEN')){
 
-  if(missing(thing_id)){stop("missing thing_id", call. = FALSE)}
-  if(!is.logical(show_deleted)){stop("show_deleted must be TRUE or FALSE", call. = FALSE)}
+  if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
+  if(!is.logical(show_deleted)){cli::cli_alert_danger("show_deleted must be TRUE or FALSE"); stop()}
 
-  if(is.null(token)){stop("Token is null: use function create_auth_token to create a valid one", call. = FALSE)}
+  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
   url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties?show_deleted=%s", thing_id, show_deleted)
   still_valid_token = FALSE
@@ -161,35 +162,34 @@ things_properties_list <- function(thing_id,
                'Content-Type' = "text/plain")
     res = httr::GET(url = url, httr::add_headers(header))
     if(res$status_code == 200){
-      still_valid_token = TRUE
       res = tibble::as_tibble(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8")))
       if(nrow(res)>0){
         res$created_at = as.POSIXct(res$created_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
         res$updated_at = as.POSIXct(res$updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
         res$value_updated_at = as.POSIXct(res$value_updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
       }
-      message("Method succeeded")}
+      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
+      }
     else if(res$status_code == 401){
-      message("Request not authorized: regenerate token")
+      cli::cli_alert_warning("Request not authorized: regenerate token")
       create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail)))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
   return(res)
 }
 #' @name things_properties
 #' @export
-#'
 things_properties_show <- function(thing_id,
                                    property_id,
                                    token = getOption('ARDUINO_API_TOKEN')){
 
-  if(missing(thing_id)){stop("missing thing_id", call. = FALSE)}
-  if(missing(thing_id)){stop("missing property_id", call. = FALSE)}
+  if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
+  if(missing(thing_id)){cli::cli_alert_danger("missing property_id"); stop()}
 
-  if(is.null(token)){stop("Token is null: use function create_auth_token to create a valid one", call. = FALSE)}
+  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
   url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s", thing_id, property_id)
   still_valid_token = FALSE
@@ -199,7 +199,6 @@ things_properties_show <- function(thing_id,
                'Content-Type' = "text/plain")
     res = httr::GET(url = url, httr::add_headers(header))
     if(res$status_code == 200){
-      still_valid_token = TRUE
       res = tibble::as_tibble(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8")))
       if(nrow(res)>0){
         res$created_at = as.POSIXct(res$created_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
@@ -207,28 +206,27 @@ things_properties_show <- function(thing_id,
         if("value_updated_at" %in% names(res)){
           res$value_updated_at = as.POSIXct(res$value_updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")}
       }
-      message("Method succeeded")}
+      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
-      message("Request not authorized: regenerate token")
+      cli::cli_alert_warning("Request not authorized: regenerate token")
       create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail)))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail, "\n"))); stop()}
   }
   return(res)
 }
 #' @name things_properties
 #' @export
-#'
 things_properties_delete <- function(thing_id,
                                      property_id,
                                      token = getOption('ARDUINO_API_TOKEN')){
 
-  if(missing(thing_id)){stop("missing thing_id", call. = FALSE)}
-  if(missing(property_id)){stop("missing property_id", call. = FALSE)}
+  if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
+  if(missing(property_id)){cli::cli_alert_danger("missing property_id"); stop()}
 
-  if(is.null(token)){stop("Token is null: use function create_auth_token to create a valid one", call. = FALSE)}
+  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
   url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s", thing_id, property_id)
   still_valid_token = FALSE
@@ -238,14 +236,17 @@ things_properties_delete <- function(thing_id,
                'Content-Type' = "text/plain")
     res = httr::DELETE(url = url, httr::add_headers(header))
     if(res$status_code == 200){
-      still_valid_token = TRUE
-      message("Method succeeded")}
+      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
+      cli::cli_text(paste0("Deleted property with {.field property_id} = {.val ", property_id,"}"))
+      }
     else if(res$status_code == 401){
-      message("Request not authorized: regenerate token")
+      cli::cli_alert_warning("Request not authorized: regenerate token")
       create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
-    else if(res$status_code == 404){ still_valid_token = TRUE; stop("API error: Not found\n")}
+    else if(res$status_code == 404){
+      still_valid_token = TRUE; cli::cli_alert_danger("API error: Not found");}
     else{
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail, "\n")))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail, "\n"))); stop()
+      }
   }
 }

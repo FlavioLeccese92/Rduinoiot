@@ -26,8 +26,8 @@
 create_auth_token <- function(client_id = Sys.getenv("ARDUINO_API_CLIENT_ID"),
                               client_secret = Sys.getenv("ARDUINO_API_CLIENT_SECRET"),
                                ...){
-  if(client_id == ""){stop("client_id not defined as system variable")}
-  if(client_secret == ""){stop("client_secret not defined as system variable")}
+  if(client_id == ""){cli::cli_alert_danger("client_id not defined as system variable"); stop()}
+  if(client_secret == ""){cli::cli_alert_danger("client_secret not defined as system variable"); stop()}
 
   add_args = list(...)
   if('token_url' %in% names(add_args)){
@@ -56,9 +56,9 @@ create_auth_token <- function(client_id = Sys.getenv("ARDUINO_API_CLIENT_ID"),
 
   if(res$status_code == 200){
     token <- as.character(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))["access_token"])
-    message("Authorization succeeded")
+    cli::cli_alert_success("Authorization succeeded")
   }else{
-    stop(paste0("API error: ", res$status_code))
+    cli::cli_alert_danger(paste0("API error: ", res$status_code)); stop()
   }
   options(ARDUINO_API_TOKEN = token)
   invisible(token)

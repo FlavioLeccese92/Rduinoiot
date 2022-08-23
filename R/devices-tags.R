@@ -34,15 +34,15 @@
 #' @rdname devices_tags
 #' @export
 devices_tags_upsert <- function(device_id,
-                               key, value,
-                               token = getOption('ARDUINO_API_TOKEN')){
+                                key, value,
+                                token = getOption('ARDUINO_API_TOKEN')){
 
-  if(missing(device_id)){stop("missing device_id", call. = FALSE)}
-  if(missing(key)){stop("missing key", call. = FALSE)}
+  if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
+  if(missing(key)){cli::cli_alert_danger("missing key"); stop()}
   key = as.character(key)
-  if(missing(value)){stop("missing value", call. = FALSE)}
+  if(missing(value)){cli::cli_alert_danger("missing value"); stop()}
   value = as.character(value)
-  if(is.null(token)){stop("Token is null: use function create_auth_token to create a valid one", call. = FALSE)}
+  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
   url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/tags", device_id)
   still_valid_token = FALSE
@@ -54,15 +54,17 @@ devices_tags_upsert <- function(device_id,
                 'value' = value)
     res = httr::PUT(url = url, body = body, httr::add_headers(header), encode = "json")
     if(res$status_code == 200){
-      still_valid_token = TRUE
-      message("Method succeeded")}
+      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
+      res = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))
+      cli::cli_text(paste0("Created/Updated tag with
+      {.field key} = {.val ", res$key,"} and {.field value} = {.val ", res$value,"}"))}
     else if(res$status_code == 401){
-      message("Request not authorized: regenerate token")
+      cli::cli_alert_warning("Request not authorized: regenerate token")
       create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail, "\n")))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
 }
 #' @name devices_tags
@@ -70,8 +72,8 @@ devices_tags_upsert <- function(device_id,
 devices_tags_list <- function(device_id,
                              token = getOption('ARDUINO_API_TOKEN')){
 
-  if(missing(device_id)){stop("missing device_id", call. = FALSE)}
-  if(is.null(token)){stop("Token is null: use function create_auth_token to create a valid one", call. = FALSE)}
+  if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
+  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
   url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/tags", device_id)
   still_valid_token = FALSE
@@ -81,16 +83,15 @@ devices_tags_list <- function(device_id,
                'Content-Type' = "text/plain")
     res = httr::GET(url = url, httr::add_headers(header))
     if(res$status_code == 200){
-      still_valid_token = TRUE
       res = tibble::as_tibble(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$tags)
-      message("Method succeeded")}
+      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
-      message("Request not authorized: regenerate token")
+      cli::cli_alert_warning("Request not authorized: regenerate token")
       create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail, "\n")))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
   return(res)
 }
@@ -101,10 +102,10 @@ devices_tags_delete <- function(device_id,
                                key,
                                token = getOption('ARDUINO_API_TOKEN')){
 
-  if(missing(device_id)){stop("missing device_id", call. = FALSE)}
-  if(missing(key)){stop("missing key", call. = FALSE)}
+  if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
+  if(missing(key)){cli::cli_alert_danger("missing key"); stop()}
   key = as.character(key)
-  if(is.null(token)){stop("Token is null: use function create_auth_token to create a valid one", call. = FALSE)}
+  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
   url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/tags/%s", device_id, key)
   still_valid_token = FALSE
@@ -114,14 +115,14 @@ devices_tags_delete <- function(device_id,
                'Content-Type' = "text/plain")
     res = httr::DELETE(url = url, httr::add_headers(header))
     if(res$status_code == 200){
-      still_valid_token = TRUE
-      message("Method succeeded")}
+      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
+      cli::cli_text(paste0("Deleted tag with {.field key} = {.val ", key,"}"))}
     else if(res$status_code == 401){
-      message("Request not authorized: regenerate token")
+      cli::cli_alert_warning("Request not authorized: regenerate token")
       create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail, "\n")))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
 }
