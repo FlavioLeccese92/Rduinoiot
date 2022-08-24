@@ -9,8 +9,7 @@ Description: This package provides an R client for the Arduino Iot Cloud API and
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/FlavioLeccese92/Rduinoiot,
-    https://flavioleccese92.github.io/Rduinoiot/
+URL: https://flavioleccese92.github.io/Rduinoiot/
 BugReports: https://github.com/FlavioLeccese92/Rduinoiot/issues
 RoxygenNote: 7.1.2
 Imports: 
