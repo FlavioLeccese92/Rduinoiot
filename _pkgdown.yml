@@ -1,28 +1,24 @@
-https://flavioleccese92.github.io/Rduinoiot/
-
 url: https://flavioleccese92.github.io/Rduinoiot/
 template:
   params:
     bootswatch: readable
 reference:
-- title: "Authentication"
-  contents:
-  - create_auth_token
-- title: "Devices"
+- title: Authentication
+  contents: create_auth_token
+- title: Devices
   contents:
   - devices
   - starts_with("devices_tags")
-- title: "Properties (of devices)"
-  contents:
-  - starts_with("devices_properties")
-- title: "Things"
+- title: Properties (of devices)
+  contents: starts_with("devices_properties")
+- title: Things
   contents:
   - things
   - starts_with("things_tags")
-- title: "Properties (of things)"
-  contents:
-  - starts_with("things_properties")
-- title: "Data"
+- title: Properties (of things)
+  contents: starts_with("things_properties")
+- title: Data
   contents:
   - things_properties_timeseries
   - devices_properties_timeseries
+

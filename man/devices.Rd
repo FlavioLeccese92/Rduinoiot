@@ -77,5 +77,6 @@ devices_get_events(device_id = device_id)
 
 ### get device properties ###
 devices_get_properties(device_id = device_id)
+
 }
 }
