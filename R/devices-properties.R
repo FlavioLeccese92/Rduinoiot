@@ -2,12 +2,12 @@
 #'
 #' List properties associated to a given device
 #'
-#' Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetProperties}{devicesV2GetProperties}
+#' Official documentation: [devicesV2GetProperties](https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetProperties)
 #'
 #' @param device_id The id of the device
 #' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`
 #' @param token A valid token created with `create_auth_token`
-#' (either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})
+#' (either explicitely assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
 #' @return A tibble showing the information about properties for given device.
 #' @examples
 #' \dontrun{

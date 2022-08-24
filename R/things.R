@@ -1,13 +1,15 @@
 #' Things API methods
 #'
+#' @description
+#'
 #' Create, Update, List, Show and Delete properties associated to a given thing
 #'
 #' Official documentation:
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Create}{thingsV2Create}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Update}{thingsV2Update}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2List}{thingsV2List}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Show}{thingsV2Show}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Delete}{thingsV2Delete}
+#'  * [thingsV2Create](https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Create)
+#'  * [thingsV2Update](https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Update)
+#'  * [thingsV2List](https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2List)
+#'  * [thingsV2Show](https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Show)
+#'  * [thingsV2Delete](https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Delete)
 #' @md
 #'
 #' @param thing_id The id of the thing
@@ -32,8 +34,8 @@
 #' @param show_properties (logical) If `TRUE`, returns things with their properties, and last values. Default to `FALSE`
 #' @param tags tags you  may want to filter from the list
 #' @param token A valid token created with `create_auth_token`
-#' (either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})
-#' @return A tibble showing the information about properties for given device
+#' (either explicitely assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
+#' @return A tibble showing information about chosen thing or list of thing for current user
 #' @examples
 #' \dontrun{
 #' library(dplyr)

@@ -1,13 +1,15 @@
 #' Properties (of things) API methods
 #'
+#' @description
+#'
 #' Create, Update, List, Show and Delete properties associated to a given thing
 #'
 #' Official documentation:
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Create}{propertiesV2Create}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Update}{propertiesV2Update}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2List}{propertiesV2List}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Show}{propertiesV2Show}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Delete}{propertiesV2Delete}
+#'  * [propertiesV2Create](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Create)
+#'  * [propertiesV2Update](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Update)
+#'  * [propertiesV2List](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2List)
+#'  * [propertiesV2Show](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Show)
+#'  * [propertiesV2Delete](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Delete)
 #' @md
 #'
 #' @param thing_id The id of the thing
@@ -26,8 +28,8 @@
 #'  has to change in order to trigger an update
 #'  * `variable_name` (character) The sketch variable name of the property
 #' @param token A valid token created with `create_auth_token`
-#' (either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})
-#' @return A tibble showing the information about properties for given device
+#' (either explicitely assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
+#' @return A tibble showing information about chosen property or list of properties for given thing
 #' @examples
 #' \dontrun{
 #' library(dplyr)

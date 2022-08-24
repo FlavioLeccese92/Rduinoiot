@@ -83,12 +83,11 @@ In case of deletion, if \code{TRUE}, hard delete the thing. Default to \code{FAL
 \item{tags}{tags you  may want to filter from the list}
 }
 \value{
-A tibble showing the information about properties for given device
+A tibble showing information about chosen thing or list of thing for current user
 }
 \description{
 Create, Update, List, Show and Delete properties associated to a given thing
-}
-\details{
+
 Official documentation:
 \itemize{
 \item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Create}{thingsV2Create}

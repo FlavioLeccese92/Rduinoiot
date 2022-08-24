@@ -1,10 +1,12 @@
 #' Data from Properties (of things) API methods
 #'
+#' @description
+#'
 #' Get numerical property's historic data binned on a specified time interval
 #' (note: the total number of data points should NOT be greater than 1000 otherwise the result will be truncated)
 #'
 #' Official documentation:
-#'  \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Timeseries}{propertiesV2Timeseries}
+#'  [propertiesV2Timeseries](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Timeseries)
 #'
 #' @param thing_id The id of the thing
 #' @param property_id The id of the property

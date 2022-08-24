@@ -78,12 +78,11 @@ has to change in order to trigger an update
 \item{show_deleted}{If \code{TRUE}, shows the soft deleted properties. Default to \code{FALSE}}
 }
 \value{
-A tibble showing the information about properties for given device
+A tibble showing information about chosen property or list of properties for given thing
 }
 \description{
 Create, Update, List, Show and Delete properties associated to a given thing
-}
-\details{
+
 Official documentation:
 \itemize{
 \item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Create}{propertiesV2Create}

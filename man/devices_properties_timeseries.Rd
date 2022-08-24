@@ -17,23 +17,25 @@ devices_properties_timeseries(
 
 \item{property_id}{The id of the property}
 
-\item{start}{A `Posixct` or `Date` object. The time at which to start selecting properties.}
+\item{start}{A \code{Posixct} or \code{Date} object. The time at which to start selecting properties.}
 
 \item{limit}{The number of properties to select}
 
-\item{token}{A valid token created with `create_auth_token`
+\item{token}{A valid token created with \code{create_auth_token}
 (either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))}
 }
 \value{
 A tibble showing of time and value for property of given device
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 Get device properties values in a range of time
-(note: this API method is bugged and waiting to be fixed by Arduino team. Would not suggest using it.)
-}
-\details{
+(note: this API method is bugged and waiting to be fixed by Arduino team.
+Here for compliteness and future developements but would not suggest using it)
+
 Official documentation:
- \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2Timeseries}{devicesV2Timeseries}
+\href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2Timeseries}{devicesV2Timeseries}
 }
 \examples{
 \dontrun{

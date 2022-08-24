@@ -12,6 +12,7 @@ This package provides an R client for the Arduino Iot Cloud API and some helpful
 Useful links:
 \itemize{
   \item \url{https://github.com/FlavioLeccese92/Rduinoiot}
+  \item \url{https://flavioleccese92.github.io/Rduinoiot/}
   \item Report bugs at \url{https://github.com/FlavioLeccese92/Rduinoiot/issues}
 }
 

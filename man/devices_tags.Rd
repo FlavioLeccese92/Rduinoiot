@@ -29,12 +29,11 @@ devices_tags_delete(device_id, key, token = getOption("ARDUINO_API_TOKEN"))
 (either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
 }
 \value{
-A tibble showing the keys and values for given device
+A tibble showing information about chosen tag or list of tags for given device
 }
 \description{
 Upsert (create/update), List and Delete tags associated to a given device
-}
-\details{
+
 Official documentation:
 \itemize{
 \item \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2Tags-devicesV2TagsUpsert}{devicesV2TagsUpsert}

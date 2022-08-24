@@ -1,19 +1,21 @@
 #' Tags (of things) API methods
 #'
+#' @description
+#'
 #' Upsert (create/update), List and Delete tags associated to a given thing
 #'
 #' Official documentation:
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsUpsert}{thingsV2TagsUpsert}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsList}{thingsV2TagsList}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsDelete}{thingsV2TagsDelete}
+#'  * [thingsV2TagsUpsert](https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsUpsert)
+#'  * [thingsV2TagsList](https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsList)
+#'  * [thingsV2TagsDelete](https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsDelete)
 #' @md
 #'
 #' @param thing_id The id of the thing
 #' @param key The key of the tag (no spaces allowed)
 #' @param value The value of the tag (no spaces allowed)
 #' @param token A valid token created with `create_auth_token`
-#' (either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})
-#' @return A tibble showing the keys and values for given device
+#' (either explicitely assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
+#' @return A tibble showing information about chosen tag or list of tags for given thing
 #' @examples
 #' \dontrun{
 #' Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')

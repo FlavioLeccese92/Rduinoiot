@@ -1,11 +1,13 @@
 #' Devices API methods
 #'
+#' @description
+#'
 #' List and show devices, events, properties associated to the user
 #'
 #' Official documentation:
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List}{devicesV2List}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Show}{thingsV2Show}
-#'  * \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetEvents}{devicesV2GetEvents}
+#'  * [devicesV2List](https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List)
+#'  * [thingsV2Show](https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Show)
+#'  * [devicesV2GetEvents](https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetEvents)
 #' @md
 #' @param serial serial number of the device you  may want to filter from the list (not device_id)
 #' @param tags tags you  may want to filter from the list
@@ -14,16 +16,28 @@
 #' @param start A `Posixct` or `Date` object. Time at which to start selecting events
 #' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`
 #' @param token A valid token created with `create_auth_token`
-#' (either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})
+#' (either explicitely assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
 #' @return A tibble showing extensive information about devices (and related things) associated to the user
 #' @examples
 #' \dontrun{
+#' library(dplyr)
 #' Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
 #' Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 #'
 #' create_auth_token()
 #'
+#' ### check properties list ###
 #' d_list = devices_list()
+#' device_id = d_list %>% slice(1) %>% pull(id)
+#'
+#' devices_show(device_id = device_id)
+#'
+#' ### get device events ###
+#' devices_get_events(device_id = device_id)
+#'
+#' ### get device properties ###
+#' devices_get_properties(device_id = device_id)
+#'
 #' }
 #' @name devices
 #' @rdname devices
@@ -86,10 +100,6 @@ devices_show <- function(device_id,
       res = tibble::as_tibble(res_raw[setdiff(names(res_raw), c("events", "thing"))])
       res$events = list(tibble::as_tibble(res_raw["events"]))
       res$thing = list(tibble::as_tibble(t(unlist(res_raw["thing"]))))
-      if(nrow(res)>0){
-        res$device$created_at = as.POSIXct(res$device$created_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
-        res$device$last_activity_at = as.POSIXct(res$device$last_activity_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
-      }
       still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")

@@ -50,8 +50,7 @@ A tibble showing extensive information about devices (and related things) associ
 }
 \description{
 List and show devices, events, properties associated to the user
-}
-\details{
+
 Official documentation:
 \itemize{
 \item \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List}{devicesV2List}
@@ -61,11 +60,22 @@ Official documentation:
 }
 \examples{
 \dontrun{
+library(dplyr)
 Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
 Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 
 create_auth_token()
 
+### check properties list ###
 d_list = devices_list()
+device_id = d_list \%>\% slice(1) \%>\% pull(id)
+
+devices_show(device_id = device_id)
+
+### get device events ###
+devices_get_events(device_id = device_id)
+
+### get device properties ###
+devices_get_properties(device_id = device_id)
 }
 }
