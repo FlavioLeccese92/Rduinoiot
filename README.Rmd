@@ -32,15 +32,21 @@ You can install the development version of Rduinoiot from [GitHub](https://githu
 # install.packages("devtools")
 devtools::install_github("FlavioLeccese92/Rduinoiot")
 ```
+## Authentication
+```{r init}
+library(Rduinoiot)
+# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+
+create_auth_token()
+```
+
 ## List things associated to the user
 
 Things associated to the user account can be easily accessed using  `things_list()`.
 This function will return detailed information, in particular `things_id` which are needed to access to properties.
 
-```{r example 1}
-library(Rduinoiot)
-# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+```{r example 1]
 create_auth_token()
 
 things_list()
@@ -57,5 +63,7 @@ property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778"
 
 things_properties_timeseries(thing_id = thing_id, property_id = property_id,
                              desc = FALSE, interval = 60)
+
 ```
+
 
