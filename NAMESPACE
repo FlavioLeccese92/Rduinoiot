@@ -2,8 +2,12 @@
 
 export("%>%")
 export(create_auth_token)
+export(devices_get_events)
+export(devices_get_properties)
 export(devices_list)
 export(devices_properties_list)
+export(devices_properties_timeseries)
+export(devices_show)
 export(devices_tags_delete)
 export(devices_tags_list)
 export(devices_tags_upsert)

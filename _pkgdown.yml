@@ -8,7 +8,7 @@ reference:
   - create_auth_token
 - title: "Devices"
   contents:
-  - devices_list
+  - devices
   - starts_with("devices_tags")
 - title: "Properties (of devices)"
   contents:
@@ -20,3 +20,6 @@ reference:
 - title: "Properties (of things)"
   contents:
   - starts_with("things_properties")
+- title: "Data"
+  contents:
+  - things_properties_timeseries

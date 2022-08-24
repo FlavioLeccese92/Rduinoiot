@@ -55,7 +55,6 @@ things_delete(thing_id, force = FALSE, token = getOption("ARDUINO_API_TOKEN"))
 
 \item{properties}{A tibble with the following columns (see \code{things_properties_create})
 \itemize{
-\item \code{show_deleted} (required) If \code{TRUE}, shows the soft deleted properties. Default to \code{FALSE}
 \item \code{name} (required) The friendly name of the property
 \item \code{permission} (required) The permission of the property (READ_ONLY or READ_WRITE allowed)
 \item \code{type} (required) The type of the property (see details for exhaustive list of values)

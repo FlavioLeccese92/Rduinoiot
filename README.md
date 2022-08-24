@@ -39,10 +39,10 @@ library(Rduinoiot)
 # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
 # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
-#> Authorization succeeded
+#> v Authorization succeeded
 
 things_list()
-#> Method succeeded
+#> v Method succeeded
 #> # A tibble: 4 x 13
 #>   created_at          href                   id    name  prope~1 sketc~2 timez~3
 #>   <dttm>              <chr>                  <chr> <chr>   <int> <chr>   <chr>  
@@ -67,7 +67,7 @@ property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778"
 
 things_properties_timeseries(thing_id = thing_id, property_id = property_id,
                              desc = FALSE, interval = 60)
-#> Method succeeded
+#> v Method succeeded
 #> # A tibble: 1,000 x 2
 #>    time                value
 #>    <dttm>              <dbl>

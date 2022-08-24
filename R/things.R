@@ -14,7 +14,6 @@
 #' @param device_id The id of the device (The arn of the associated device)
 #' @param name The friendly name of the thing
 #' @param properties A tibble with the following columns (see `things_properties_create`)
-#'  * `show_deleted` (required) If `TRUE`, shows the soft deleted properties. Default to `FALSE`
 #'  * `name` (required) The friendly name of the property
 #'  * `permission` (required) The permission of the property (READ_ONLY or READ_WRITE allowed)
 #'  * `type` (required) The type of the property (see details for exhaustive list of values)
@@ -97,7 +96,7 @@ things_create <- function(device_id = NULL, thing_id = NULL, name = NULL,
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      stop(cat(paste0("API error: ", res_detail)))}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
 }
 #' @name things
@@ -138,7 +137,7 @@ things_update <- function(device_id = NULL, thing_id = NULL, name = NULL,
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      cli::cli_alert_danger(cat(paste0("API error: ", res_detail, "\n"))); stop()}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
 }
 #' @name things
@@ -180,7 +179,7 @@ things_list <- function(device_id = NULL, thing_id = NULL,
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      cli::cli_alert_danger(cat(paste0("API error: ", res_detail, "\n"))); stop()}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
   return(res)
 }
@@ -218,7 +217,7 @@ things_show <- function(thing_id, show_deleted = FALSE,
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      cli::cli_alert_danger(cat(paste0("API error: ", res_detail, "\n"))); stop()}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
   return(res)
 }
@@ -250,6 +249,6 @@ things_delete <- function(thing_id, force = FALSE,
     else if(res$status_code == 404){ still_valid_token = TRUE; cli::cli_alert_danger("API error: Not found"); stop()}
     else{
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
-      cli::cli_alert_danger(cat(paste0("API error: ", res_detail, "\n"))); stop()}
+      cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}
   }
 }

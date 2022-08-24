@@ -51,6 +51,7 @@ things_list()
 Reading real-time humidity sensor of one of your devices can be done like this:
 
 ```{r example 2}
+
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
 property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778"
 

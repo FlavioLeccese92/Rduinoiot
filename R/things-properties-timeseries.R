@@ -48,16 +48,16 @@ things_properties_timeseries <- function(thing_id, property_id,
     if(!is(from, "POSIXct") && !is(from, "Date")){
       from = tryCatch({as.Date(from)}, error = function(e){
         cli::cli_alert_danger("{.field to} not in a valid POSIXct or Date format")})
-      from = strftime(format(from, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
-    else{from = strftime(format(from, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
+      from = strftime(format(from, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")
+    }else{from = strftime(format(from, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
   }
 
   if(!missing(to)){
     if(!is(to, "POSIXct") && !is(to, "Date")){
       to = tryCatch({as.Date(to)}, error = function(e){
         cli::cli_alert_danger("{.field from} not in a valid POSIXct or Date format")})
-      to = strftime(format(to, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
-    else{to = strftime(format(to, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
+      to = strftime(format(to, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")
+    }else{to = strftime(format(to, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
   }
 
   while(!still_valid_token){
