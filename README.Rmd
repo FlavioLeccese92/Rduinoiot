@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Rduinoiot
+# Rduinoiot <img src="man/figures/logo.png" align="right" width="100px">
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/Rduinoiot)](https://CRAN.R-project.org/package=Rduinoiot)
@@ -46,7 +46,7 @@ create_auth_token()
 Things associated to the user account can be easily accessed using  `things_list()`.
 This function will return detailed information, in particular `things_id` which are needed to access to properties.
 
-```{r example 1]
+```{r example 1}
 create_auth_token()
 
 things_list()
