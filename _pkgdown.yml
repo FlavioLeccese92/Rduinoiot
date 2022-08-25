@@ -1,7 +1,21 @@
 url: https://flavioleccese92.github.io/Rduinoiot/
 template:
-  params:
-    bootswatch: readable
+  bootstrap: 5
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [search, linkedin, github]
+  components:
+    linkedin:
+      icon: fa-linkedin
+      href: https://www.linkedin.com/in/flavio-leccese-1645b691
+      aria-label: LinkedIn
+home:
+  links:
+  - text: Official Arduino IoT Cloud API documentation
+    href: https://www.arduino.cc/reference/en/iot/api/
+docsearch:
+  search:
 reference:
 - title: Authentication
   contents: create_auth_token
