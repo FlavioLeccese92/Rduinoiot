@@ -32,7 +32,7 @@ A tibble showing of time and value for property of given device
 
 Get device properties values in a range of time
 (note: this API method is bugged and waiting to be fixed by Arduino team.
-Here for compliteness and future developements but would not suggest using it)
+Here for completeness and future developements but would not suggest using it)
 
 Official documentation:
 \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2Timeseries}{devicesV2Timeseries}

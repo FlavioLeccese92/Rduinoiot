@@ -35,4 +35,5 @@ reference:
   contents:
   - things_properties_timeseries
   - devices_properties_timeseries
+  - series_batch
 

@@ -2,6 +2,8 @@
 #'
 #' @description
 #'
+#' `r lifecycle::badge('stable')`
+#'
 #' Get numerical property's historic data binned on a specified time interval
 #' (note: the total number of data points should NOT be greater than 1000 otherwise the result will be truncated)
 #'

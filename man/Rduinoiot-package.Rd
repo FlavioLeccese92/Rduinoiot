@@ -6,6 +6,8 @@
 \alias{Rduinoiot-package}
 \title{Rduinoiot: Arduino iot-api R client}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 This package provides an R client for the Arduino Iot Cloud API and some helpful functions that utilize the client.
 }
 \seealso{

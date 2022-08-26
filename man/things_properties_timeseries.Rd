@@ -37,6 +37,8 @@ Get data with a timestamp < to this value (default: now, min: 1842-01-01, max: 2
 A tibble showing of time and value for property of given device
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+
 Get numerical property's historic data binned on a specified time interval
 (note: the total number of data points should NOT be greater than 1000 otherwise the result will be truncated)
 
