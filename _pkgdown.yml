@@ -35,5 +35,5 @@ reference:
   contents:
   - things_properties_timeseries
   - devices_properties_timeseries
-  - series_batch
+  - starts_with("series_batch")
 

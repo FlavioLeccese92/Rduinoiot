@@ -33,6 +33,7 @@ You can install the development version of Rduinoiot from [GitHub](https://githu
 devtools::install_github("FlavioLeccese92/Rduinoiot")
 ```
 ## Authentication
+
 ```{r init}
 library(Rduinoiot)
 # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
@@ -50,20 +51,40 @@ This function will return detailed information, in particular `things_id` which 
 create_auth_token()
 
 things_list()
-```
+``` 
 
 ## Real-time sensor data
 
 Reading real-time humidity sensor of one of your devices can be done like this:
 
-```{r example 2}
-
+```{r example 2, paged.print=FALSE}
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
-property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778"
+property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778" # Humidity
 
-things_properties_timeseries(thing_id = thing_id, property_id = property_id,
-                             desc = FALSE, interval = 60)
-
+data_ts = things_properties_timeseries(thing_id = thing_id,
+                                       property_id = property_id,
+                                       desc = FALSE, interval = 3600)
+data_ts
 ```
 
+## Plotting the result
+```{r example 3, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
+library(echarts4r)
+library(dplyr)
+library(lubridate)
 
+data_ts = data_ts %>% mutate(time = with_tz(time, tzone = Sys.timezone()))
+
+data_ts %>%
+  e_charts(time) %>%
+  e_line(value, name = "Value", color = "#007BFF", showSymbol = FALSE, smooth = TRUE,
+         connectNulls = TRUE, animation = FALSE, emphasis = NULL) %>%
+  e_title(left = 'center', text = "Humidity",
+          subtext = "Last 1000 values averaged hourly",
+          textStyle = list(fontWeight = 'lighter')) %>%
+  e_grid(top = 70, right = 30, left = 50, bottom = 30) %>%
+  e_x_axis(show = TRUE, type = "time") %>%
+  e_y_axis(show = TRUE, scale = TRUE) %>%
+  e_legend(show = FALSE)
+```
+![](man/figures/example_3.png)

@@ -71,23 +71,49 @@ like this:
 
 ``` r
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
-property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778"
+property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778" # Humidity
 
-things_properties_timeseries(thing_id = thing_id, property_id = property_id,
-                             desc = FALSE, interval = 60)
+data_ts = things_properties_timeseries(thing_id = thing_id,
+                                       property_id = property_id,
+                                       desc = FALSE, interval = 3600)
 #> v Method succeeded
-#> # A tibble: 1,000 x 2
+data_ts
+#> # A tibble: 337 x 2
 #>    time                value
 #>    <dttm>              <dbl>
-#>  1 2022-08-12 21:58:00  27.8
-#>  2 2022-08-12 21:59:00  28.0
-#>  3 2022-08-12 22:00:00  28.3
-#>  4 2022-08-12 22:01:00  28.6
-#>  5 2022-08-12 22:02:00  28.9
-#>  6 2022-08-12 22:03:00  29.2
-#>  7 2022-08-12 22:04:00  29.5
-#>  8 2022-08-12 22:05:00  29.7
-#>  9 2022-08-12 22:06:00  29.9
-#> 10 2022-08-12 22:07:00  30.1
-#> # ... with 990 more rows
+#>  1 2022-08-25 10:00:00  32.3
+#>  2 2022-08-25 11:00:00  32.4
+#>  3 2022-08-25 12:00:00  32.6
+#>  4 2022-08-25 13:00:00  32.8
+#>  5 2022-08-25 14:00:00  33.0
+#>  6 2022-08-25 15:00:00  33.1
+#>  7 2022-08-25 16:00:00  33.2
+#>  8 2022-08-25 17:00:00  33.4
+#>  9 2022-08-25 18:00:00  33.3
+#> 10 2022-08-25 19:00:00  32.7
+#> # ... with 327 more rows
 ```
+
+## Plotting the result
+
+``` r
+library(echarts4r)
+library(dplyr)
+library(lubridate)
+
+data_ts = data_ts %>% mutate(time = with_tz(time, tzone = Sys.timezone()))
+
+data_ts %>%
+  e_charts(time) %>%
+  e_line(value, name = "Value", color = "#007BFF", showSymbol = FALSE, smooth = TRUE,
+         connectNulls = TRUE, animation = FALSE, emphasis = NULL) %>%
+  e_title(left = 'center', text = "Humidity",
+          subtext = "Last 1000 values averaged hourly",
+          textStyle = list(fontWeight = 'lighter')) %>%
+  e_grid(top = 70, right = 30, left = 50, bottom = 30) %>%
+  e_x_axis(show = TRUE, type = "time") %>%
+  e_y_axis(show = TRUE, scale = TRUE) %>%
+  e_legend(show = FALSE)
+```
+
+![](man/figures/example_3.png)
