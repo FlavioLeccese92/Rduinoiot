@@ -11,4 +11,12 @@ h1, h2, h3, h4, h5{
 body{
   font-family: "Open Sans", sans-serif;
 }
-
+/*
+code a:any-link {
+    color: #0d6efd;
+    text-decoration-color: #0d6efd;
+}
+pre code span.fu {
+    color: #0d6efd;
+}
+*/
