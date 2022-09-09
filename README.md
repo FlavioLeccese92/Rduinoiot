@@ -16,7 +16,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 API](https://create.arduino.cc/iot/) with R. Functions allow to exploit
 [API methods](https://www.arduino.cc/reference/en/iot/api) for many
 purposes, manage your Arduino devices and dashboards and access to the
-data produced by sensors and sketches.
+data produced by sensors and sketches. This is not an official library
+by Arduino.
 
 ## Installation
 
@@ -29,6 +30,13 @@ devtools::install_github("FlavioLeccese92/Rduinoiot")
 ```
 
 ## Authentication
+
+In order to access the API methods you need to create an API key. This
+can be done by logging into your Arduino Cloud account and going to the
+page <https://cloud.arduino.cc/home/api-keys> and retrieve corresponding
+`ARDUINO_API_CLIENT_ID` and `ARDUINO_API_CLIENT_SECRET`.
+
+![](man/figures/readme-authentication.png)
 
 ``` r
 library(Rduinoiot)
@@ -49,25 +57,226 @@ particular `things_id` which are needed to access to properties.
 create_auth_token()
 #> v Authorization succeeded
 
-things_list()
+tl = things_list()
 #> v Method succeeded
-#> # A tibble: 4 x 13
-#>   created_at          href                   id    name  prope~1 sketc~2 timez~3
-#>   <dttm>              <chr>                  <chr> <chr>   <int> <chr>   <chr>  
-#> 1 2022-08-12 13:49:43 /iot/v1/things/0b18eb~ 0b18~ Smar~       8 7a8e48~ Americ~
-#> 2 2022-08-12 18:24:07 /iot/v1/things/60ef77~ 60ef~ Home~       7 87cbfd~ Americ~
-#> 3 2022-08-12 21:57:28 /iot/v1/things/b68224~ b682~ Pers~       5 0ef1dc~ Americ~
-#> 4 2022-08-12 13:32:16 /iot/v1/things/bc3b27~ bc3b~ Thin~       2 3a558c~ Americ~
-#> # ... with 6 more variables: updated_at <dttm>, user_id <chr>,
-#> #   device_fqbn <chr>, device_id <chr>, device_name <chr>, device_type <chr>,
-#> #   and abbreviated variable names 1: properties_count, 2: sketch_id,
-#> #   3: timezone
 ```
+
+<table class=" lightable-paper table" style="font-family: &quot;Open Sans&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; font-size: 12px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+created\_at
+</th>
+<th style="text-align:left;">
+href
+</th>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:right;">
+properties\_count
+</th>
+<th style="text-align:left;">
+sketch\_id
+</th>
+<th style="text-align:left;">
+timezone
+</th>
+<th style="text-align:left;">
+updated\_at
+</th>
+<th style="text-align:left;">
+user\_id
+</th>
+<th style="text-align:left;">
+device\_fqbn
+</th>
+<th style="text-align:left;">
+device\_id
+</th>
+<th style="text-align:left;">
+device\_name
+</th>
+<th style="text-align:left;">
+device\_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-12 13:49:43
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+/iot/v1/things/0b18eba2-2aba-4740-8bec-5043403ecdd9
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+0b18eba2-2aba-4740-8bec-5043403ecdd9
+</td>
+<td style="text-align:left;min-width: 2in; ">
+Smart Garden
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+7a8e48be-e77d-401c-8ef7-05bd6e7b4c27
+</td>
+<td style="text-align:left;">
+America/New\_York
+</td>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-12 18:23:38
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+fd39fa13-cbac-49ac-9316-cbdf452ba1c9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-12 18:24:07
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+/iot/v1/things/60ef7770-90c0-4068-ac3d-8a2301c3ac3d
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+60ef7770-90c0-4068-ac3d-8a2301c3ac3d
+</td>
+<td style="text-align:left;min-width: 2in; ">
+Home Security Alarm
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+87cbfdec-b965-4a04-814a-232f65ac2f8e
+</td>
+<td style="text-align:left;">
+America/New\_York
+</td>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-12 18:42:09
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+fd39fa13-cbac-49ac-9316-cbdf452ba1c9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-12 21:57:28
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+/iot/v1/things/b6822400-2f35-4d93-b3e7-be919bdc5eba
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+b6822400-2f35-4d93-b3e7-be919bdc5eba
+</td>
+<td style="text-align:left;min-width: 2in; ">
+Personal Weather Station
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+0ef1dc12-dd8f-477e-963a-f7734b5ff141
+</td>
+<td style="text-align:left;">
+America/New\_York
+</td>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-12 21:59:46
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+fd39fa13-cbac-49ac-9316-cbdf452ba1c9
+</td>
+<td style="text-align:left;">
+arduino:samd:mkrwifi1010
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+fa7ee291-8dc8-4713-92c7-9027969e4aa1
+</td>
+<td style="text-align:left;">
+MFA
+</td>
+<td style="text-align:left;">
+mkrwifi1010
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-12 13:32:16
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+/iot/v1/things/bc3b2763-a775-4fc8-95da-c03235d47f3a
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+bc3b2763-a775-4fc8-95da-c03235d47f3a
+</td>
+<td style="text-align:left;min-width: 2in; ">
+Thinking About You
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+3a558c37-f087-47e9-8f01-339b40fc6dd9
+</td>
+<td style="text-align:left;">
+America/New\_York
+</td>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-12 13:40:06
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+fd39fa13-cbac-49ac-9316-cbdf452ba1c9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;min-width: 2.6in; ">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Real-time sensor data
 
-Reading real-time humidity sensor of one of your devices can be done
-like this:
+Reading real-time humidity sensor of one of your devices can be done as
+follow:
 
 ``` r
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
@@ -77,24 +286,108 @@ data_ts = things_properties_timeseries(thing_id = thing_id,
                                        property_id = property_id,
                                        desc = FALSE, interval = 3600)
 #> v Method succeeded
-data_ts
-#> # A tibble: 337 x 2
-#>    time                value
-#>    <dttm>              <dbl>
-#>  1 2022-08-25 10:00:00  32.3
-#>  2 2022-08-25 11:00:00  32.4
-#>  3 2022-08-25 12:00:00  32.6
-#>  4 2022-08-25 13:00:00  32.8
-#>  5 2022-08-25 14:00:00  33.0
-#>  6 2022-08-25 15:00:00  33.1
-#>  7 2022-08-25 16:00:00  33.2
-#>  8 2022-08-25 17:00:00  33.4
-#>  9 2022-08-25 18:00:00  33.3
-#> 10 2022-08-25 19:00:00  32.7
-#> # ... with 327 more rows
 ```
 
+<table class="table lightable-paper" style="font-size: 12px; margin-left: auto; margin-right: auto; font-family: &quot;Open Sans&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+time
+</th>
+<th style="text-align:right;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-26 10:00:00
+</td>
+<td style="text-align:right;">
+32.63547
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-26 11:00:00
+</td>
+<td style="text-align:right;">
+32.83686
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-26 12:00:00
+</td>
+<td style="text-align:right;">
+33.08431
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-26 13:00:00
+</td>
+<td style="text-align:right;">
+33.33731
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-26 14:00:00
+</td>
+<td style="text-align:right;">
+33.56967
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-26 15:00:00
+</td>
+<td style="text-align:right;">
+33.72534
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-26 16:00:00
+</td>
+<td style="text-align:right;">
+33.85618
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-26 17:00:00
+</td>
+<td style="text-align:right;">
+34.01798
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-26 18:00:00
+</td>
+<td style="text-align:right;">
+33.78055
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-26 19:00:00
+</td>
+<td style="text-align:right;">
+33.41863
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Plotting the result
+
+A catchy representation of humidity time series can be plotted, for
+instance, by using the library
+[echarts4r](https://echarts4r.john-coene.com/) by John Coene:
 
 ``` r
 library(echarts4r)
@@ -106,7 +399,8 @@ data_ts = data_ts %>% mutate(time = with_tz(time, tzone = Sys.timezone()))
 data_ts %>%
   e_charts(time) %>%
   e_line(value, name = "Value", color = "#007BFF", showSymbol = FALSE, smooth = TRUE,
-         connectNulls = TRUE, animation = FALSE, emphasis = NULL) %>%
+         connectNulls = TRUE, animation = FALSE, emphasis = NULL,
+         lineStyle = list(width = 1)) %>%
   e_title(left = 'center', text = "Humidity",
           subtext = "Last 1000 values averaged hourly",
           textStyle = list(fontWeight = 'lighter')) %>%
@@ -116,4 +410,4 @@ data_ts %>%
   e_legend(show = FALSE)
 ```
 
-![](man/figures/example_3.png)
+![](man/figures/readme-example-3.png)

@@ -1,5 +1,6 @@
 ---
 output: github_document
+always_allow_html: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -23,6 +24,7 @@ knitr::opts_chunk$set(
 
 **Rduinoiot** provides an easy way to connect to [Arduino Iot Cloud API](https://create.arduino.cc/iot/) with R.
 Functions allow to exploit [API methods](https://www.arduino.cc/reference/en/iot/api) for many purposes, manage your Arduino devices and dashboards and access to the data produced by sensors and sketches.
+This is not an official library by Arduino.
 
 ## Installation
 
@@ -33,6 +35,10 @@ You can install the development version of Rduinoiot from [GitHub](https://githu
 devtools::install_github("FlavioLeccese92/Rduinoiot")
 ```
 ## Authentication
+
+In order to access the API methods you need to create an API key. This can be done by logging into your Arduino Cloud account and going to the page https://cloud.arduino.cc/home/api-keys and retrieve corresponding `ARDUINO_API_CLIENT_ID` and `ARDUINO_API_CLIENT_SECRET`.
+
+![](man/figures/readme-authentication.png)
 
 ```{r init}
 library(Rduinoiot)
@@ -50,24 +56,44 @@ This function will return detailed information, in particular `things_id` which 
 ```{r example 1}
 create_auth_token()
 
-things_list()
+tl = things_list()
 ``` 
+```{r example 1 - run, echo=FALSE, message=FALSE, warning=FALSE}
+library(kableExtra)
 
+tl %>%
+  kbl(longtable = TRUE) %>%
+  kable_paper(full_width = FALSE, html_font = '"Open Sans", sans-serif') %>%
+  kable_styling(font_size = 12) %>%
+  column_spec(column = c(1, 8), width_min = "1.6in") %>%
+  column_spec(column = 4, width_min = "2in") %>%
+  column_spec(column = c(2, 3, 6, 9, 11), width_min = "2.6in")
+```
 ## Real-time sensor data
 
-Reading real-time humidity sensor of one of your devices can be done like this:
+Reading real-time humidity sensor of one of your devices can be done as follow:
 
-```{r example 2, paged.print=FALSE}
+```{r example 2}
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
 property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778" # Humidity
 
 data_ts = things_properties_timeseries(thing_id = thing_id,
                                        property_id = property_id,
                                        desc = FALSE, interval = 3600)
-data_ts
+```
+```{r example 2 -  run, echo=FALSE}
+data_ts %>%
+  head(10)%>%
+  kbl(longtable = TRUE) %>%
+  kable_styling(font_size = 12)  %>%
+  kable_paper(full_width = FALSE, html_font = '"Open Sans", sans-serif') %>%
+  column_spec(column = 1, width_min = "1.6in")
 ```
 
 ## Plotting the result
+
+A catchy representation of humidity time series can be plotted, for instance, by using the library [echarts4r](https://echarts4r.john-coene.com/) by John Coene:
+
 ```{r example 3, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 library(echarts4r)
 library(dplyr)
@@ -78,7 +104,8 @@ data_ts = data_ts %>% mutate(time = with_tz(time, tzone = Sys.timezone()))
 data_ts %>%
   e_charts(time) %>%
   e_line(value, name = "Value", color = "#007BFF", showSymbol = FALSE, smooth = TRUE,
-         connectNulls = TRUE, animation = FALSE, emphasis = NULL) %>%
+         connectNulls = TRUE, animation = FALSE, emphasis = NULL,
+         lineStyle = list(width = 1)) %>%
   e_title(left = 'center', text = "Humidity",
           subtext = "Last 1000 values averaged hourly",
           textStyle = list(fontWeight = 'lighter')) %>%
@@ -87,4 +114,4 @@ data_ts %>%
   e_y_axis(show = TRUE, scale = TRUE) %>%
   e_legend(show = FALSE)
 ```
-![](man/figures/example_3.png)
+![](man/figures/readme-example-3.png)
