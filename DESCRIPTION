@@ -17,11 +17,9 @@ Imports:
     jsonlite,
     tibble,
     dplyr,
-    magrittr,
     cli,
     purrr,
-    methods,
-    lifecycle
+    methods
 Suggests:
     knitr,
     rmarkdown
