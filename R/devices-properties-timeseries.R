@@ -45,7 +45,7 @@ devices_properties_timeseries <- function(device_id, property_id,
   still_valid_token = FALSE
 
   if(!missing(start)){
-    if(!is(start, "POSIXct") && !is(start, "Date")){
+    if(!methods::is(start, "POSIXct") && !methods::is(start, "Date")){
       start = tryCatch({as.Date(start)}, error = function(e){
         cli::cli_alert_danger("{.field to} not in a valid POSIXct or Date format")})
       start = strftime(format(start, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")

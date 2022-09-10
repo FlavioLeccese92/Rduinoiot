@@ -33,8 +33,8 @@ devtools::install_github("FlavioLeccese92/Rduinoiot")
 
 In order to access the API methods you need to create an API key. This
 can be done by logging into your Arduino Cloud account and going to the
-page <https://cloud.arduino.cc/home/api-keys> and retrieve corresponding
-`ARDUINO_API_CLIENT_ID` and `ARDUINO_API_CLIENT_SECRET`.
+page <https://cloud.arduino.cc/home/api-keys/> and retrieve
+corresponding `ARDUINO_API_CLIENT_ID` and `ARDUINO_API_CLIENT_SECRET`.
 
 ![](man/figures/readme-authentication.png)
 
@@ -302,82 +302,82 @@ value
 <tbody>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-26 10:00:00
+2022-08-27 09:00:00
 </td>
 <td style="text-align:right;">
-32.63547
+33.47527
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-26 11:00:00
+2022-08-27 10:00:00
 </td>
 <td style="text-align:right;">
-32.83686
+33.51266
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-26 12:00:00
+2022-08-27 11:00:00
 </td>
 <td style="text-align:right;">
-33.08431
+33.04984
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-26 13:00:00
+2022-08-27 12:00:00
 </td>
 <td style="text-align:right;">
-33.33731
+31.92248
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-26 14:00:00
+2022-08-27 13:00:00
 </td>
 <td style="text-align:right;">
-33.56967
+31.52561
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-26 15:00:00
+2022-08-27 14:00:00
 </td>
 <td style="text-align:right;">
-33.72534
+31.80211
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-26 16:00:00
+2022-08-27 15:00:00
 </td>
 <td style="text-align:right;">
-33.85618
+31.80377
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-26 17:00:00
+2022-08-27 16:00:00
 </td>
 <td style="text-align:right;">
-34.01798
+32.02121
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-26 18:00:00
+2022-08-27 17:00:00
 </td>
 <td style="text-align:right;">
-33.78055
+31.99696
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-26 19:00:00
+2022-08-27 18:00:00
 </td>
 <td style="text-align:right;">
-33.41863
+31.71654
 </td>
 </tr>
 </tbody>

@@ -59,7 +59,7 @@ series_batch_query <- function(from, to, interval = NULL, Q, SeriesLimit = NULL,
   if(missing(Q)){cli::cli_alert_danger("missing Q"); stop()}
 
   if(!missing(from)){
-    if(!is(from, "POSIXct") && !is(from, "Date")){
+    if(!methods::is(from, "POSIXct") && !methods::is(from, "Date")){
       from = tryCatch({as.Date(from)}, error = function(e){
         cli::cli_alert_danger("{.field to} not in a valid POSIXct or Date format")})
       from = strftime(format(from, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")
@@ -67,7 +67,7 @@ series_batch_query <- function(from, to, interval = NULL, Q, SeriesLimit = NULL,
   }
 
   if(!missing(to)){
-    if(!is(to, "POSIXct") && !is(to, "Date")){
+    if(!methods::is(to, "POSIXct") && !methods::is(to, "Date")){
       to = tryCatch({as.Date(to)}, error = function(e){
         cli::cli_alert_danger("{.field from} not in a valid POSIXct or Date format")})
       to = strftime(format(to, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")
@@ -115,7 +115,7 @@ series_batch_query_raw <- function(from, to, interval = NULL, Q, SeriesLimit = N
   if(missing(Q)){cli::cli_alert_danger("missing Q"); stop()}
 
   if(!missing(from)){
-    if(!is(from, "POSIXct") && !is(from, "Date")){
+    if(!methods::is(from, "POSIXct") && !methods::is(from, "Date")){
       from = tryCatch({as.Date(from)}, error = function(e){
         cli::cli_alert_danger("{.field to} not in a valid POSIXct or Date format")})
       from = strftime(format(from, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")
@@ -123,7 +123,7 @@ series_batch_query_raw <- function(from, to, interval = NULL, Q, SeriesLimit = N
   }
 
   if(!missing(to)){
-    if(!is(to, "POSIXct") && !is(to, "Date")){
+    if(!methods::is(to, "POSIXct") && !methods::is(to, "Date")){
       to = tryCatch({as.Date(to)}, error = function(e){
         cli::cli_alert_danger("{.field from} not in a valid POSIXct or Date format")})
       to = strftime(format(to, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")

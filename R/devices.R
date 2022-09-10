@@ -120,7 +120,7 @@ devices_get_events <- function(device_id,
 
   if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
   if(!is.null(start)){
-    if(!is(start, "POSIXct") && !is(start, "Date")){
+    if(!methods::is(start, "POSIXct") && !methods::is(start, "Date")){
       start = tryCatch({as.Date(start)}, error = function(e){
         cli::cli_alert_danger("{.field to} not in a valid POSIXct or Date format")})
       start = strftime(format(start, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
