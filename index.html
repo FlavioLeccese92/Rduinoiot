@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="This package provides an R client for the Arduino Iot Cloud API and some helpful functions that utilize the client.">
-<title>Arduino iot-api R client • Rduinoiot</title>
+<title>Arduino Iot-Api R Client • Rduinoiot</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -18,7 +18,7 @@
 <script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
-<meta property="og:title" content="Arduino iot-api R client">
+<meta property="og:title" content="Arduino Iot-Api R Client">
 <meta property="og:description" content="This package provides an R client for the Arduino Iot Cloud API and some helpful functions that utilize the client.">
 <meta property="og:image" content="https://flavioleccese92.github.io/Rduinoiot/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -95,7 +95,7 @@
 <div class="section level2">
 <h2 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
 </h2>
-<p>In order to access the API methods you need to create an API key. This can be done by logging into your Arduino Cloud account and going to the page <a href="https://cloud.arduino.cc/home/api-keys" class="external-link uri">https://cloud.arduino.cc/home/api-keys</a> and retrieve corresponding <code>ARDUINO_API_CLIENT_ID</code> and <code>ARDUINO_API_CLIENT_SECRET</code>.</p>
+<p>In order to access the API methods you need to create an API key. This can be done by logging into your Arduino Cloud account and going to the page <a href="https://cloud.arduino.cc/home/api-keys/" class="external-link uri">https://cloud.arduino.cc/home/api-keys/</a> and retrieve corresponding <code>ARDUINO_API_CLIENT_ID</code> and <code>ARDUINO_API_CLIENT_SECRET</code>.</p>
 <p><img src="reference/figures/readme-authentication.png"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://flavioleccese92.github.io/Rduinoiot/">Rduinoiot</a></span><span class="op">)</span></span>
@@ -214,44 +214,44 @@
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-26 10:00:00</td>
-<td style="text-align:right;">32.63547</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-27 09:00:00</td>
+<td style="text-align:right;">33.47527</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-26 11:00:00</td>
-<td style="text-align:right;">32.83686</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-27 10:00:00</td>
+<td style="text-align:right;">33.51266</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-26 12:00:00</td>
-<td style="text-align:right;">33.08431</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-27 11:00:00</td>
+<td style="text-align:right;">33.04984</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-26 13:00:00</td>
-<td style="text-align:right;">33.33731</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-27 12:00:00</td>
+<td style="text-align:right;">31.92248</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-26 14:00:00</td>
-<td style="text-align:right;">33.56967</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-27 13:00:00</td>
+<td style="text-align:right;">31.52561</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-26 15:00:00</td>
-<td style="text-align:right;">33.72534</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-27 14:00:00</td>
+<td style="text-align:right;">31.80211</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-26 16:00:00</td>
-<td style="text-align:right;">33.85618</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-27 15:00:00</td>
+<td style="text-align:right;">31.80377</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-26 17:00:00</td>
-<td style="text-align:right;">34.01798</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-27 16:00:00</td>
+<td style="text-align:right;">32.02121</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-26 18:00:00</td>
-<td style="text-align:right;">33.78055</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-27 17:00:00</td>
+<td style="text-align:right;">31.99696</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-26 19:00:00</td>
-<td style="text-align:right;">33.41863</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-27 18:00:00</td>
+<td style="text-align:right;">31.71654</td>
 </tr>
 </tbody>
 </table>
