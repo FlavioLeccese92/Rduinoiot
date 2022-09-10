@@ -6,7 +6,7 @@
 #'
 #' Get device properties values in a range of time
 #' (note: this API method is bugged and waiting to be fixed by Arduino team.
-#' Here for completeness and future developements but would not suggest using it)
+#' Here for completeness and future developments but would not suggest using it)
 #'
 #' Official documentation:
 #'  [devicesV2Timeseries](https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2Timeseries)
@@ -16,7 +16,7 @@
 #' @param start A `Posixct` or `Date` object. The time at which to start selecting properties.
 #' @param limit The number of properties to select
 #' @param token A valid token created with `create_auth_token`
-#' (either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
+#' (either explicitly assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
 #' @return A tibble showing of time and value for property of given device
 #' @examples
 #' \dontrun{

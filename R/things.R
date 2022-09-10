@@ -34,7 +34,7 @@
 #' @param show_properties (logical) If `TRUE`, returns things with their properties, and last values. Default to `FALSE`
 #' @param tags tags you  may want to filter from the list
 #' @param token A valid token created with `create_auth_token`
-#' (either explicitely assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
+#' (either explicitly assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
 #' @return A tibble showing information about chosen thing or list of thing for current user
 #' @examples
 #' \dontrun{

@@ -26,7 +26,7 @@ devices_tags_delete(device_id, key, token = getOption("ARDUINO_API_TOKEN"))
 \item{value}{The value of the tag (no spaces allowed)}
 
 \item{token}{A valid token created with \code{create_auth_token}
-(either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
+(either explicitly assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
 }
 \value{
 A tibble showing information about chosen tag or list of tags for given device

@@ -71,7 +71,7 @@ has to change in order to trigger an update
 }}
 
 \item{token}{A valid token created with \code{create_auth_token}
-(either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
+(either explicitly assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
 
 \item{property_id}{The id of the property}
 

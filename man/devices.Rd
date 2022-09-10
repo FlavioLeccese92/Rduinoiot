@@ -35,7 +35,7 @@ devices_get_properties(
 \item{tags}{tags you  may want to filter from the list}
 
 \item{token}{A valid token created with \code{create_auth_token}
-(either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
+(either explicitly assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
 
 \item{device_id}{The id of the device (The arn of the associated device)}
 

@@ -16,7 +16,7 @@
 #' @param start A `Posixct` or `Date` object. Time at which to start selecting events
 #' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`
 #' @param token A valid token created with `create_auth_token`
-#' (either explicitely assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
+#' (either explicitly assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
 #' @return A tibble showing extensive information about devices (and related things) associated to the user
 #' @examples
 #' \dontrun{

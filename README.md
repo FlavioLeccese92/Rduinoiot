@@ -14,7 +14,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 **Rduinoiot** provides an easy way to connect to [Arduino Iot Cloud
 API](https://create.arduino.cc/iot/) with R. Functions allow to exploit
-[API methods](https://www.arduino.cc/reference/en/iot/api) for many
+[API methods](https://www.arduino.cc/reference/en/iot/api/) for many
 purposes, manage your Arduino devices and dashboards and access to the
 data produced by sensors and sketches. This is not an official library
 by Arduino.
@@ -302,42 +302,10 @@ value
 <tbody>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 09:00:00
-</td>
-<td style="text-align:right;">
-33.47527
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 10:00:00
-</td>
-<td style="text-align:right;">
-33.51266
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 11:00:00
-</td>
-<td style="text-align:right;">
-33.04984
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 12:00:00
-</td>
-<td style="text-align:right;">
-31.92248
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
 2022-08-27 13:00:00
 </td>
 <td style="text-align:right;">
-31.52561
+31.53573
 </td>
 </tr>
 <tr>
@@ -378,6 +346,38 @@ value
 </td>
 <td style="text-align:right;">
 31.71654
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-27 19:00:00
+</td>
+<td style="text-align:right;">
+31.31777
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-27 20:00:00
+</td>
+<td style="text-align:right;">
+30.81066
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-27 21:00:00
+</td>
+<td style="text-align:right;">
+30.24258
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-27 22:00:00
+</td>
+<td style="text-align:right;">
+30.27172
 </td>
 </tr>
 </tbody>

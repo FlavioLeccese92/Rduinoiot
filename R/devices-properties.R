@@ -7,7 +7,7 @@
 #' @param device_id The id of the device
 #' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`
 #' @param token A valid token created with `create_auth_token`
-#' (either explicitely assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
+#' (either explicitly assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
 #' @return A tibble showing the information about properties for given device.
 #' @examples
 #' \dontrun{

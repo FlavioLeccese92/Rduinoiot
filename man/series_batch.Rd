@@ -40,13 +40,13 @@ Get data with a timestamp < to this value}
 
 \item{interval}{(numeric) Resolutions in seconds (seems not to affect results)}
 
-\item{Q}{The query. (Not clear what this means but allows to chose amongs properties by filling in,
+\item{Q}{The query. (Not clear what this means but allows to chose among properties by filling in,
 for instance, \verb{property.fbf34284-91f0-42be-bbf6-dd46cfb3f1e0})}
 
 \item{SeriesLimit}{Maximum number of values (seems not to affect results)}
 
 \item{token}{A valid token created with \code{create_auth_token}
-(either explicitely assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))}
+(either explicitly assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))}
 
 \item{thing_id}{The id of the thing}
 
@@ -60,7 +60,7 @@ A tibble showing of time and value for properties
 
 Returns the batch of time-series data or last data point for a property of given thing
 (note: this API method is bugged and waiting to be fixed by Arduino team.
-Here for completeness and future developements but would not suggest using it)
+Here for completeness and future developments but would not suggest using it)
 
 Official documentation:
 \itemize{

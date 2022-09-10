@@ -74,7 +74,7 @@ has to change in order to trigger an update
 In case of deletion, if \code{TRUE}, hard delete the thing. Default to \code{FALSE}}
 
 \item{token}{A valid token created with \code{create_auth_token}
-(either explicitely assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
+(either explicitly assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
 
 \item{show_deleted}{(logical) If \code{TRUE}, shows the soft deleted things. Default to \code{FALSE}}
 
