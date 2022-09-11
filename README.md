@@ -33,7 +33,7 @@ devtools::install_github("FlavioLeccese92/Rduinoiot")
 
 In order to access the API methods you need to create an API key. This
 can be done by logging into your Arduino Cloud account and going to the
-page <https://cloud.arduino.cc/home/api-keys/> and retrieve
+page `https://cloud.arduino.cc/home/api-keys/` and retrieve
 corresponding `ARDUINO_API_CLIENT_ID` and `ARDUINO_API_CLIENT_SECRET`.
 
 ![](man/figures/readme-authentication.png)
@@ -299,18 +299,10 @@ value
 <tbody>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-28 14:00:00
-</td>
-<td style="text-align:right;">
-32.68501
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
 2022-08-28 15:00:00
 </td>
 <td style="text-align:right;">
-32.28891
+32.16811
 </td>
 </tr>
 <tr>
@@ -375,6 +367,14 @@ value
 </td>
 <td style="text-align:right;">
 30.15794
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-29 00:00:00
+</td>
+<td style="text-align:right;">
+29.91635
 </td>
 </tr>
 </tbody>
