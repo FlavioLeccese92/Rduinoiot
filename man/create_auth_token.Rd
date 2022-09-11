@@ -17,9 +17,9 @@ create_auth_token(
 
 \item{...}{Additional parameters needed for the body of the \code{POST} request:
 \itemize{
-\item \code{token_url} (default: 'https://api2.arduino.cc/iot/v1/clients/token')
+\item \code{token_url} (default: \url{https://api2.arduino.cc/iot/v1/clients/token/})
 \item \code{grant_type} (default: 'client_credentials')
-\item \code{audience} (default: 'https://api2.arduino.cc/iot')
+\item \code{audience} (default: \url{https://api2.arduino.cc/iot/})
 \item \code{content_type} (default: 'application/x-www-form-urlencoded')
 }}
 }
@@ -28,9 +28,9 @@ A token valid for Arduino IoT Cloud API (stored on .Rprofile) and retrievable by
 }
 \description{
 Obtain an authorization token using your personal client_id and client_secret
-from Arduino site page https://cloud.arduino.cc/home/api-keys
+from Arduino site page \url{https://cloud.arduino.cc/home/api-keys/}
 
-Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api-_}{API Summary}
+Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api/}{API Summary}
 }
 \examples{
 \dontrun{

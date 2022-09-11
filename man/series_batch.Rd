@@ -64,9 +64,9 @@ Here for completeness and future developments but would not suggest using it)
 
 Official documentation:
 \itemize{
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQuery}{seriesV2BatchQuery}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQueryRaw}{seriesV2BatchQueryRaw}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQueryRawLastValue}{seriesV2BatchQueryRawLastValue}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQuery/}{seriesV2BatchQuery}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQueryRaw/}{seriesV2BatchQueryRaw}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQueryRawLastValue/}{seriesV2BatchQueryRawLastValue}
 }
 }
 \examples{

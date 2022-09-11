@@ -9,20 +9,19 @@ Description: Easily interact with the Arduino Iot Cloud API, including devices, 
 License: MIT + file LICENSE
 Encoding: UTF-8
 URL: https://flavioleccese92.github.io/Rduinoiot/
-BugReports: https://github.com/FlavioLeccese92/Rduinoiot/issues
+BugReports: https://github.com/FlavioLeccese92/Rduinoiot/issues/
 Language: en-US
 RoxygenNote: 7.1.2
 Imports: 
     httr,
     jsonlite,
     tibble,
-    dplyr,
     cli,
     purrr,
     methods
 Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
+    dplyr
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-Config/testthat/edition: 3

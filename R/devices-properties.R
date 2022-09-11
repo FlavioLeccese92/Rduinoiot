@@ -2,7 +2,7 @@
 #'
 #' List properties associated to a given device
 #'
-#' Official documentation: [devicesV2GetProperties](https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetProperties)
+#' Official documentation: [devicesV2GetProperties](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetProperties/>)
 #'
 #' @param device_id The id of the device
 #' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`
@@ -34,7 +34,7 @@ devices_properties_list <- function(device_id,
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/properties", device_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/properties/", device_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){

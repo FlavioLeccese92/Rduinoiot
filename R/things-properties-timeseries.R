@@ -8,7 +8,7 @@
 #' (note: the total number of data points should NOT be greater than 1000 otherwise the result will be truncated)
 #'
 #' Official documentation:
-#'  [propertiesV2Timeseries](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Timeseries)
+#'  [propertiesV2Timeseries](<https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Timeseries/>)
 #'
 #' @param thing_id The id of the thing
 #' @param property_id The id of the property
@@ -45,7 +45,7 @@ things_properties_timeseries <- function(thing_id, property_id,
   if(missing(property_id)){cli::cli_alert_danger("missing property_id"); stop()}
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
-  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s/timeseries", thing_id, property_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s/timeseries/", thing_id, property_id)
   still_valid_token = FALSE
 
   if(!missing(from)){

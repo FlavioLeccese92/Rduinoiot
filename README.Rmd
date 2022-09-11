@@ -22,13 +22,13 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/FlavioLeccese92/Rduinoiot/workflows/R-CMD-check/badge.svg)](https://github.com/FlavioLeccese92/Rduinoiot/actions)
 <!-- badges: end -->
 
-**Rduinoiot** provides an easy way to connect to [Arduino Iot Cloud API](https://create.arduino.cc/iot/) with R.
-Functions allow to exploit [API methods](https://www.arduino.cc/reference/en/iot/api/) for many purposes, manage your Arduino devices and dashboards and access to the data produced by sensors and sketches.
+**Rduinoiot** provides an easy way to connect to [Arduino Iot Cloud API](<https://create.arduino.cc/iot/>) with R.
+Functions allow to exploit [API methods](<https://www.arduino.cc/reference/en/iot/api/>) for many purposes, manage your Arduino devices and dashboards and access to the data produced by sensors and sketches.
 This is not an official library by Arduino.
 
 ## Installation
 
-You can install the development version of Rduinoiot from [GitHub](https://github.com/) with:
+You can install the development version of Rduinoiot from [GitHub](<https://github.com/>) with:
 
 ``` r
 # install.packages("devtools")
@@ -36,7 +36,7 @@ devtools::install_github("FlavioLeccese92/Rduinoiot")
 ```
 ## Authentication
 
-In order to access the API methods you need to create an API key. This can be done by logging into your Arduino Cloud account and going to the page https://cloud.arduino.cc/home/api-keys/ and retrieve corresponding `ARDUINO_API_CLIENT_ID` and `ARDUINO_API_CLIENT_SECRET`.
+In order to access the API methods you need to create an API key. This can be done by logging into your Arduino Cloud account and going to the page <https://cloud.arduino.cc/home/api-keys/> and retrieve corresponding `ARDUINO_API_CLIENT_ID` and `ARDUINO_API_CLIENT_SECRET`.
 
 ![](man/figures/readme-authentication.png)
 
@@ -54,8 +54,6 @@ Things associated to the user account can be easily accessed using  `things_list
 This function will return detailed information, in particular `things_id` which are needed to access to properties.
 
 ```{r example 1}
-create_auth_token()
-
 tl = things_list()
 ``` 
 ```{r example 1 - run, echo=FALSE, message=FALSE, warning=FALSE}
@@ -92,7 +90,7 @@ data_ts %>%
 
 ## Plotting the result
 
-A catchy representation of humidity time series can be plotted, for instance, by using the library [echarts4r](https://echarts4r.john-coene.com/) by John Coene:
+A catchy representation of humidity time series can be plotted, for instance, by using the library [echarts4r](<https://echarts4r.john-coene.com/>) by John Coene:
 
 ```{r example 3, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 library(echarts4r)

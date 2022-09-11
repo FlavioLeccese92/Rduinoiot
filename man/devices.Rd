@@ -53,9 +53,9 @@ List and show devices, events, properties associated to the user
 
 Official documentation:
 \itemize{
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List}{devicesV2List}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Show}{thingsV2Show}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetEvents}{devicesV2GetEvents}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List/}{devicesV2List}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Show/}{thingsV2Show}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetEvents/}{devicesV2GetEvents}
 }
 }
 \examples{

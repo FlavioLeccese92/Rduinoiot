@@ -90,11 +90,11 @@ Create, Update, List, Show and Delete properties associated to a given thing
 
 Official documentation:
 \itemize{
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Create}{thingsV2Create}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Update}{thingsV2Update}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2List}{thingsV2List}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Show}{thingsV2Show}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Delete}{thingsV2Delete}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Create/}{thingsV2Create}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Update/}{thingsV2Update}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2List/}{thingsV2List}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Show/}{thingsV2Show}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Delete/}{thingsV2Delete}
 }
 }
 \examples{

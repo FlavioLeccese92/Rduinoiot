@@ -54,9 +54,6 @@ Things associated to the user account can be easily accessed using
 particular `things_id` which are needed to access to properties.
 
 ``` r
-create_auth_token()
-#> v Authorization succeeded
-
 tl = things_list()
 #> v Method succeeded
 ```
@@ -302,82 +299,82 @@ value
 <tbody>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 13:00:00
+2022-08-28 14:00:00
 </td>
 <td style="text-align:right;">
-31.53573
+32.68501
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 14:00:00
+2022-08-28 15:00:00
 </td>
 <td style="text-align:right;">
-31.80211
+32.28891
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 15:00:00
+2022-08-28 16:00:00
 </td>
 <td style="text-align:right;">
-31.80377
+31.91641
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 16:00:00
+2022-08-28 17:00:00
 </td>
 <td style="text-align:right;">
-32.02121
+31.69461
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 17:00:00
+2022-08-28 18:00:00
 </td>
 <td style="text-align:right;">
-31.99696
+31.47696
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 18:00:00
+2022-08-28 19:00:00
 </td>
 <td style="text-align:right;">
-31.71654
+31.24006
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 19:00:00
+2022-08-28 20:00:00
 </td>
 <td style="text-align:right;">
-31.31777
+30.93651
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 20:00:00
+2022-08-28 21:00:00
 </td>
 <td style="text-align:right;">
-30.81066
+30.79315
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 21:00:00
+2022-08-28 22:00:00
 </td>
 <td style="text-align:right;">
-30.24258
+30.41680
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-27 22:00:00
+2022-08-28 23:00:00
 </td>
 <td style="text-align:right;">
-30.27172
+30.15794
 </td>
 </tr>
 </tbody>

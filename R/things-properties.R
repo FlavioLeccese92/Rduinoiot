@@ -5,11 +5,11 @@
 #' Create, Update, List, Show and Delete properties associated to a given thing
 #'
 #' Official documentation:
-#'  * [propertiesV2Create](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Create)
-#'  * [propertiesV2Update](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Update)
-#'  * [propertiesV2List](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2List)
-#'  * [propertiesV2Show](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Show)
-#'  * [propertiesV2Delete](https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Delete)
+#'  * [propertiesV2Create](<https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Create/>)
+#'  * [propertiesV2Update](<https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Update/>)
+#'  * [propertiesV2List](<https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2List/>)
+#'  * [propertiesV2Show](<https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Show/>)
+#'  * [propertiesV2Delete](<https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Delete/>)
 #' @md
 #'
 #' @param thing_id The id of the thing
@@ -77,7 +77,7 @@ things_properties_create <- function(thing_id,
   add_body = add_args[which(names(add_args) %in% add_args_name)]
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
-  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties", thing_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/", thing_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -121,7 +121,7 @@ things_properties_update <- function(thing_id, property_id,
   add_body = add_args[which(names(add_args) %in% add_args_name)]
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
-  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s", thing_id, property_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s/", thing_id, property_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -156,7 +156,7 @@ things_properties_list <- function(thing_id,
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties?show_deleted=%s", thing_id, show_deleted)
+  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties?show_deleted=%s/", thing_id, show_deleted)
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -193,7 +193,7 @@ things_properties_show <- function(thing_id,
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s", thing_id, property_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s/", thing_id, property_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -230,7 +230,7 @@ things_properties_delete <- function(thing_id,
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s", thing_id, property_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s/", thing_id, property_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){
