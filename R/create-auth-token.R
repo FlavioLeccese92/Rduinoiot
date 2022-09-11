@@ -2,8 +2,7 @@
 #'
 #' @description
 #'
-#' Obtain an authorization token using your personal client_id and client_secret
-#' from [Arduino site page](<https://cloud.arduino.cc/home/api-keys/>)
+#' Obtain an authorization token using your personal client_id and client_secret..
 #'
 #' Official documentation: [API Summary](<https://www.arduino.cc/reference/en/iot/api/#api/>)
 #'

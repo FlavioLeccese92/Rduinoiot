@@ -26,7 +26,7 @@ A tibble showing the information about properties for given device.
 List properties associated to a given device
 }
 \details{
-Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetProperties/}{devicesV2GetProperties}
+Official documentation: \href{https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetProperties}{devicesV2GetProperties}
 }
 \examples{
 \dontrun{

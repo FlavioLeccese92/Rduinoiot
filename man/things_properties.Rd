@@ -85,11 +85,11 @@ Create, Update, List, Show and Delete properties associated to a given thing
 
 Official documentation:
 \itemize{
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Create/}{propertiesV2Create}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Update/}{propertiesV2Update}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2List/}{propertiesV2List}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Show/}{propertiesV2Show}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Delete/}{propertiesV2Delete}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Create}{propertiesV2Create}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Update}{propertiesV2Update}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2List}{propertiesV2List}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Show}{propertiesV2Show}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-PropertiesV2-propertiesV2Delete}{propertiesV2Delete}
 }
 }
 \examples{

@@ -36,9 +36,9 @@ Upsert (create/update), List and Delete tags associated to a given thing
 
 Official documentation:
 \itemize{
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsUpsert/}{thingsV2TagsUpsert}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsList/}{thingsV2TagsList}
-\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsDelete/}{thingsV2TagsDelete}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsUpsert}{thingsV2TagsUpsert}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsList}{thingsV2TagsList}
+\item \href{https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2Tags-thingsV2TagsDelete}{thingsV2TagsDelete}
 }
 }
 \examples{

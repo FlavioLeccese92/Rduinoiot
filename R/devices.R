@@ -5,9 +5,9 @@
 #' List and show devices, events, properties associated to the user
 #'
 #' Official documentation:
-#'  * [devicesV2List](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List/>)
-#'  * [thingsV2Show](<https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Show/>)
-#'  * [devicesV2GetEvents](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetEvents/>)
+#'  * [devicesV2List](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2List>)
+#'  * [thingsV2Show](<https://www.arduino.cc/reference/en/iot/api/#api-ThingsV2-thingsV2Show>)
+#'  * [devicesV2GetEvents](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2GetEvents>)
 #' @md
 #' @param serial serial number of the device you  may want to filter from the list (not device_id)
 #' @param tags tags you  may want to filter from the list
@@ -51,7 +51,7 @@ devices_list <- function(serial = NULL, tags = NULL,
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = "https://api2.arduino.cc/iot/v2/devices/"
+  url = "https://api2.arduino.cc/iot/v2/devices"
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -88,7 +88,7 @@ devices_show <- function(device_id,
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/", device_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s", device_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -129,7 +129,7 @@ devices_get_events <- function(device_id,
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/events/", device_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/events", device_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -164,7 +164,7 @@ devices_get_properties <- function(device_id,
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/properties/", device_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/properties", device_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){

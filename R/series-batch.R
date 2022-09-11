@@ -9,9 +9,9 @@
 #' Here for completeness and future developments but would not suggest using it)
 #'
 #' Official documentation:
-#'  * [seriesV2BatchQuery](<https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQuery/>)
-#'  * [seriesV2BatchQueryRaw](<https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQueryRaw/>)
-#'  * [seriesV2BatchQueryRawLastValue](<https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQueryRawLastValue/>)
+#'  * [seriesV2BatchQuery](<https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQuery>)
+#'  * [seriesV2BatchQueryRaw](<https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQueryRaw>)
+#'  * [seriesV2BatchQueryRawLastValue](<https://www.arduino.cc/reference/en/iot/api/#api-SeriesV2-seriesV2BatchQueryRawLastValue>)
 #' @md
 #'
 #' @param from A `Posixct` or `Date` object.
@@ -75,7 +75,7 @@ series_batch_query <- function(from, to, interval = NULL, Q, SeriesLimit = NULL,
   }
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
-  url = "https://api2.arduino.cc/iot/v2/series/batch_query/"
+  url = "https://api2.arduino.cc/iot/v2/series/batch_query"
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -131,7 +131,7 @@ series_batch_query_raw <- function(from, to, interval = NULL, Q, SeriesLimit = N
   }
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
-  url = "https://api2.arduino.cc/iot/v2/series/batch_query_raw/"
+  url = "https://api2.arduino.cc/iot/v2/series/batch_query_raw"
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -171,7 +171,7 @@ series_batch_last_value <- function(thing_id, property_id,
 
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
-  url = "https://api2.arduino.cc/iot/v2/series/batch_query_raw/lastvalue/"
+  url = "https://api2.arduino.cc/iot/v2/series/batch_query_raw/lastvalue"
   still_valid_token = FALSE
 
   while(!still_valid_token){

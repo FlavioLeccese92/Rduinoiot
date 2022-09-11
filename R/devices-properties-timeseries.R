@@ -9,7 +9,7 @@
 #' Here for completeness and future developments but would not suggest using it)
 #'
 #' Official documentation:
-#'  [devicesV2Timeseries](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2Timeseries/>)
+#'  [devicesV2Timeseries](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2-devicesV2Timeseries>)
 #'
 #' @param device_id The id of the device
 #' @param property_id The id of the property
@@ -41,7 +41,7 @@ devices_properties_timeseries <- function(device_id, property_id,
   if(missing(property_id)){cli::cli_alert_danger("missing property_id"); stop()}
 
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
-  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/properties/%s/", device_id, property_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/properties/%s", device_id, property_id)
   still_valid_token = FALSE
 
   if(!missing(start)){

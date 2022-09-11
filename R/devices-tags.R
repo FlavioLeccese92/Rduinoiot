@@ -5,9 +5,9 @@
 #' Upsert (create/update), List and Delete tags associated to a given device
 #'
 #' Official documentation:
-#'  * [devicesV2TagsUpsert](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2Tags-devicesV2TagsUpsert/>)
-#'  * [devicesV2TagsList](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2Tags-devicesV2TagsList/>)
-#'  * [devicesV2TagsDelete](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2Tags-devicesV2TagsDelete/>)
+#'  * [devicesV2TagsUpsert](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2Tags-devicesV2TagsUpsert>)
+#'  * [devicesV2TagsList](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2Tags-devicesV2TagsList>)
+#'  * [devicesV2TagsDelete](<https://www.arduino.cc/reference/en/iot/api/#api-DevicesV2Tags-devicesV2TagsDelete>)
 #' @md
 #'
 #' @param device_id The id of the device
@@ -46,7 +46,7 @@ devices_tags_upsert <- function(device_id,
   value = as.character(value)
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/tags/", device_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/tags", device_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -77,7 +77,7 @@ devices_tags_list <- function(device_id,
   if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/tags/", device_id)
+  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/tags", device_id)
   still_valid_token = FALSE
 
   while(!still_valid_token){
@@ -109,7 +109,7 @@ devices_tags_delete <- function(device_id,
   key = as.character(key)
   if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
 
-  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/tags/%s/", device_id, key)
+  url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/tags/%s", device_id, key)
   still_valid_token = FALSE
 
   while(!still_valid_token){
