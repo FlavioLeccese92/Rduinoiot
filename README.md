@@ -299,82 +299,82 @@ value
 <tbody>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-28 15:00:00
+2022-08-30 09:00:00
 </td>
 <td style="text-align:right;">
-32.16811
+31.92613
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-28 16:00:00
+2022-08-30 10:00:00
 </td>
 <td style="text-align:right;">
-31.91641
+32.28989
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-28 17:00:00
+2022-08-30 11:00:00
 </td>
 <td style="text-align:right;">
-31.69461
+32.59562
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-28 18:00:00
+2022-08-30 12:00:00
 </td>
 <td style="text-align:right;">
-31.47696
+32.91097
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-28 19:00:00
+2022-08-30 13:00:00
 </td>
 <td style="text-align:right;">
-31.24006
+33.12977
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-28 20:00:00
+2022-08-30 14:00:00
 </td>
 <td style="text-align:right;">
-30.93651
+33.03801
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-28 21:00:00
+2022-08-30 15:00:00
 </td>
 <td style="text-align:right;">
-30.79315
+32.78237
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-28 22:00:00
+2022-08-30 16:00:00
 </td>
 <td style="text-align:right;">
-30.41680
+31.85849
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-28 23:00:00
+2022-08-30 17:00:00
 </td>
 <td style="text-align:right;">
-30.15794
+31.22132
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-29 00:00:00
+2022-08-30 18:00:00
 </td>
 <td style="text-align:right;">
-29.91635
+31.08187
 </td>
 </tr>
 </tbody>
@@ -384,7 +384,8 @@ value
 
 A catchy representation of humidity time series can be plotted, for
 instance, by using the library
-[echarts4r](https://echarts4r.john-coene.com/) by John Coene:
+[echarts4r](https://echarts4r.john-coene.com/) by [John
+Coene](https://john-coene.com/):
 
 ``` r
 library(echarts4r)

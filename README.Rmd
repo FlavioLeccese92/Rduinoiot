@@ -90,7 +90,7 @@ data_ts %>%
 
 ## Plotting the result
 
-A catchy representation of humidity time series can be plotted, for instance, by using the library [echarts4r](<https://echarts4r.john-coene.com/>) by John Coene:
+A catchy representation of humidity time series can be plotted, for instance, by using the library [echarts4r](<https://echarts4r.john-coene.com/>) by [John Coene](<https://john-coene.com/>):
 
 ```{r example 3, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 library(echarts4r)
