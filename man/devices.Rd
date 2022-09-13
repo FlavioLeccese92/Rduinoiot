@@ -8,23 +8,31 @@
 \alias{devices_get_properties}
 \title{Devices API methods}
 \usage{
-devices_list(serial = NULL, tags = NULL, store_token = "option", token = NULL)
+devices_list(
+  serial = NULL,
+  tags = NULL,
+  store_token = "option",
+  token = NULL,
+  silent = FALSE
+)
 
-devices_show(device_id, store_token = "option", token = NULL)
+devices_show(device_id, store_token = "option", token = NULL, silent = FALSE)
 
 devices_get_events(
   device_id,
   limit = NULL,
   start = NULL,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
 devices_get_properties(
   device_id,
   show_deleted = FALSE,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 }
 \arguments{
@@ -33,10 +41,12 @@ devices_get_properties(
 \item{tags}{tags you  may want to filter from the list}
 
 \item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
-if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+if \code{envir} it will be retrieved from environmental variables list (cross-session)}
 
 \item{token}{A valid token created with \code{create_auth_token} or manually.
-It not \code{NULL} it has higher priority then \code{store_token}.}
+It not \code{NULL} it has higher priority then \code{store_token}}
+
+\item{silent}{Whether to hide or show API method success messages (default \code{FALSE})}
 
 \item{device_id}{The id of the device (The arn of the associated device)}
 

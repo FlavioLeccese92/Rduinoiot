@@ -7,9 +7,10 @@
 #' @param device_id The id of the device
 #' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`
 #' @param store_token Where your token is stored. If `option` it will be retrieved from the .Rprofile (not cross-session and default),
-#' if `envir` it will be retrieved from environmental variables list (cross-session).
+#' if `envir` it will be retrieved from environmental variables list (cross-session)
 #' @param token A valid token created with `create_auth_token` or manually.
-#' It not `NULL` it has higher priority then `store_token`.
+#' It not `NULL` it has higher priority then `store_token`
+#' @param silent Whether to hide or show API method success messages (default `FALSE`)
 #' @return A tibble showing the information about properties for given device.
 #' @examples
 #' \dontrun{
@@ -30,7 +31,8 @@
 devices_properties_list <- function(device_id,
                                     show_deleted = FALSE,
                                     store_token = "option",
-                                    token = NULL){
+                                    token = NULL,
+                                    silent = FALSE){
 
   if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
   if(!is.logical(show_deleted)){cli::cli_alert_danger("show_deleted must be TRUE or FALSE"); stop()}
@@ -52,11 +54,11 @@ devices_properties_list <- function(device_id,
     res = httr::GET(url = url, query = query, httr::add_headers(header))
     if(res$status_code == 200){
       res = tibble::as_tibble(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8")))
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
+      still_valid_token = TRUE; if(!is.logical(silent)){cli::cli_alert_success("Method succeeded")}}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
-      }
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
+    }
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail

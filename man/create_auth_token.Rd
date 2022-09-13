@@ -9,6 +9,7 @@ create_auth_token(
   client_secret = Sys.getenv("ARDUINO_API_CLIENT_SECRET"),
   store_token = "option",
   return_token = FALSE,
+  silent = FALSE,
   ...
 )
 }
@@ -21,6 +22,8 @@ create_auth_token(
 if \code{envir} it will be saved as an environmental variable.}
 
 \item{return_token}{If \code{TRUE} returns the token value as output of the function.}
+
+\item{silent}{Whether to hide or show API method success messages (default \code{FALSE})}
 
 \item{...}{Additional parameters needed for the body of the \code{POST} request:
 \itemize{

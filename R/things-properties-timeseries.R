@@ -20,9 +20,10 @@
 #' (default: the smallest possible value compatibly with the limit of 1000 data points in the response)
 #' @param desc (logic) Whether data ordering (by time) should be descending. Default TO `FALSE`
 #' @param store_token Where your token is stored. If `option` it will be retrieved from the .Rprofile (not cross-session and default),
-#' if `envir` it will be retrieved from environmental variables list (cross-session).
+#' if `envir` it will be retrieved from environmental variables list (cross-session)
 #' @param token A valid token created with `create_auth_token` or manually.
-#' It not `NULL` it has higher priority then `store_token`.
+#' It not `NULL` it has higher priority then `store_token`
+#' @param silent Whether to hide or show API method success messages (default `FALSE`)
 #' @return A tibble showing of time and value for property of given device
 #' @examples
 #' \dontrun{
@@ -42,10 +43,13 @@
 things_properties_timeseries <- function(thing_id, property_id,
                                          from = NULL, to = NULL, interval = NULL, desc = NULL,
                                          store_token = "option",
-                                         token = NULL){
+                                         token = NULL,
+                                         silent = FALSE){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing device_id"); stop()}
   if(missing(property_id)){cli::cli_alert_danger("missing property_id"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!is.null(token)){token = token}
   else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
@@ -86,13 +90,13 @@ things_properties_timeseries <- function(thing_id, property_id,
       if(nrow(res)>0){
         res$time = as.POSIXct(res$time, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
       }
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
+      still_valid_token = TRUE; if(!silent){cli::cli_alert_success("Method succeeded")}}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else if(res$status_code == 404){
-      still_valid_token = TRUE; cli::cli_alert_danger("API error: Not found");}
+      still_valid_token = TRUE; cli::cli_alert_danger("API error: Not found")}
     else{
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
       cli::cli_alert_danger(cat(paste0("API error: ", res_detail))); stop()}

@@ -12,12 +12,24 @@ devices_tags_upsert(
   key,
   value,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
-devices_tags_list(device_id, store_token = "option", token = NULL)
+devices_tags_list(
+  device_id,
+  store_token = "option",
+  token = NULL,
+  silent = FALSE
+)
 
-devices_tags_delete(device_id, key, store_token = "option", token = NULL)
+devices_tags_delete(
+  device_id,
+  key,
+  store_token = "option",
+  token = NULL,
+  silent = FALSE
+)
 }
 \arguments{
 \item{device_id}{The id of the device}
@@ -31,6 +43,8 @@ if \code{envir} it will be retrieved from environmental variables list (cross-se
 
 \item{token}{A valid token created with \code{create_auth_token} or manually.
 It not \code{NULL} it has higher priority then \code{store_token}.}
+
+\item{silent}{Whether to hide or show API method success messages (default \code{FALSE})}
 }
 \value{
 A tibble showing information about chosen tag or list of tags for given device

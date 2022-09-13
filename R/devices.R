@@ -16,9 +16,10 @@
 #' @param start A `Posixct` or `Date` object. Time at which to start selecting events
 #' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`
 #' @param store_token Where your token is stored. If `option` it will be retrieved from the .Rprofile (not cross-session and default),
-#' if `envir` it will be retrieved from environmental variables list (cross-session).
+#' if `envir` it will be retrieved from environmental variables list (cross-session)
 #' @param token A valid token created with `create_auth_token` or manually.
-#' It not `NULL` it has higher priority then `store_token`.
+#' It not `NULL` it has higher priority then `store_token`
+#' @param silent Whether to hide or show API method success messages (default `FALSE`)
 #' @return A tibble showing extensive information about devices (and related things) associated to the user
 #' @examples
 #' \dontrun{
@@ -46,11 +47,14 @@
 #' @export
 devices_list <- function(serial = NULL, tags = NULL,
                          store_token = "option",
-                         token = NULL
+                         token = NULL,
+                         silent = FALSE
                          ){
 
   ### attention: if TRUE returns 401 -> meaning of the parameter not clear ###
   across_user_ids = FALSE
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
 
@@ -77,10 +81,10 @@ devices_list <- function(serial = NULL, tags = NULL,
         res$created_at = as.POSIXct(res$created_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
         res$last_activity_at = as.POSIXct(res$last_activity_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
       }
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
+      still_valid_token = TRUE; if(!silent){cli::cli_alert_success("Method succeeded")}}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else {
       still_valid_token = TRUE
@@ -94,9 +98,12 @@ devices_list <- function(serial = NULL, tags = NULL,
 #'
 devices_show <- function(device_id,
                          store_token = "option",
-                         token = NULL){
+                         token = NULL,
+                         silent = FALSE){
 
   if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
 
@@ -119,11 +126,11 @@ devices_show <- function(device_id,
       res = tibble::as_tibble(res_raw[setdiff(names(res_raw), c("events", "thing"))])
       res$events = list(tibble::as_tibble(res_raw["events"]))
       res$thing = list(tibble::as_tibble(t(unlist(res_raw["thing"]))))
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
+      still_valid_token = TRUE; if(!silent){cli::cli_alert_success("Method succeeded")}}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
-      }
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
+    }
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
@@ -137,7 +144,8 @@ devices_show <- function(device_id,
 devices_get_events <- function(device_id,
                                limit = NULL, start = NULL,
                                store_token = "option",
-                               token = NULL){
+                               token = NULL,
+                               silent = FALSE){
 
   if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
   if(!is.null(start)){
@@ -147,6 +155,8 @@ devices_get_events <- function(device_id,
       start = strftime(format(start, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
     else{start = strftime(format(start, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
   }
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
 
@@ -170,11 +180,11 @@ devices_get_events <- function(device_id,
       if(nrow(res)>0){
         res$events$updated_at = as.POSIXct(res$events$updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
       }
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
+      still_valid_token = TRUE; if(!silent){cli::cli_alert_success("Method succeeded")}}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
-      }
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
+    }
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
@@ -188,9 +198,12 @@ devices_get_events <- function(device_id,
 devices_get_properties <- function(device_id,
                                    show_deleted = FALSE,
                                    store_token = "option",
-                                   token = NULL){
+                                   token = NULL,
+                                   silent = FALSE){
 
   if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
 
@@ -215,11 +228,11 @@ devices_get_properties <- function(device_id,
         res$properties$created_at = as.POSIXct(res$properties$created_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
         res$properties$updated_at = as.POSIXct(res$properties$updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
       }
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
+      still_valid_token = TRUE; if(!silent){cli::cli_alert_success("Method succeeded")}}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
-      }
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
+    }
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail

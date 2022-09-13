@@ -17,7 +17,8 @@ things_create(
   timezone = NULL,
   force = FALSE,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
 things_update(
@@ -28,7 +29,8 @@ things_update(
   timezone = NULL,
   force = FALSE,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
 things_list(
@@ -38,17 +40,25 @@ things_list(
   show_properties = FALSE,
   tags = NULL,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
 things_show(
   thing_id,
   show_deleted = FALSE,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
-things_delete(thing_id, force = FALSE, store_token = "option", token = NULL)
+things_delete(
+  thing_id,
+  force = FALSE,
+  store_token = "option",
+  token = NULL,
+  silent = FALSE
+)
 }
 \arguments{
 \item{device_id}{The id of the device (The arn of the associated device)}
@@ -78,10 +88,12 @@ has to change in order to trigger an update
 In case of deletion, if \code{TRUE}, hard delete the thing. Default to \code{FALSE}}
 
 \item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
-if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+if \code{envir} it will be retrieved from environmental variables list (cross-session)}
 
 \item{token}{A valid token created with \code{create_auth_token} or manually.
 It not \code{NULL} it has higher priority then \code{store_token}.}
+
+\item{silent}{Whether to hide or show API method success messages (default \code{FALSE})}
 
 \item{show_deleted}{(logical) If \code{TRUE}, shows the soft deleted things. Default to \code{FALSE}}
 
@@ -108,15 +120,15 @@ Official documentation:
 \dontrun{
 library(dplyr)
 
-Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 
 ### create thing ###
 things_create(name = "test")
 
 ### check things list ###
-t_list = things_list()
+t_list = things_list(silent = TRUE)
 thing_id = t_list \%>\% filter(name == "test") \%>\% pull(id)
 
 things_show(thing_id = thing_id)

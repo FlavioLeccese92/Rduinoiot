@@ -16,6 +16,7 @@
 #' @param store_token Where your token is stored. If `option` it will be saved into the .Rprofile (not cross-session),
 #' if `envir` it will be saved as an environmental variable.
 #' @param return_token If `TRUE` returns the token value as output of the function.
+#' @param silent Whether to hide or show API method success messages (default `FALSE`)
 #' @md
 #' @return A token valid for Arduino IoT Cloud API. It can  retrievable by `getOption('ARDUINO_API_TOKEN')` (if `store_content` = "option")
 #' or by `Sys.getenv("ARDUINO_API_TOKEN")` (if `store_token` = "envir")
@@ -32,10 +33,13 @@ create_auth_token <- function(client_id = Sys.getenv("ARDUINO_API_CLIENT_ID"),
                               client_secret = Sys.getenv("ARDUINO_API_CLIENT_SECRET"),
                               store_token = "option",
                               return_token = FALSE,
+                              silent = FALSE,
                                ...){
   if(client_id == ""){cli::cli_alert_danger("client_id not defined as system variable"); stop()}
   if(client_secret == ""){cli::cli_alert_danger("client_secret not defined as system variable"); stop()}
   if(!is.logical(return_token)){cli::cli_alert_danger("return_token must be TRUE or FALSE"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
 
@@ -66,7 +70,7 @@ create_auth_token <- function(client_id = Sys.getenv("ARDUINO_API_CLIENT_ID"),
 
   if(res$status_code == 200){
     token <- as.character(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))["access_token"])
-    cli::cli_alert_success("Authorization succeeded")
+    if(!silent){cli::cli_alert_success("Method succeeded")}
   }else{
     cli::cli_alert_danger(paste0("API error: ", res$status_code)); stop()
   }

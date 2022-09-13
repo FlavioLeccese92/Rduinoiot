@@ -34,23 +34,24 @@
 #' @param show_properties (logical) If `TRUE`, returns things with their properties, and last values. Default to `FALSE`
 #' @param tags tags you  may want to filter from the list
 #' @param store_token Where your token is stored. If `option` it will be retrieved from the .Rprofile (not cross-session and default),
-#' if `envir` it will be retrieved from environmental variables list (cross-session).
+#' if `envir` it will be retrieved from environmental variables list (cross-session)
 #' @param token A valid token created with `create_auth_token` or manually.
 #' It not `NULL` it has higher priority then `store_token`.
+#' @param silent Whether to hide or show API method success messages (default `FALSE`)
 #' @return A tibble showing information about chosen thing or list of thing for current user
 #' @examples
 #' \dontrun{
 #' library(dplyr)
 #'
-#' Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-#' Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+#' # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+#' # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 #' create_auth_token()
 #'
 #' ### create thing ###
 #' things_create(name = "test")
 #'
 #' ### check things list ###
-#' t_list = things_list()
+#' t_list = things_list(silent = TRUE)
 #' thing_id = t_list %>% filter(name == "test") %>% pull(id)
 #'
 #' things_show(thing_id = thing_id)
@@ -71,7 +72,10 @@
 things_create <- function(device_id = NULL, thing_id = NULL, name = NULL,
                           properties = NULL, timezone = NULL, force = FALSE,
                           store_token = "option",
-                          token = NULL){
+                          token = NULL,
+                          silent = FALSE){
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!is.null(token)){token = token}
   else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
@@ -97,13 +101,15 @@ things_create <- function(device_id = NULL, thing_id = NULL, name = NULL,
     query = list('force' = force)
     res = httr::PUT(url = url, query = query, body = body, httr::add_headers(header), encode = "json")
     if(res$status_code == 201){
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
-      res = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))
-      cli::cli_text(paste0("Created thing with
-      {.field name} = {.val ", res$name,"} and {.field thing_id} = {.val ", res$id,"}"))}
+      still_valid_token = TRUE; res = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))
+      if(!silent){
+        cli::cli_alert_success("Method succeeded")
+        cli::cli_text(paste0("Created thing with
+                             {.field name} = {.val ", res$name,"} and {.field thing_id} = {.val ", res$id,"}"))}
+    }
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else {
       still_valid_token = TRUE
@@ -117,10 +123,13 @@ things_create <- function(device_id = NULL, thing_id = NULL, name = NULL,
 things_update <- function(device_id = NULL, thing_id = NULL, name = NULL,
                           properties = NULL, timezone = NULL, force = FALSE,
                           store_token = "option",
-                          token = NULL){
+                          token = NULL,
+                          silent = FALSE){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
   if(!is.logical(force)){cli::cli_alert_danger("force must be TRUE or FALSE"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!is.null(token)){token = token}
   else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
@@ -143,11 +152,14 @@ things_update <- function(device_id = NULL, thing_id = NULL, name = NULL,
     query = list('force' = force)
     res = httr::POST(url = url, query = query, body = body, httr::add_headers(header), encode = "json")
     if(res$status_code == 200){
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
-      cli::cli_text(paste0("Updated thing with {.field thing_id} = {.val ", thing_id,"}"))}
+      still_valid_token = TRUE
+      if(!silent){
+        cli::cli_alert_success("Method succeeded")
+        cli::cli_text(paste0("Updated thing with {.field thing_id} = {.val ", thing_id,"}"))}
+    }
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       cli::cli_alert_warning("Check if Thing actually exists")
       t_list = things_list()
       if(nrow(t_list) == 0){cli::cli_alert_danger("No Things associated to the user"); stop()}
@@ -164,10 +176,13 @@ things_update <- function(device_id = NULL, thing_id = NULL, name = NULL,
 things_list <- function(device_id = NULL, thing_id = NULL,
                         show_deleted = FALSE, show_properties = FALSE, tags = NULL,
                         store_token = "option",
-                        token = NULL){
+                        token = NULL,
+                        silent = FALSE){
 
   ### attention: if TRUE returns 401 -> meaning of the parameter not clear ###
   across_user_ids = FALSE
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!is.null(token)){token = token}
   else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
@@ -198,10 +213,10 @@ things_list <- function(device_id = NULL, thing_id = NULL,
         res$created_at = as.POSIXct(res$created_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
         res$updated_at = as.POSIXct(res$updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
       }
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
+      still_valid_token = TRUE; if(!silent){cli::cli_alert_success("Method succeeded")}}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else {
       still_valid_token = TRUE
@@ -215,10 +230,13 @@ things_list <- function(device_id = NULL, thing_id = NULL,
 #'
 things_show <- function(thing_id, show_deleted = FALSE,
                         store_token = "option",
-                        token = NULL){
+                        token = NULL,
+                        silent = FALSE){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
   if(!is.logical(show_deleted)){cli::cli_alert_danger("show_deleted must be TRUE or FALSE"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!is.null(token)){token = token}
   else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
@@ -243,10 +261,10 @@ things_show <- function(thing_id, show_deleted = FALSE,
         if("value_updated_at" %in% names(res)){
           res$value_updated_at = as.POSIXct(res$value_updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")}
       }
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
+      still_valid_token = TRUE; if(!silent){cli::cli_alert_success("Method succeeded")}}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else {
       still_valid_token = TRUE
@@ -260,10 +278,13 @@ things_show <- function(thing_id, show_deleted = FALSE,
 #'
 things_delete <- function(thing_id, force = FALSE,
                           store_token = "option",
-                          token = NULL){
+                          token = NULL,
+                          silent = FALSE){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
   if(!is.logical(force)){cli::cli_alert_danger("force must be TRUE or FALSE"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!is.null(token)){token = token}
   else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
@@ -281,11 +302,14 @@ things_delete <- function(thing_id, force = FALSE,
     query = list('force' = force)
     res = httr::DELETE(url = url, query = query, httr::add_headers(header))
     if(res$status_code == 200){
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
-      cli::cli_text(paste0("Deleted thing with {.field thinkg_id} = {.val ", thing_id,"}"))}
+      still_valid_token = TRUE
+      if(!silent){
+        cli::cli_alert_success("Method succeeded")
+        cli::cli_text(paste0("Deleted thing with {.field thing_id} = {.val ", thing_id,"}"))}
+    }
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else if(res$status_code == 404){ still_valid_token = TRUE; cli::cli_alert_danger("API error: Not found"); stop()}
     else{

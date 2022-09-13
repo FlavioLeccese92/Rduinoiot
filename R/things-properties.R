@@ -28,9 +28,10 @@
 #'  has to change in order to trigger an update
 #'  * `variable_name` (character) The sketch variable name of the property
 #' @param store_token Where your token is stored. If `option` it will be retrieved from the .Rprofile (not cross-session and default),
-#' if `envir` it will be retrieved from environmental variables list (cross-session).
+#' if `envir` it will be retrieved from environmental variables list (cross-session)
 #' @param token A valid token created with `create_auth_token` or manually.
 #' It not `NULL` it has higher priority then `store_token`.
+#' @param silent Whether to hide or show API method success messages (default `FALSE`)
 #' @return A tibble showing information about chosen property or list of properties for given thing
 #' @examples
 #' \dontrun{
@@ -68,7 +69,8 @@ things_properties_create <- function(thing_id,
                                      name, permission, type, update_strategy,
                                      ...,
                                      store_token = "option",
-                                     token = NULL){
+                                     token = NULL,
+                                     silent = FALSE){
 
   missing_args = setdiff(c("thing_id", "name", "permission", "type", "update_strategy"),
                          names(unlist(match.call())))
@@ -79,7 +81,17 @@ things_properties_create <- function(thing_id,
   add_args_name = c("max_value", "min_value", "persist", "tag", "update_parameter", "variable_name")
   add_body = add_args[which(names(add_args) %in% add_args_name)]
 
-  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
+
+  if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
+
+  if(!is.null(token)){token = token}
+  else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
+  else if(store_token == "envir"){token = Sys.getenv('ARDUINO_API_TOKEN')}
+  else{cli::cli_alert_danger("Token is null and store_token neither 'option' nor 'envir':
+                             use function create_auth_token to create a valid one or choose a valid value
+                             for store_token"); stop()}
+
   url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/", thing_id)
   still_valid_token = FALSE
 
@@ -93,14 +105,17 @@ things_properties_create <- function(thing_id,
     if(length(add_body)>0){body = append(body, add_body)}
     res = httr::PUT(url = url, body = body, httr::add_headers(header), encode = "json")
     if(res$status_code == 201){
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
+      still_valid_token = TRUE
       res = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))
-      cli::cli_text(paste0("Created property with
-      {.field name} = {.val ", res$variable_name,"} and {.field property_id} = {.val ", res$id,"}"))
+      if(!silent){
+        cli::cli_alert_success("Method succeeded")
+        cli::cli_text(paste0("Created property with
+                             {.field name} = {.val ", res$variable_name,"} and {.field property_id} = {.val ", res$id,"}"))
+        }
     }
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else {
       still_valid_token = TRUE
@@ -114,7 +129,8 @@ things_properties_update <- function(thing_id, property_id,
                                      name, permission, type, update_strategy,
                                      ...,
                                      store_token = "option",
-                                     token = NULL){
+                                     token = NULL,
+                                     silent = FALSE){
 
   missing_args = setdiff(c("thing_id", "property_id", "name", "permission", "type", "update_strategy"),
                          names(unlist(match.call())))
@@ -124,6 +140,8 @@ things_properties_update <- function(thing_id, property_id,
   add_args = list(...)
   add_args_name = c("max_value", "min_value", "persist", "tag", "update_parameter", "variable_name")
   add_body = add_args[which(names(add_args) %in% add_args_name)]
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!is.null(token)){token = token}
   else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
@@ -145,11 +163,14 @@ things_properties_update <- function(thing_id, property_id,
     if(length(add_body)>0){body = append(body, add_body)}
     res = httr::POST(url = url, body = body, httr::add_headers(header), encode = "json")
     if(res$status_code == 200){
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
-      cli::cli_text(paste0("Updated property with {.field property_id} = {.val ", property_id,"}"))}
+      still_valid_token = TRUE
+      if(!silent){
+        cli::cli_alert_success("Method succeeded")
+        cli::cli_text(paste0("Updated property with {.field property_id} = {.val ", property_id,"}"))}
+    }
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else {
       still_valid_token = TRUE
@@ -162,10 +183,13 @@ things_properties_update <- function(thing_id, property_id,
 things_properties_list <- function(thing_id,
                                    show_deleted = FALSE,
                                    store_token = "option",
-                                   token = NULL){
+                                   token = NULL,
+                                   silent = FALSE){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
   if(!is.logical(show_deleted)){cli::cli_alert_danger("show_deleted must be TRUE or FALSE"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!is.null(token)){token = token}
   else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
@@ -188,11 +212,10 @@ things_properties_list <- function(thing_id,
         res$updated_at = as.POSIXct(res$updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
         res$value_updated_at = as.POSIXct(res$value_updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
       }
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
-      }
+      still_valid_token = TRUE; if(!silent){cli::cli_alert_success("Method succeeded")}}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else {
       still_valid_token = TRUE
@@ -206,10 +229,13 @@ things_properties_list <- function(thing_id,
 things_properties_show <- function(thing_id,
                                    property_id,
                                    store_token = "option",
-                                   token = NULL){
+                                   token = NULL,
+                                   silent = FALSE){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
-  if(missing(thing_id)){cli::cli_alert_danger("missing property_id"); stop()}
+  if(missing(property_id)){cli::cli_alert_danger("missing property_id"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!is.null(token)){token = token}
   else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
@@ -233,10 +259,10 @@ things_properties_show <- function(thing_id,
         if("value_updated_at" %in% names(res)){
           res$value_updated_at = as.POSIXct(res$value_updated_at, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")}
       }
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
+      still_valid_token = TRUE; if(!silent){cli::cli_alert_success("Method succeeded")}}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else {
       still_valid_token = TRUE
@@ -250,10 +276,13 @@ things_properties_show <- function(thing_id,
 things_properties_delete <- function(thing_id,
                                      property_id,
                                      store_token = "option",
-                                     token = NULL){
+                                     token = NULL,
+                                     silent = FALSE){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
   if(missing(property_id)){cli::cli_alert_danger("missing property_id"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!is.null(token)){token = token}
   else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
@@ -270,12 +299,14 @@ things_properties_delete <- function(thing_id,
                'Content-Type' = "text/plain")
     res = httr::DELETE(url = url, httr::add_headers(header))
     if(res$status_code == 200){
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
-      cli::cli_text(paste0("Deleted property with {.field property_id} = {.val ", property_id,"}"))
+      still_valid_token = TRUE
+      if(!silent){
+        cli::cli_alert_success("Method succeeded")
+        cli::cli_text(paste0("Deleted property with {.field property_id} = {.val ", property_id,"}"))}
       }
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
       }
     else if(res$status_code == 404){
       still_valid_token = TRUE; cli::cli_alert_danger("API error: Not found");}

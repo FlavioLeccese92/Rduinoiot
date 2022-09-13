@@ -9,7 +9,8 @@ devices_properties_list(
   device_id,
   show_deleted = FALSE,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 }
 \arguments{
@@ -18,10 +19,12 @@ devices_properties_list(
 \item{show_deleted}{If \code{TRUE}, shows the soft deleted properties. Default to \code{FALSE}}
 
 \item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
-if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+if \code{envir} it will be retrieved from environmental variables list (cross-session)}
 
 \item{token}{A valid token created with \code{create_auth_token} or manually.
-It not \code{NULL} it has higher priority then \code{store_token}.}
+It not \code{NULL} it has higher priority then \code{store_token}}
+
+\item{silent}{Whether to hide or show API method success messages (default \code{FALSE})}
 }
 \value{
 A tibble showing the information about properties for given device.

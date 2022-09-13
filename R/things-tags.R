@@ -14,14 +14,15 @@
 #' @param key The key of the tag (no spaces allowed)
 #' @param value The value of the tag (no spaces allowed)
 #' @param store_token Where your token is stored. If `option` it will be retrieved from the .Rprofile (not cross-session and default),
-#' if `envir` it will be retrieved from environmental variables list (cross-session).
+#' if `envir` it will be retrieved from environmental variables list (cross-session)
 #' @param token A valid token created with `create_auth_token` or manually.
-#' It not `NULL` it has higher priority then `store_token`.
+#' It not `NULL` it has higher priority then `store_token`
+#' @param silent Whether to hide or show API method success messages (default `FALSE`)
 #' @return A tibble showing information about chosen tag or list of tags for given thing
 #' @examples
 #' \dontrun{
-#' Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-#' Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+#' # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+#' # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 #' create_auth_token()
 #'
 #' thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
@@ -41,13 +42,16 @@
 things_tags_upsert <- function(thing_id,
                                key, value,
                                store_token = "option",
-                               token = NULL){
+                               token = NULL,
+                               silent = FALSE){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
   if(missing(key)){cli::cli_alert_danger("missing key"); stop()}
   key = as.character(key)
   if(missing(value)){cli::cli_alert_danger("missing value"); stop()}
   value = as.character(value)
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
 
   if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
 
@@ -67,13 +71,16 @@ things_tags_upsert <- function(thing_id,
     body = list('key' = key, 'value' = value)
     res = httr::PUT(url = url, body = body, httr::add_headers(header), encode = "json")
     if(res$status_code == 200){
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
-      res = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))
-      cli::cli_text(paste0("Created/Updated tag with
-      {.field key} = {.val ", res$key,"} and {.field value} = {.val ", res$value,"}"))}
+      still_valid_token = TRUE; res = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))
+      if(!silent){
+        cli::cli_alert_success("Method succeeded")
+        cli::cli_text(paste0("Created/Updated tag with
+                             {.field key} = {.val ", res$key,"} and {.field value} = {.val ", res$value,"}"))
+      }
+    }
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
     }
     else {
       still_valid_token = TRUE
@@ -85,9 +92,13 @@ things_tags_upsert <- function(thing_id,
 #' @export
 things_tags_list <- function(thing_id,
                              store_token = "option",
-                             token = NULL){
+                             token = NULL,
+                             silent = FALSE){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
+
   if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
 
   if(!is.null(token)){token = token}
@@ -105,11 +116,11 @@ things_tags_list <- function(thing_id,
                'Content-Type' = "text/plain")
     res = httr::GET(url = url, httr::add_headers(header))
     if(res$status_code == 200){
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
+      still_valid_token = TRUE; if(!silent){cli::cli_alert_success("Method succeeded")}
       res = tibble::as_tibble(jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$tags)}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
     }
     else {
       still_valid_token = TRUE
@@ -124,11 +135,15 @@ things_tags_list <- function(thing_id,
 things_tags_delete <- function(thing_id,
                                key,
                                store_token = "option",
-                               token = NULL){
+                               token = NULL,
+                               silent = FALSE){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
   if(missing(key)){cli::cli_alert_danger("missing key"); stop()}
   key = as.character(key)
+
+  if(!is.logical(silent)){cli::cli_alert_danger("silent must be TRUE or FALSE"); stop()}
+
   if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
 
   if(!is.null(token)){token = token}
@@ -146,11 +161,14 @@ things_tags_delete <- function(thing_id,
                'Content-Type' = "text/plain")
     res = httr::DELETE(url = url, httr::add_headers(header))
     if(res$status_code == 200){
-      still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")
-      cli::cli_text(paste0("Deleted tag with {.field key} = {.val ", key,"}"))}
+      still_valid_token = TRUE
+      if(!silent){
+        cli::cli_alert_success("Method succeeded")
+        cli::cli_text(paste0("Deleted tag with {.field key} = {.val ", key,"}"))}
+      }
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      token = create_auth_token(store_token = store_token, return_token = TRUE, silent = silent)
     }
     else {
       still_valid_token = TRUE

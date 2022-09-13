@@ -7,11 +7,29 @@
 \alias{things_tags_delete}
 \title{Tags (of things) API methods}
 \usage{
-things_tags_upsert(thing_id, key, value, store_token = "option", token = NULL)
+things_tags_upsert(
+  thing_id,
+  key,
+  value,
+  store_token = "option",
+  token = NULL,
+  silent = FALSE
+)
 
-things_tags_list(thing_id, store_token = "option", token = NULL)
+things_tags_list(
+  thing_id,
+  store_token = "option",
+  token = NULL,
+  silent = FALSE
+)
 
-things_tags_delete(thing_id, key, store_token = "option", token = NULL)
+things_tags_delete(
+  thing_id,
+  key,
+  store_token = "option",
+  token = NULL,
+  silent = FALSE
+)
 }
 \arguments{
 \item{thing_id}{The id of the thing}
@@ -21,10 +39,12 @@ things_tags_delete(thing_id, key, store_token = "option", token = NULL)
 \item{value}{The value of the tag (no spaces allowed)}
 
 \item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
-if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+if \code{envir} it will be retrieved from environmental variables list (cross-session)}
 
 \item{token}{A valid token created with \code{create_auth_token} or manually.
-It not \code{NULL} it has higher priority then \code{store_token}.}
+It not \code{NULL} it has higher priority then \code{store_token}}
+
+\item{silent}{Whether to hide or show API method success messages (default \code{FALSE})}
 }
 \value{
 A tibble showing information about chosen tag or list of tags for given thing
@@ -41,8 +61,8 @@ Official documentation:
 }
 \examples{
 \dontrun{
-Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"

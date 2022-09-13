@@ -10,7 +10,8 @@ devices_properties_timeseries(
   start = NULL,
   limit = NULL,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 }
 \arguments{
@@ -26,7 +27,9 @@ devices_properties_timeseries(
 if \code{envir} it will be retrieved from environmental variables list (cross-session).}
 
 \item{token}{A valid token created with \code{create_auth_token} or manually.
-It not \code{NULL} it has higher priority then \code{store_token}.}
+It not \code{NULL} it has higher priority then \code{store_token}}
+
+\item{silent}{Whether to hide or show API method success messages (default \code{FALSE})}
 }
 \value{
 A tibble showing of time and value for property of given device

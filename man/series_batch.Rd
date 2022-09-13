@@ -14,7 +14,8 @@ series_batch_query(
   Q,
   SeriesLimit = NULL,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
 series_batch_query_raw(
@@ -24,14 +25,16 @@ series_batch_query_raw(
   Q,
   SeriesLimit = NULL,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
 series_batch_last_value(
   thing_id,
   property_id,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 }
 \arguments{
@@ -49,10 +52,12 @@ for instance, \verb{property.fbf34284-91f0-42be-bbf6-dd46cfb3f1e0})}
 \item{SeriesLimit}{Maximum number of values (seems not to affect results)}
 
 \item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
-if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+if \code{envir} it will be retrieved from environmental variables list (cross-session)}
 
 \item{token}{A valid token created with \code{create_auth_token} or manually.
-It not \code{NULL} it has higher priority then \code{store_token}.}
+It not \code{NULL} it has higher priority then \code{store_token}}
+
+\item{silent}{Whether to hide or show API method success messages (default \code{FALSE})}
 
 \item{thing_id}{The id of the thing}
 

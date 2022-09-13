@@ -17,7 +17,8 @@ things_properties_create(
   update_strategy,
   ...,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
 things_properties_update(
@@ -29,28 +30,32 @@ things_properties_update(
   update_strategy,
   ...,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
 things_properties_list(
   thing_id,
   show_deleted = FALSE,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
 things_properties_show(
   thing_id,
   property_id,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 
 things_properties_delete(
   thing_id,
   property_id,
   store_token = "option",
-  token = NULL
+  token = NULL,
+  silent = FALSE
 )
 }
 \arguments{
@@ -76,10 +81,12 @@ has to change in order to trigger an update
 }}
 
 \item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
-if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+if \code{envir} it will be retrieved from environmental variables list (cross-session)}
 
 \item{token}{A valid token created with \code{create_auth_token} or manually.
 It not \code{NULL} it has higher priority then \code{store_token}.}
+
+\item{silent}{Whether to hide or show API method success messages (default \code{FALSE})}
 
 \item{property_id}{The id of the property}
 
