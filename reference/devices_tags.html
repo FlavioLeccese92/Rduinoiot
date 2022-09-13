@@ -80,12 +80,24 @@ devicesV2TagsDelete
 <span>  <span class="va">key</span>,</span>
 <span>  <span class="va">value</span>,</span>
 <span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
-<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">devices_tags_list</span><span class="op">(</span><span class="va">device_id</span>, store_token <span class="op">=</span> <span class="st">"option"</span>, token <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">devices_tags_list</span><span class="op">(</span></span>
+<span>  <span class="va">device_id</span>,</span>
+<span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">devices_tags_delete</span><span class="op">(</span><span class="va">device_id</span>, <span class="va">key</span>, store_token <span class="op">=</span> <span class="st">"option"</span>, token <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devices_tags_delete</span><span class="op">(</span></span>
+<span>  <span class="va">device_id</span>,</span>
+<span>  <span class="va">key</span>,</span>
+<span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -110,6 +122,10 @@ if <code>envir</code> it will be retrieved from environmental variables list (cr
 <dt>token</dt>
 <dd><p>A valid token created with <code>create_auth_token</code> or manually.
 It not <code>NULL</code> it has higher priority then <code>store_token</code>.</p></dd>
+
+
+<dt>silent</dt>
+<dd><p>Whether to hide or show API method success messages (default <code>FALSE</code>)</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -91,7 +91,8 @@ Here for completeness and future developments but would not suggest using it)</p
 <span>  <span class="va">Q</span>,</span>
 <span>  SeriesLimit <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
-<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">series_batch_query_raw</span><span class="op">(</span></span>
@@ -101,14 +102,16 @@ Here for completeness and future developments but would not suggest using it)</p
 <span>  <span class="va">Q</span>,</span>
 <span>  SeriesLimit <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
-<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">series_batch_last_value</span><span class="op">(</span></span>
 <span>  <span class="va">thing_id</span>,</span>
 <span>  <span class="va">property_id</span>,</span>
 <span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
-<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -139,12 +142,16 @@ for instance, <code>property.fbf34284-91f0-42be-bbf6-dd46cfb3f1e0</code>)</p></d
 
 <dt>store_token</dt>
 <dd><p>Where your token is stored. If <code>option</code> it will be retrieved from the .Rprofile (not cross-session and default),
-if <code>envir</code> it will be retrieved from environmental variables list (cross-session).</p></dd>
+if <code>envir</code> it will be retrieved from environmental variables list (cross-session)</p></dd>
 
 
 <dt>token</dt>
 <dd><p>A valid token created with <code>create_auth_token</code> or manually.
-It not <code>NULL</code> it has higher priority then <code>store_token</code>.</p></dd>
+It not <code>NULL</code> it has higher priority then <code>store_token</code></p></dd>
+
+
+<dt>silent</dt>
+<dd><p>Whether to hide or show API method success messages (default <code>FALSE</code>)</p></dd>
 
 
 <dt>thing_id</dt>

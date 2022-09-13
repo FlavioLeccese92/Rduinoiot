@@ -89,7 +89,8 @@ thingsV2Delete
 <span>  timezone <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  force <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
-<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">things_update</span><span class="op">(</span></span>
@@ -100,7 +101,8 @@ thingsV2Delete
 <span>  timezone <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  force <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
-<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">things_list</span><span class="op">(</span></span>
@@ -110,17 +112,25 @@ thingsV2Delete
 <span>  show_properties <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  tags <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
-<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">things_show</span><span class="op">(</span></span>
 <span>  <span class="va">thing_id</span>,</span>
 <span>  show_deleted <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
-<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">things_delete</span><span class="op">(</span><span class="va">thing_id</span>, force <span class="op">=</span> <span class="cn">FALSE</span>, store_token <span class="op">=</span> <span class="st">"option"</span>, token <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">things_delete</span><span class="op">(</span></span>
+<span>  <span class="va">thing_id</span>,</span>
+<span>  force <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -163,12 +173,16 @@ In case of deletion, if <code>TRUE</code>, hard delete the thing. Default to <co
 
 <dt>store_token</dt>
 <dd><p>Where your token is stored. If <code>option</code> it will be retrieved from the .Rprofile (not cross-session and default),
-if <code>envir</code> it will be retrieved from environmental variables list (cross-session).</p></dd>
+if <code>envir</code> it will be retrieved from environmental variables list (cross-session)</p></dd>
 
 
 <dt>token</dt>
 <dd><p>A valid token created with <code>create_auth_token</code> or manually.
 It not <code>NULL</code> it has higher priority then <code>store_token</code>.</p></dd>
+
+
+<dt>silent</dt>
+<dd><p>Whether to hide or show API method success messages (default <code>FALSE</code>)</p></dd>
 
 
 <dt>show_deleted</dt>
@@ -195,15 +209,15 @@ It not <code>NULL</code> it has higher priority then <code>store_token</code>.</
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>ARDUINO_API_CLIENT_ID <span class="op">=</span> <span class="st">'INSERT CLIENT_ID HERE'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>ARDUINO_API_CLIENT_SECRET <span class="op">=</span> <span class="st">'INSERT CLIENT_SECRET HERE'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')</span></span></span>
+<span class="r-in"><span><span class="co"># Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="create_auth_token.html">create_auth_token</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">### create thing ###</span></span></span>
 <span class="r-in"><span><span class="fu">things_create</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"test"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">### check things list ###</span></span></span>
-<span class="r-in"><span><span class="va">t_list</span> <span class="op">=</span> <span class="fu">things_list</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">t_list</span> <span class="op">=</span> <span class="fu">things_list</span><span class="op">(</span>silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">thing_id</span> <span class="op">=</span> <span class="va">t_list</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"test"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">things_show</span><span class="op">(</span>thing_id <span class="op">=</span> <span class="va">thing_id</span><span class="op">)</span></span></span>
