@@ -8,25 +8,23 @@
 \alias{devices_get_properties}
 \title{Devices API methods}
 \usage{
-devices_list(
-  serial = NULL,
-  tags = NULL,
-  token = getOption("ARDUINO_API_TOKEN")
-)
+devices_list(serial = NULL, tags = NULL, store_token = "option", token = NULL)
 
-devices_show(device_id, token = getOption("ARDUINO_API_TOKEN"))
+devices_show(device_id, store_token = "option", token = NULL)
 
 devices_get_events(
   device_id,
   limit = NULL,
   start = NULL,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
 devices_get_properties(
   device_id,
   show_deleted = FALSE,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 }
 \arguments{
@@ -34,8 +32,11 @@ devices_get_properties(
 
 \item{tags}{tags you  may want to filter from the list}
 
-\item{token}{A valid token created with \code{create_auth_token}
-(either explicitly assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
+\item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
+if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+
+\item{token}{A valid token created with \code{create_auth_token} or manually.
+It not \code{NULL} it has higher priority then \code{store_token}.}
 
 \item{device_id}{The id of the device (The arn of the associated device)}
 

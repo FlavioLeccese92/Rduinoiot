@@ -15,8 +15,10 @@
 #' @param property_id The id of the property
 #' @param start A `Posixct` or `Date` object. The time at which to start selecting properties.
 #' @param limit The number of properties to select
-#' @param token A valid token created with `create_auth_token`
-#' (either explicitly assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
+#' @param store_token Where your token is stored. If `option` it will be retrieved from the .Rprofile (not cross-session and default),
+#' if `envir` it will be retrieved from environmental variables list (cross-session).
+#' @param token A valid token created with `create_auth_token` or manually.
+#' It not `NULL` it has higher priority then `store_token`.
 #' @return A tibble showing of time and value for property of given device
 #' @examples
 #' \dontrun{
@@ -35,12 +37,19 @@
 #' @export
 devices_properties_timeseries <- function(device_id, property_id,
                                           start = NULL, limit = NULL,
-                                          token = getOption('ARDUINO_API_TOKEN')){
+                                          store_token = "option",
+                                          token = NULL){
 
   if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
   if(missing(property_id)){cli::cli_alert_danger("missing property_id"); stop()}
 
-  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
+  if(!is.null(token)){token = token}
+  else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
+  else if(store_token == "envir"){token = Sys.getenv('ARDUINO_API_TOKEN')}
+  else{cli::cli_alert_danger("Token is null and store_token neither 'option' nor 'envir':
+                             use function create_auth_token to create a valid one or choose a valid value
+                             for store_token"); stop()}
+
   url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/properties/%s", device_id, property_id)
   still_valid_token = FALSE
 
@@ -65,7 +74,8 @@ devices_properties_timeseries <- function(device_id, property_id,
       still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
+      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      }
     else if(res$status_code == 404){
       still_valid_token = TRUE; cli::cli_alert_danger("API error: Not found");}
     else{

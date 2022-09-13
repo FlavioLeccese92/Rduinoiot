@@ -11,7 +11,8 @@ things_properties_timeseries(
   to = NULL,
   interval = NULL,
   desc = NULL,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 }
 \arguments{
@@ -30,8 +31,11 @@ Get data with a timestamp < to this value (default: now, min: 1842-01-01, max: 2
 
 \item{desc}{(logic) Whether data ordering (by time) should be descending. Default TO \code{FALSE}}
 
-\item{token}{A valid token created with \code{create_auth_token}
-(either explicitly assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))}
+\item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
+if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+
+\item{token}{A valid token created with \code{create_auth_token} or manually.
+It not \code{NULL} it has higher priority then \code{store_token}.}
 }
 \value{
 A tibble showing of time and value for property of given device
@@ -47,8 +51,8 @@ Official documentation:
 }
 \examples{
 \dontrun{
-Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+# Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+# Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 create_auth_token()
 
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"

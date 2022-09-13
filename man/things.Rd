@@ -16,7 +16,8 @@ things_create(
   properties = NULL,
   timezone = NULL,
   force = FALSE,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
 things_update(
@@ -26,7 +27,8 @@ things_update(
   properties = NULL,
   timezone = NULL,
   force = FALSE,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
 things_list(
@@ -35,16 +37,18 @@ things_list(
   show_deleted = FALSE,
   show_properties = FALSE,
   tags = NULL,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
 things_show(
   thing_id,
   show_deleted = FALSE,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
-things_delete(thing_id, force = FALSE, token = getOption("ARDUINO_API_TOKEN"))
+things_delete(thing_id, force = FALSE, store_token = "option", token = NULL)
 }
 \arguments{
 \item{device_id}{The id of the device (The arn of the associated device)}
@@ -73,8 +77,11 @@ has to change in order to trigger an update
 \item{force}{(logical)  If \code{TRUE}, detach device from the other thing, and attach to this thing.
 In case of deletion, if \code{TRUE}, hard delete the thing. Default to \code{FALSE}}
 
-\item{token}{A valid token created with \code{create_auth_token}
-(either explicitly assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
+\item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
+if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+
+\item{token}{A valid token created with \code{create_auth_token} or manually.
+It not \code{NULL} it has higher priority then \code{store_token}.}
 
 \item{show_deleted}{(logical) If \code{TRUE}, shows the soft deleted things. Default to \code{FALSE}}
 

@@ -7,16 +7,11 @@
 \alias{things_tags_delete}
 \title{Tags (of things) API methods}
 \usage{
-things_tags_upsert(
-  thing_id,
-  key,
-  value,
-  token = getOption("ARDUINO_API_TOKEN")
-)
+things_tags_upsert(thing_id, key, value, store_token = "option", token = NULL)
 
-things_tags_list(thing_id, token = getOption("ARDUINO_API_TOKEN"))
+things_tags_list(thing_id, store_token = "option", token = NULL)
 
-things_tags_delete(thing_id, key, token = getOption("ARDUINO_API_TOKEN"))
+things_tags_delete(thing_id, key, store_token = "option", token = NULL)
 }
 \arguments{
 \item{thing_id}{The id of the thing}
@@ -25,8 +20,11 @@ things_tags_delete(thing_id, key, token = getOption("ARDUINO_API_TOKEN"))
 
 \item{value}{The value of the tag (no spaces allowed)}
 
-\item{token}{A valid token created with \code{create_auth_token}
-(either explicitly assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
+\item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
+if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+
+\item{token}{A valid token created with \code{create_auth_token} or manually.
+It not \code{NULL} it has higher priority then \code{store_token}.}
 }
 \value{
 A tibble showing information about chosen tag or list of tags for given thing

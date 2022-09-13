@@ -15,8 +15,10 @@
 #' @param limit The number of events to select
 #' @param start A `Posixct` or `Date` object. Time at which to start selecting events
 #' @param show_deleted If `TRUE`, shows the soft deleted properties. Default to `FALSE`
-#' @param token A valid token created with `create_auth_token`
-#' (either explicitly assigned or retrieved via default `getOption('ARDUINO_API_TOKEN')`)
+#' @param store_token Where your token is stored. If `option` it will be retrieved from the .Rprofile (not cross-session and default),
+#' if `envir` it will be retrieved from environmental variables list (cross-session).
+#' @param token A valid token created with `create_auth_token` or manually.
+#' It not `NULL` it has higher priority then `store_token`.
 #' @return A tibble showing extensive information about devices (and related things) associated to the user
 #' @examples
 #' \dontrun{
@@ -43,13 +45,21 @@
 #' @rdname devices
 #' @export
 devices_list <- function(serial = NULL, tags = NULL,
-                         token = getOption('ARDUINO_API_TOKEN')
+                         store_token = "option",
+                         token = NULL
                          ){
 
   ### attention: if TRUE returns 401 -> meaning of the parameter not clear ###
   across_user_ids = FALSE
 
-  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
+  if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
+
+  if(!is.null(token)){token = token}
+  else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
+  else if(store_token == "envir"){token = Sys.getenv('ARDUINO_API_TOKEN')}
+  else{cli::cli_alert_danger("Token is null and store_token neither 'option' nor 'envir':
+                             use function create_auth_token to create a valid one or choose a valid value
+                             for store_token"); stop()}
 
   url = "https://api2.arduino.cc/iot/v2/devices"
   still_valid_token = FALSE
@@ -70,7 +80,8 @@ devices_list <- function(serial = NULL, tags = NULL,
       still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
+      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      }
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
@@ -82,11 +93,19 @@ devices_list <- function(serial = NULL, tags = NULL,
 #' @export
 #'
 devices_show <- function(device_id,
-                         token = getOption('ARDUINO_API_TOKEN')){
+                         store_token = "option",
+                         token = NULL){
 
   if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
 
-  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
+  if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
+
+  if(!is.null(token)){token = token}
+  else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
+  else if(store_token == "envir"){token = Sys.getenv('ARDUINO_API_TOKEN')}
+  else{cli::cli_alert_danger("Token is null and store_token neither 'option' nor 'envir':
+                             use function create_auth_token to create a valid one or choose a valid value
+                             for store_token"); stop()}
 
   url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s", device_id)
   still_valid_token = FALSE
@@ -103,7 +122,8 @@ devices_show <- function(device_id,
       still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
+      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      }
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
@@ -116,7 +136,8 @@ devices_show <- function(device_id,
 #'
 devices_get_events <- function(device_id,
                                limit = NULL, start = NULL,
-                               token = getOption('ARDUINO_API_TOKEN')){
+                               store_token = "option",
+                               token = NULL){
 
   if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
   if(!is.null(start)){
@@ -127,7 +148,14 @@ devices_get_events <- function(device_id,
     else{start = strftime(format(start, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
   }
 
-  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
+  if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
+
+  if(!is.null(token)){token = token}
+  else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
+  else if(store_token == "envir"){token = Sys.getenv('ARDUINO_API_TOKEN')}
+  else{cli::cli_alert_danger("Token is null and store_token neither 'option' nor 'envir':
+                             use function create_auth_token to create a valid one or choose a valid value
+                             for store_token"); stop()}
 
   url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/events", device_id)
   still_valid_token = FALSE
@@ -145,7 +173,8 @@ devices_get_events <- function(device_id,
       still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
+      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      }
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail
@@ -158,11 +187,19 @@ devices_get_events <- function(device_id,
 #'
 devices_get_properties <- function(device_id,
                                    show_deleted = FALSE,
-                                   token = getOption('ARDUINO_API_TOKEN')){
+                                   store_token = "option",
+                                   token = NULL){
 
   if(missing(device_id)){cli::cli_alert_danger("missing device_id"); stop()}
 
-  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
+  if(!(store_token %in% c("option", "envir"))){cli::cli_alert_danger("store_token must be either 'option' or 'envir'"); stop()}
+
+  if(!is.null(token)){token = token}
+  else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
+  else if(store_token == "envir"){token = Sys.getenv('ARDUINO_API_TOKEN')}
+  else{cli::cli_alert_danger("Token is null and store_token neither 'option' nor 'envir':
+                             use function create_auth_token to create a valid one or choose a valid value
+                             for store_token"); stop()}
 
   url = sprintf("https://api2.arduino.cc/iot/v2/devices/%s/properties", device_id)
   still_valid_token = FALSE
@@ -181,7 +218,8 @@ devices_get_properties <- function(device_id,
       still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
+      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      }
     else {
       still_valid_token = TRUE
       res_detail = jsonlite::fromJSON(httr::content(res, 'text', encoding = "UTF-8"))$detail

@@ -11,12 +11,13 @@ devices_tags_upsert(
   device_id,
   key,
   value,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
-devices_tags_list(device_id, token = getOption("ARDUINO_API_TOKEN"))
+devices_tags_list(device_id, store_token = "option", token = NULL)
 
-devices_tags_delete(device_id, key, token = getOption("ARDUINO_API_TOKEN"))
+devices_tags_delete(device_id, key, store_token = "option", token = NULL)
 }
 \arguments{
 \item{device_id}{The id of the device}
@@ -25,8 +26,11 @@ devices_tags_delete(device_id, key, token = getOption("ARDUINO_API_TOKEN"))
 
 \item{value}{The value of the tag (no spaces allowed)}
 
-\item{token}{A valid token created with \code{create_auth_token}
-(either explicitly assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
+\item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
+if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+
+\item{token}{A valid token created with \code{create_auth_token} or manually.
+It not \code{NULL} it has higher priority then \code{store_token}.}
 }
 \value{
 A tibble showing information about chosen tag or list of tags for given device

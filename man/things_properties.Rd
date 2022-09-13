@@ -16,7 +16,8 @@ things_properties_create(
   type,
   update_strategy,
   ...,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
 things_properties_update(
@@ -27,25 +28,29 @@ things_properties_update(
   type,
   update_strategy,
   ...,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
 things_properties_list(
   thing_id,
   show_deleted = FALSE,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
 things_properties_show(
   thing_id,
   property_id,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
 things_properties_delete(
   thing_id,
   property_id,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 }
 \arguments{
@@ -70,8 +75,11 @@ has to change in order to trigger an update
 \item \code{variable_name} (character) The sketch variable name of the property
 }}
 
-\item{token}{A valid token created with \code{create_auth_token}
-(either explicitly assigned or retrieved via default \code{getOption('ARDUINO_API_TOKEN')})}
+\item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
+if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+
+\item{token}{A valid token created with \code{create_auth_token} or manually.
+It not \code{NULL} it has higher priority then \code{store_token}.}
 
 \item{property_id}{The id of the property}
 

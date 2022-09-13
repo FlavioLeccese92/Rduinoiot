@@ -13,7 +13,8 @@ series_batch_query(
   interval = NULL,
   Q,
   SeriesLimit = NULL,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
 series_batch_query_raw(
@@ -22,13 +23,15 @@ series_batch_query_raw(
   interval = NULL,
   Q,
   SeriesLimit = NULL,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 
 series_batch_last_value(
   thing_id,
   property_id,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 }
 \arguments{
@@ -45,8 +48,11 @@ for instance, \verb{property.fbf34284-91f0-42be-bbf6-dd46cfb3f1e0})}
 
 \item{SeriesLimit}{Maximum number of values (seems not to affect results)}
 
-\item{token}{A valid token created with \code{create_auth_token}
-(either explicitly assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))}
+\item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
+if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+
+\item{token}{A valid token created with \code{create_auth_token} or manually.
+It not \code{NULL} it has higher priority then \code{store_token}.}
 
 \item{thing_id}{The id of the thing}
 

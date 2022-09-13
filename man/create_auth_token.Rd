@@ -8,6 +8,7 @@ create_auth_token(
   client_id = Sys.getenv("ARDUINO_API_CLIENT_ID"),
   client_secret = Sys.getenv("ARDUINO_API_CLIENT_SECRET"),
   store_token = "option",
+  return_token = FALSE,
   ...
 )
 }
@@ -18,6 +19,8 @@ create_auth_token(
 
 \item{store_token}{Where your token is stored. If \code{option} it will be saved into the .Rprofile (not cross-session),
 if \code{envir} it will be saved as an environmental variable.}
+
+\item{return_token}{If \code{TRUE} returns the token value as output of the function.}
 
 \item{...}{Additional parameters needed for the body of the \code{POST} request:
 \itemize{

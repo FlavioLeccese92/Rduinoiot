@@ -9,7 +9,8 @@ devices_properties_timeseries(
   property_id,
   start = NULL,
   limit = NULL,
-  token = getOption("ARDUINO_API_TOKEN")
+  store_token = "option",
+  token = NULL
 )
 }
 \arguments{
@@ -21,8 +22,11 @@ devices_properties_timeseries(
 
 \item{limit}{The number of properties to select}
 
-\item{token}{A valid token created with \code{create_auth_token}
-(either explicitly assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))}
+\item{store_token}{Where your token is stored. If \code{option} it will be retrieved from the .Rprofile (not cross-session and default),
+if \code{envir} it will be retrieved from environmental variables list (cross-session).}
+
+\item{token}{A valid token created with \code{create_auth_token} or manually.
+It not \code{NULL} it has higher priority then \code{store_token}.}
 }
 \value{
 A tibble showing of time and value for property of given device

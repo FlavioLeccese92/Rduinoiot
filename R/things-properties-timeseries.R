@@ -19,13 +19,15 @@
 #' @param interval (numeric) Binning interval in seconds
 #' (default: the smallest possible value compatibly with the limit of 1000 data points in the response)
 #' @param desc (logic) Whether data ordering (by time) should be descending. Default TO `FALSE`
-#' @param token A valid token created with `create_auth_token`
-#' (either explicitly assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
+#' @param store_token Where your token is stored. If `option` it will be retrieved from the .Rprofile (not cross-session and default),
+#' if `envir` it will be retrieved from environmental variables list (cross-session).
+#' @param token A valid token created with `create_auth_token` or manually.
+#' It not `NULL` it has higher priority then `store_token`.
 #' @return A tibble showing of time and value for property of given device
 #' @examples
 #' \dontrun{
-#' Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
-#' Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
+#' # Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')
+#' # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 #' create_auth_token()
 #'
 #' thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
@@ -39,12 +41,19 @@
 #' @export
 things_properties_timeseries <- function(thing_id, property_id,
                                          from = NULL, to = NULL, interval = NULL, desc = NULL,
-                                         token = getOption('ARDUINO_API_TOKEN')){
+                                         store_token = "option",
+                                         token = NULL){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing device_id"); stop()}
   if(missing(property_id)){cli::cli_alert_danger("missing property_id"); stop()}
 
-  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
+  if(!is.null(token)){token = token}
+  else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
+  else if(store_token == "envir"){token = Sys.getenv('ARDUINO_API_TOKEN')}
+  else{cli::cli_alert_danger("Token is null and store_token neither 'option' nor 'envir':
+                             use function create_auth_token to create a valid one or choose a valid value
+                             for store_token"); stop()}
+
   url = sprintf("https://api2.arduino.cc/iot/v2/things/%s/properties/%s/timeseries", thing_id, property_id)
   still_valid_token = FALSE
 
@@ -80,7 +89,8 @@ things_properties_timeseries <- function(thing_id, property_id,
       still_valid_token = TRUE; cli::cli_alert_success("Method succeeded")}
     else if(res$status_code == 401){
       cli::cli_alert_warning("Request not authorized: regenerate token")
-      create_auth_token(); token = getOption('ARDUINO_API_TOKEN')}
+      token = create_auth_token(store_token = store_token, return_token = TRUE)
+      }
     else if(res$status_code == 404){
       still_valid_token = TRUE; cli::cli_alert_danger("API error: Not found");}
     else{

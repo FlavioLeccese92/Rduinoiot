@@ -24,8 +24,10 @@
 #' @param SeriesLimit Maximum number of values (seems not to affect results)
 #' @param thing_id The id of the thing
 #' @param property_id The id of the property
-#' @param token A valid token created with `create_auth_token`
-#' (either explicitly assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))
+#' @param store_token Where your token is stored. If `option` it will be retrieved from the .Rprofile (not cross-session and default),
+#' if `envir` it will be retrieved from environmental variables list (cross-session).
+#' @param token A valid token created with `create_auth_token` or manually.
+#' It not `NULL` it has higher priority then `store_token`.
 #' @return A tibble showing of time and value for properties
 #' @examples
 #' \dontrun{
@@ -52,7 +54,8 @@
 #' @rdname series_batch
 #' @export
 series_batch_query <- function(from, to, interval = NULL, Q, SeriesLimit = NULL,
-                               token = getOption('ARDUINO_API_TOKEN')){
+                               store_token = "option",
+                               token = NULL){
 
   if(missing(from)){cli::cli_alert_danger("missing from"); stop()}
   if(missing(to)){cli::cli_alert_danger("missing to"); stop()}
@@ -74,7 +77,13 @@ series_batch_query <- function(from, to, interval = NULL, Q, SeriesLimit = NULL,
     }else{to = strftime(format(to, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
   }
 
-  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
+  if(!is.null(token)){token = token}
+  else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
+  else if(store_token == "envir"){token = Sys.getenv('ARDUINO_API_TOKEN')}
+  else{cli::cli_alert_danger("Token is null and store_token neither 'option' nor 'envir':
+                             use function create_auth_token to create a valid one or choose a valid value
+                             for store_token"); stop()}
+
   url = "https://api2.arduino.cc/iot/v2/series/batch_query"
   still_valid_token = FALSE
 
@@ -108,7 +117,8 @@ series_batch_query <- function(from, to, interval = NULL, Q, SeriesLimit = NULL,
 #' @name series_batch
 #' @export
 series_batch_query_raw <- function(from, to, interval = NULL, Q, SeriesLimit = NULL,
-                                   token = getOption('ARDUINO_API_TOKEN')){
+                                   store_token = "option",
+                                   token = NULL){
 
   if(missing(from)){cli::cli_alert_danger("missing from"); stop()}
   if(missing(to)){cli::cli_alert_danger("missing to"); stop()}
@@ -130,7 +140,13 @@ series_batch_query_raw <- function(from, to, interval = NULL, Q, SeriesLimit = N
     }else{to = strftime(format(to, tz = "UTC", usetz = TRUE), "%Y-%m-%dT%H:%M:%OSZ")}
   }
 
-  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
+  if(!is.null(token)){token = token}
+  else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
+  else if(store_token == "envir"){token = Sys.getenv('ARDUINO_API_TOKEN')}
+  else{cli::cli_alert_danger("Token is null and store_token neither 'option' nor 'envir':
+                             use function create_auth_token to create a valid one or choose a valid value
+                             for store_token"); stop()}
+
   url = "https://api2.arduino.cc/iot/v2/series/batch_query_raw"
   still_valid_token = FALSE
 
@@ -164,13 +180,20 @@ series_batch_query_raw <- function(from, to, interval = NULL, Q, SeriesLimit = N
 #' @name series_batch
 #' @export
 series_batch_last_value <- function(thing_id, property_id,
-                                    token = getOption('ARDUINO_API_TOKEN')){
+                                    store_token = "option",
+                                    token = NULL){
 
   if(missing(thing_id)){cli::cli_alert_danger("missing thing_id"); stop()}
   if(missing(property_id)){cli::cli_alert_danger("missing property_id"); stop()}
 
 
-  if(is.null(token)){cli::cli_alert_danger("Token is null: use function create_auth_token to create a valid one"); stop()}
+  if(!is.null(token)){token = token}
+  else if(store_token == "option"){token = getOption('ARDUINO_API_TOKEN')}
+  else if(store_token == "envir"){token = Sys.getenv('ARDUINO_API_TOKEN')}
+  else{cli::cli_alert_danger("Token is null and store_token neither 'option' nor 'envir':
+                             use function create_auth_token to create a valid one or choose a valid value
+                             for store_token"); stop()}
+
   url = "https://api2.arduino.cc/iot/v2/series/batch_query_raw/lastvalue"
   still_valid_token = FALSE
 
