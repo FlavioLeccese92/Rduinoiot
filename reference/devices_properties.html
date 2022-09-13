@@ -63,7 +63,8 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">devices_properties_list</span><span class="op">(</span></span>
 <span>  <span class="va">device_id</span>,</span>
 <span>  show_deleted <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"ARDUINO_API_TOKEN"</span><span class="op">)</span></span>
+<span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -77,9 +78,14 @@
 <dd><p>If <code>TRUE</code>, shows the soft deleted properties. Default to <code>FALSE</code></p></dd>
 
 
+<dt>store_token</dt>
+<dd><p>Where your token is stored. If <code>option</code> it will be retrieved from the .Rprofile (not cross-session and default),
+if <code>envir</code> it will be retrieved from environmental variables list (cross-session).</p></dd>
+
+
 <dt>token</dt>
-<dd><p>A valid token created with <code>create_auth_token</code>
-(either explicitly assigned or retrieved via default <code>getOption('ARDUINO_API_TOKEN')</code>)</p></dd>
+<dd><p>A valid token created with <code>create_auth_token</code> or manually.
+It not <code>NULL</code> it has higher priority then <code>store_token</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

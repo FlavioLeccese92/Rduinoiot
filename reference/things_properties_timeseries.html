@@ -79,7 +79,8 @@ propertiesV2Timeseries"><meta property="og:image" content="https://flavioleccese
 <span>  to <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  interval <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"ARDUINO_API_TOKEN"</span><span class="op">)</span></span>
+<span>  store_token <span class="op">=</span> <span class="st">"option"</span>,</span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -112,9 +113,14 @@ Get data with a timestamp &lt; to this value (default: now, min: 1842-01-01, max
 <dd><p>(logic) Whether data ordering (by time) should be descending. Default TO <code>FALSE</code></p></dd>
 
 
+<dt>store_token</dt>
+<dd><p>Where your token is stored. If <code>option</code> it will be retrieved from the .Rprofile (not cross-session and default),
+if <code>envir</code> it will be retrieved from environmental variables list (cross-session).</p></dd>
+
+
 <dt>token</dt>
-<dd><p>A valid token created with <code>create_auth_token</code>
-(either explicitly assigned or retrieved via default getOption('ARDUINO_API_TOKEN'))</p></dd>
+<dd><p>A valid token created with <code>create_auth_token</code> or manually.
+It not <code>NULL</code> it has higher priority then <code>store_token</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -127,8 +133,8 @@ Get data with a timestamp &lt; to this value (default: now, min: 1842-01-01, max
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>ARDUINO_API_CLIENT_ID <span class="op">=</span> <span class="st">'INSERT CLIENT_ID HERE'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>ARDUINO_API_CLIENT_SECRET <span class="op">=</span> <span class="st">'INSERT CLIENT_SECRET HERE'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')</span></span></span>
+<span class="r-in"><span><span class="co"># Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="create_auth_token.html">create_auth_token</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">thing_id</span> <span class="op">=</span> <span class="st">"b6822400-2f35-4d93-b3e7-be919bdc5eba"</span></span></span>
