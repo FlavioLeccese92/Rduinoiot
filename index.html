@@ -87,8 +87,11 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of Rduinoiot from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>To get the current released version from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Rduinoiot"</span><span class="op">)</span></span></code></pre></div>
+<p>To get the current development version from <a href="https://github.com/" class="external-link">GitHub</a>:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"FlavioLeccese92/Rduinoiot"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -97,19 +100,19 @@
 </h2>
 <p>In order to access the API methods you need to create an API key. This can be done by logging into your Arduino Cloud account and going to the page <code>https://cloud.arduino.cc/home/api-keys/</code> and retrieve corresponding <code>ARDUINO_API_CLIENT_ID</code> and <code>ARDUINO_API_CLIENT_SECRET</code>.</p>
 <p><img src="reference/figures/readme-authentication.png"></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://flavioleccese92.github.io/Rduinoiot/">Rduinoiot</a></span><span class="op">)</span></span>
 <span><span class="co"># Sys.setenv(ARDUINO_API_CLIENT_ID = 'INSERT CLIENT_ID HERE')</span></span>
 <span><span class="co"># Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/create_auth_token.html">create_auth_token</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; v Authorization succeeded</span></span></code></pre></div>
+<span><span class="co">#&gt; v Method succeeded</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="list-things-associated-to-the-user">List things associated to the user<a class="anchor" aria-label="anchor" href="#list-things-associated-to-the-user"></a>
 </h2>
 <p>Things associated to the user account can be easily accessed using <code><a href="reference/things.html">things_list()</a></code>. This function will return detailed information, in particular <code>things_id</code> which are needed to access to properties.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tl</span> <span class="op">=</span> <span class="fu"><a href="reference/things.html">things_list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; v Method succeeded</span></span></code></pre></div>
 <table class="table  lightable-paper table" style='font-family: "Open Sans", sans-serif; width: auto !important; margin-left: auto; margin-right: auto; font-size: 12px; margin-left: auto; margin-right: auto;'>
@@ -196,7 +199,7 @@
 <h2 id="real-time-sensor-data">Real-time sensor data<a class="anchor" aria-label="anchor" href="#real-time-sensor-data"></a>
 </h2>
 <p>Reading real-time humidity sensor of one of your devices can be done as follow:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">thing_id</span> <span class="op">=</span> <span class="st">"b6822400-2f35-4d93-b3e7-be919bdc5eba"</span></span>
 <span><span class="va">property_id</span> <span class="op">=</span> <span class="st">"d1134fe1-6519-49f1-afd8-7fe9e891e778"</span> <span class="co"># Humidity</span></span>
 <span></span>
@@ -211,44 +214,44 @@
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-30 09:00:00</td>
-<td style="text-align:right;">31.92613</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-31 10:00:00</td>
+<td style="text-align:right;">31.12757</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-30 10:00:00</td>
-<td style="text-align:right;">32.28989</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-31 11:00:00</td>
+<td style="text-align:right;">31.28831</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-30 11:00:00</td>
-<td style="text-align:right;">32.59562</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-31 12:00:00</td>
+<td style="text-align:right;">31.37407</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-30 12:00:00</td>
-<td style="text-align:right;">32.91097</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-31 13:00:00</td>
+<td style="text-align:right;">31.57041</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-30 13:00:00</td>
-<td style="text-align:right;">33.12977</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-31 14:00:00</td>
+<td style="text-align:right;">31.64814</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-30 14:00:00</td>
-<td style="text-align:right;">33.03801</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-31 15:00:00</td>
+<td style="text-align:right;">31.71925</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-30 15:00:00</td>
-<td style="text-align:right;">32.78237</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-31 16:00:00</td>
+<td style="text-align:right;">31.72388</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-30 16:00:00</td>
-<td style="text-align:right;">31.85849</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-31 17:00:00</td>
+<td style="text-align:right;">31.67160</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-30 17:00:00</td>
-<td style="text-align:right;">31.22132</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-31 18:00:00</td>
+<td style="text-align:right;">31.19190</td>
 </tr>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-08-30 18:00:00</td>
-<td style="text-align:right;">31.08187</td>
+<td style="text-align:left;min-width: 1.6in; ">2022-08-31 19:00:00</td>
+<td style="text-align:right;">31.14528</td>
 </tr>
 </tbody>
 </table>
@@ -257,7 +260,7 @@
 <h2 id="plotting-the-result">Plotting the result<a class="anchor" aria-label="anchor" href="#plotting-the-result"></a>
 </h2>
 <p>A catchy representation of humidity time series can be plotted, for instance, by using the library <a href="https://echarts4r.john-coene.com/" class="external-link">echarts4r</a> by <a href="https://john-coene.com/" class="external-link">John Coene</a>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://echarts4r.john-coene.com/" class="external-link">echarts4r</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span>
@@ -282,6 +285,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=Rduinoiot" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/FlavioLeccese92/Rduinoiot/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/FlavioLeccese92/Rduinoiot/issues/" class="external-link">Report a bug</a></li>
 <li><a href="https://www.arduino.cc/reference/en/iot/api/" class="external-link">Official Arduino IoT Cloud API documentation</a></li>
