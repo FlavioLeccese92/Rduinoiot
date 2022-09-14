@@ -28,7 +28,13 @@ This is not an official library by Arduino.
 
 ## Installation
 
-You can install the development version of Rduinoiot from [GitHub](<https://github.com/>) with:
+To get the current released version from CRAN:
+
+``` r
+install.packages("Rduinoiot")
+```
+
+To get the current development version from [GitHub](<https://github.com/>):
 
 ``` r
 # install.packages("devtools")

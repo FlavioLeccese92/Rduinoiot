@@ -21,8 +21,14 @@ by Arduino.
 
 ## Installation
 
-You can install the development version of Rduinoiot from
-[GitHub](https://github.com/) with:
+To get the current released version from CRAN:
+
+``` r
+install.packages("Rduinoiot")
+```
+
+To get the current development version from
+[GitHub](https://github.com/):
 
 ``` r
 # install.packages("devtools")
@@ -44,7 +50,7 @@ library(Rduinoiot)
 # Sys.setenv(ARDUINO_API_CLIENT_SECRET = 'INSERT CLIENT_SECRET HERE')
 
 create_auth_token()
-#> v Authorization succeeded
+#> v Method succeeded
 ```
 
 ## List things associated to the user
@@ -299,82 +305,82 @@ value
 <tbody>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-30 09:00:00
+2022-08-31 10:00:00
 </td>
 <td style="text-align:right;">
-31.92613
+31.12757
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-30 10:00:00
+2022-08-31 11:00:00
 </td>
 <td style="text-align:right;">
-32.28989
+31.28831
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-30 11:00:00
+2022-08-31 12:00:00
 </td>
 <td style="text-align:right;">
-32.59562
+31.37407
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-30 12:00:00
+2022-08-31 13:00:00
 </td>
 <td style="text-align:right;">
-32.91097
+31.57041
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-30 13:00:00
+2022-08-31 14:00:00
 </td>
 <td style="text-align:right;">
-33.12977
+31.64814
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-30 14:00:00
+2022-08-31 15:00:00
 </td>
 <td style="text-align:right;">
-33.03801
+31.71925
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-30 15:00:00
+2022-08-31 16:00:00
 </td>
 <td style="text-align:right;">
-32.78237
+31.72388
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-30 16:00:00
+2022-08-31 17:00:00
 </td>
 <td style="text-align:right;">
-31.85849
+31.67160
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-30 17:00:00
+2022-08-31 18:00:00
 </td>
 <td style="text-align:right;">
-31.22132
+31.19190
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-30 18:00:00
+2022-08-31 19:00:00
 </td>
 <td style="text-align:right;">
-31.08187
+31.14528
 </td>
 </tr>
 </tbody>
