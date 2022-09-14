@@ -30,13 +30,13 @@ This is not an official library by Arduino.
 
 To get the current released version from CRAN:
 
-``` r
+```{r install-cran, eval=FALSE, include=TRUE}
 install.packages("Rduinoiot")
 ```
 
 To get the current development version from [GitHub](<https://github.com/>):
 
-``` r
+```{r install-github, eval=FALSE, include=TRUE}
 # install.packages("devtools")
 devtools::install_github("FlavioLeccese92/Rduinoiot")
 ```

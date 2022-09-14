@@ -305,58 +305,10 @@ value
 <tbody>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 10:00:00
-</td>
-<td style="text-align:right;">
-31.12757
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 11:00:00
-</td>
-<td style="text-align:right;">
-31.28831
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 12:00:00
-</td>
-<td style="text-align:right;">
-31.37407
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 13:00:00
-</td>
-<td style="text-align:right;">
-31.57041
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 14:00:00
-</td>
-<td style="text-align:right;">
-31.64814
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 15:00:00
-</td>
-<td style="text-align:right;">
-31.71925
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
 2022-08-31 16:00:00
 </td>
 <td style="text-align:right;">
-31.72388
+31.72118
 </td>
 </tr>
 <tr>
@@ -381,6 +333,54 @@ value
 </td>
 <td style="text-align:right;">
 31.14528
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-31 20:00:00
+</td>
+<td style="text-align:right;">
+31.14114
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-31 21:00:00
+</td>
+<td style="text-align:right;">
+30.89318
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-31 22:00:00
+</td>
+<td style="text-align:right;">
+30.61387
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-08-31 23:00:00
+</td>
+<td style="text-align:right;">
+30.32460
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-09-01 00:00:00
+</td>
+<td style="text-align:right;">
+30.36724
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-09-01 01:00:00
+</td>
+<td style="text-align:right;">
+30.19721
 </td>
 </tr>
 </tbody>
