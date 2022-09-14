@@ -3,7 +3,7 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   Rduinoiot: Rduinoiot.html
-last_built: 2022-09-14T10:09Z
+last_built: 2022-09-14T16:05Z
 urls:
   reference: https://flavioleccese92.github.io/Rduinoiot/reference
   article: https://flavioleccese92.github.io/Rduinoiot/articles
