@@ -283,7 +283,7 @@ follow:
 
 ``` r
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
-property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778" # (Humidity)
+property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778" # Humidity
 
 data_ts = things_properties_timeseries(thing_id = thing_id,
                                        property_id = property_id,
@@ -305,18 +305,10 @@ value
 <tbody>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-09-19 20:00:00
-</td>
-<td style="text-align:right;">
-26.66417
-</td>
-</tr>
-<tr>
-<td style="text-align:left;min-width: 1.6in; ">
 2022-09-19 21:00:00
 </td>
 <td style="text-align:right;">
-26.61055
+26.58458
 </td>
 </tr>
 <tr>
@@ -381,6 +373,14 @@ value
 </td>
 <td style="text-align:right;">
 23.37810
+</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">
+2022-09-20 06:00:00
+</td>
+<td style="text-align:right;">
+24.62635
 </td>
 </tr>
 </tbody>

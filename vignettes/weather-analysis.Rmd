@@ -1,6 +1,10 @@
 ---
-title: "Rduinoiot"
-output: html_document
+title: "Weather Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Weather Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
