@@ -44,10 +44,13 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
-  <a class="nav-link" href="articles/Rduinoiot.html">Get started</a>
-</li>
-<li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/weather-analysis.html">Weather Analysis</a>
+  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="news/index.html">Changelog</a>
@@ -201,7 +204,7 @@
 <p>Reading real-time humidity sensor of one of your devices can be done as follow:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">thing_id</span> <span class="op">=</span> <span class="st">"b6822400-2f35-4d93-b3e7-be919bdc5eba"</span></span>
-<span><span class="va">property_id</span> <span class="op">=</span> <span class="st">"d1134fe1-6519-49f1-afd8-7fe9e891e778"</span> <span class="co"># (Humidity)</span></span>
+<span><span class="va">property_id</span> <span class="op">=</span> <span class="st">"d1134fe1-6519-49f1-afd8-7fe9e891e778"</span> <span class="co"># Humidity</span></span>
 <span></span>
 <span><span class="va">data_ts</span> <span class="op">=</span> <span class="fu"><a href="reference/things_properties_timeseries.html">things_properties_timeseries</a></span><span class="op">(</span>thing_id <span class="op">=</span> <span class="va">thing_id</span>,</span>
 <span>                                       property_id <span class="op">=</span> <span class="va">property_id</span>,</span>
@@ -214,12 +217,8 @@
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align:left;min-width: 1.6in; ">2022-09-19 20:00:00</td>
-<td style="text-align:right;">26.66417</td>
-</tr>
-<tr>
 <td style="text-align:left;min-width: 1.6in; ">2022-09-19 21:00:00</td>
-<td style="text-align:right;">26.61055</td>
+<td style="text-align:right;">26.58458</td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">2022-09-19 22:00:00</td>
@@ -252,6 +251,10 @@
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">2022-09-20 05:00:00</td>
 <td style="text-align:right;">23.37810</td>
+</tr>
+<tr>
+<td style="text-align:left;min-width: 1.6in; ">2022-09-20 06:00:00</td>
+<td style="text-align:right;">24.62635</td>
 </tr>
 </tbody>
 </table>
