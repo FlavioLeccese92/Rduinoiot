@@ -1,10 +1,6 @@
 ---
 title: "Rduinoiot"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Rduinoiot}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: html_document
 ---
 
 ```{r, include = FALSE}
@@ -14,6 +10,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(Rduinoiot)
-```
+Usage of `Rduinoiot` in a project can be found here:
+
+<center><font size="5">**https://flavioleccese92.github.io/Rduinoiot-analysis/weather-report**</font></center>
+
+<center><div style="margin-top:20px; margin-bottom:20px;">
+![](../man/figures/weather-report.png)
+</div></center>
+
+The `flexdashboard` connected to one [**Arduino Oplà Iot kit**](https://opla.arduino.cc/){target="_blank"}
+of mine, whose sensor valus are processed to the dashboard based on this setup:
+
+<center><div style="margin-top:20px; margin-bottom:20px;">
+![](../man/figures/environment-setup.png)
+</div></center>
+
+More information is available here:
+
+<center><font size="5">**https://flavioleccese92.github.io/Rduinoiot-analysis/**</font></center>

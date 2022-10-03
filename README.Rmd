@@ -79,7 +79,7 @@ Reading real-time humidity sensor of one of your devices can be done as follow:
 
 ```{r example 2}
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
-property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778" # Humidity
+property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778" # (Humidity)
 
 data_ts = things_properties_timeseries(thing_id = thing_id,
                                        property_id = property_id,

@@ -283,7 +283,7 @@ follow:
 
 ``` r
 thing_id = "b6822400-2f35-4d93-b3e7-be919bdc5eba"
-property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778" # Humidity
+property_id = "d1134fe1-6519-49f1-afd8-7fe9e891e778" # (Humidity)
 
 data_ts = things_properties_timeseries(thing_id = thing_id,
                                        property_id = property_id,
@@ -305,82 +305,82 @@ value
 <tbody>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 16:00:00
+2022-09-19 20:00:00
 </td>
 <td style="text-align:right;">
-31.72118
+26.66417
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 17:00:00
+2022-09-19 21:00:00
 </td>
 <td style="text-align:right;">
-31.67160
+26.61055
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 18:00:00
+2022-09-19 22:00:00
 </td>
 <td style="text-align:right;">
-31.19190
+25.64852
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 19:00:00
+2022-09-19 23:00:00
 </td>
 <td style="text-align:right;">
-31.14528
+24.94009
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 20:00:00
+2022-09-20 00:00:00
 </td>
 <td style="text-align:right;">
-31.14114
+24.97513
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 21:00:00
+2022-09-20 01:00:00
 </td>
 <td style="text-align:right;">
-30.89318
+25.20554
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 22:00:00
+2022-09-20 02:00:00
 </td>
 <td style="text-align:right;">
-30.61387
+24.66693
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-08-31 23:00:00
+2022-09-20 03:00:00
 </td>
 <td style="text-align:right;">
-30.32460
+24.54984
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-09-01 00:00:00
+2022-09-20 04:00:00
 </td>
 <td style="text-align:right;">
-30.36724
+23.92859
 </td>
 </tr>
 <tr>
 <td style="text-align:left;min-width: 1.6in; ">
-2022-09-01 01:00:00
+2022-09-20 05:00:00
 </td>
 <td style="text-align:right;">
-30.19721
+23.37810
 </td>
 </tr>
 </tbody>
